@@ -1,0 +1,22 @@
+{
+  "name": "template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/donthedeveloper/template.git"
+  },
+  "author": "Don Hansen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/donthedeveloper/template/issues"
+  },
+  "homepage": "https://github.com/donthedeveloper/template#readme"
+}
