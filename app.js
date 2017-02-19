@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(express.static('server/templates'))
-app.use(express.static('browser/public'));
+app.use('/public', express.static('browser/public'));
 
 app.use('/', router);
 
