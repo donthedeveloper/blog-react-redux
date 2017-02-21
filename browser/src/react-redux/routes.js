@@ -7,6 +7,7 @@ import store from './store';
 // import containers
 
 // import components
+import form from './components/Form.js';
 
 // on enters
 
@@ -14,7 +15,7 @@ export default () => {
   return (
     <Provider store={ store }>
       <Router history={ hashHistory }>
-        <Route path="/" component={ App }>
+        <Route path="/" component={ form }>
           {/*<Route path=""/>*/}
         </Route>
       </Router>

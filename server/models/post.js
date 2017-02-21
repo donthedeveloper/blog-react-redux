@@ -25,7 +25,8 @@ const Post = db.define('post', {
     }
   },
   setterMethods: {
-    urlTitle: function(value) {
+    urlTitle: (value) => {
+      console.log(value);
       return this.title.trim().replace(/\s+/g, '-');
     }
   }
