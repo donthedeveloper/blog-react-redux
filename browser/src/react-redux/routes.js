@@ -5,9 +5,10 @@ import { axios } from 'axios';
 import store from './store';
 
 // import containers
+import AppContainer from './containers/AppContainer';
 
 // import components
-import form from './components/Form.js';
+// import form from './components/Form.js';
 
 // on enters
 
@@ -15,7 +16,7 @@ export default () => {
   return (
     <Provider store={ store }>
       <Router history={ hashHistory }>
-        <Route path="/" component={ form }>
+        <Route path="/" component={ AppContainer }>
           {/*<Route path=""/>*/}
         </Route>
       </Router>

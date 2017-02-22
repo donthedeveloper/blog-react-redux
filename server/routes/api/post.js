@@ -6,17 +6,11 @@ const { Post, User, db } = require('../../models');
 
 // get all of posts from database
 router.get('/', (req, res) => {
-//   db.sync({ force: true })
-//   .then(() => {
-//     console.log(chalk.blue('we are here'));
-//     Post.findAll()
-//     .then(res.send)
-//     .catch(console.error);
-//   })
-//   .catch(console.error);
-    Post.findAll()
-    .then(res.send)
-    .catch(console.error);
+  Post.findAll()
+  .then((posts) => {
+    res.send(posts);
+  })
+  .catch(console.error);
 });
 
 // get one post from database
@@ -28,7 +22,11 @@ router.get('/:postId', (req, res) => {
 
 // create one post in database
 router.post('/', (req, res) => {
-  Post.create(req.body)
+  Post.create({
+    title: req.body.title,
+    intro_paragraph: req.body.introParagraph,
+    content: req.body.content
+  })
   .then((post) => {
     res.send(post);
   })

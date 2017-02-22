@@ -6,8 +6,8 @@ export default (props) => {
       <label for="title">Title: </label>
       <input id="title" name="title" type="text" />
       <br />
-      <label for="intro-paragraph">Intro Paragraph: </label>
-      <textarea id="intro-paragraph" name="intro-paragraph"></textarea>
+      <label for="introParagraph">Intro Paragraph: </label>
+      <textarea id="introParagraph" name="introParagraph"></textarea>
       <br />
       <label for="content">Content: </label>
       <textarea id="content" name="content"></textarea>
