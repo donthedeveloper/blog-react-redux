@@ -1,9 +1,13 @@
 const { Sequelize, db, Post } = require('./post');
 const { User } = require('./user');
+const { Role } = require('./role');
+const { Permission } = require('./permission');
+const { Comment } = require('./comment');
 
-db.sync({ force: true });
+Post.belongsTo(User, { as: 'author' });
+User.hasMany(Post);
+Role.hasMany(User);
+Role.belongsToMany(Permission, { through: 'RolePermission' });
+Permission.belongsToMany(Role, { through: 'RolePermission' });
 
-// Post.belongsTo(User, { as: 'author' });
-// User.hasMany(Post);
-
-module.exports = { Sequelize, db, Post, User };
+module.exports = { Sequelize, db, Post, User, Role, Permission, Comment };
