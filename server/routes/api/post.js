@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const chalk = require('chalk');
 
-const { Post, User, db } = require('../../models');
+const { Post } = require('../../models');
 
 // get all of posts from database
 router.get('/', (req, res) => {
@@ -20,7 +20,7 @@ router.get('/:postId', (req, res) => {
   .catch(console.error);
 });
 
-// create one post in database
+// create one post in database (admin)
 router.post('/', (req, res) => {
   Post.create({
     title: req.body.title,
@@ -33,14 +33,14 @@ router.post('/', (req, res) => {
   .catch(console.error);
 });
 
-// update one post in database
+// update one post in database (admin)
 router.put('/:postId', (req, res) => {
   Post.update(req.body)
   .then(res.send)
   .catch(console.error);
 });
 
-// delete one post from database
+// delete one post from database (admin)
 router.delete('/:postId'), (req, res) => {
   Post.destroy({
     where: {

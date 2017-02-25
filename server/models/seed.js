@@ -5,6 +5,7 @@ const users = [
   {
     firstname: "Don",
     lastname: "Hansen",
+    username: "donthedeveloper",
     password: "password",
     email: "test@gmail.com"
   }

@@ -11,8 +11,10 @@ export default class AppContainer extends React.Component {
 
   render() {
     return(
-      <Social />
-      <Navigation />
+      <div>
+        <Social />
+        <Navigation />
+      </div>
     )
   }
 }

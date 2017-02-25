@@ -4,6 +4,9 @@ import Navigation from '../components/Navigation';
 import PostContainer from './PostContainer';
 import FooterContainer from './FooterContainer';
 
+import Login from '../components/Login';
+import Logout from '../components/Logout';
+
 export default class AppContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -11,9 +14,13 @@ export default class AppContainer extends React.Component {
   
   render() {
     return(
-      <Navigation />
-      <PostContainer />
-      <FooterContainer />
+      <div>
+        {/*<Navigation />
+        <PostContainer />
+        <FooterContainer />*/}
+        <Login />
+        <Logout />
+      </div>
     );
   }
 }
