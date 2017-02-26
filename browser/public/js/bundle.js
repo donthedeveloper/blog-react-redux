@@ -14882,6 +14882,10 @@ var _Logout = __webpack_require__(155);
 
 var _Logout2 = _interopRequireDefault(_Logout);
 
+var _Register = __webpack_require__(313);
+
+var _Register2 = _interopRequireDefault(_Register);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -14906,7 +14910,8 @@ var AppContainer = function (_React$Component) {
         'div',
         null,
         _react2.default.createElement(_Login2.default, null),
-        _react2.default.createElement(_Logout2.default, null)
+        _react2.default.createElement(_Logout2.default, null),
+        _react2.default.createElement(_Register2.default, null)
       );
     }
   }]);
@@ -31457,6 +31462,66 @@ var _routes2 = _interopRequireDefault(_routes);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _reactDom2.default.render(_react2.default.createElement(_routes2.default, null), document.getElementById('app'));
+
+/***/ }),
+/* 313 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (props) {
+  return _react2.default.createElement(
+    "form",
+    { method: "post", action: "api/register" },
+    _react2.default.createElement(
+      "label",
+      { "for": "username" },
+      "Username: "
+    ),
+    _react2.default.createElement("input", { id: "username", name: "username", type: "text" }),
+    _react2.default.createElement("br", null),
+    _react2.default.createElement(
+      "label",
+      { "for": "password" },
+      "Password: "
+    ),
+    _react2.default.createElement("input", { id: "password", name: "password", type: "text" }),
+    _react2.default.createElement("br", null),
+    _react2.default.createElement(
+      "label",
+      { "for": "first-name" },
+      "First Name: "
+    ),
+    _react2.default.createElement("input", { id: "first-name", name: "firstName", type: "text" }),
+    _react2.default.createElement("br", null),
+    _react2.default.createElement(
+      "label",
+      { "for": "last-name" },
+      "Last Name: "
+    ),
+    _react2.default.createElement("input", { id: "last-name", name: "lastName", type: "text" }),
+    _react2.default.createElement("br", null),
+    _react2.default.createElement(
+      "label",
+      { "for": "email" },
+      "Email: "
+    ),
+    _react2.default.createElement("input", { id: "email", name: "email", type: "text" }),
+    _react2.default.createElement("br", null),
+    _react2.default.createElement("input", { type: "submit", value: "Register" })
+  );
+};
 
 /***/ })
 /******/ ]);

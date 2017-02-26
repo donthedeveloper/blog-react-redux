@@ -6,6 +6,7 @@ const { Comment } = require('./comment');
 
 Post.belongsTo(User, { as: 'author' });
 User.hasMany(Post);
+User.belongsTo(Role);
 Role.hasMany(User);
 Role.belongsToMany(Permission, { through: 'RolePermission' });
 Permission.belongsToMany(Role, { through: 'RolePermission' });
