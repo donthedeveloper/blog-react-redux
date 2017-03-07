@@ -10,13 +10,16 @@ import AppContainer from './containers/AppContainer';
 // import components
 // import form from './components/Form.js';
 
+// import action creators for onEnter(s)
+import { retrievePosts } from './reducers/post.js';
+
 // on enters
 
 export default () => {
   return (
     <Provider store={ store }>
       <Router history={ hashHistory }>
-        <Route path="/" component={ AppContainer }>
+        <Route path="/" component={ AppContainer } onEnter={ retrievePosts() }>
           {/*<Route path=""/>*/}
         </Route>
       </Router>
