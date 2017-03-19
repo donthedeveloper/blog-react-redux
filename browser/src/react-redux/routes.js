@@ -14,12 +14,15 @@ import AppContainer from './containers/AppContainer';
 import { retrievePosts } from './reducers/post.js';
 
 // on enters
+const onAppEnter = () => {
+  store.dispatch(retrievePosts())
+}
 
 export default () => {
   return (
-    <Provider store={ store }>
-      <Router history={ hashHistory }>
-        <Route path="/" component={ AppContainer } onEnter={ retrievePosts() }>
+    <Provider store={store}>
+      <Router history={hashHistory}>
+        <Route path="/" component={AppContainer} onEnter={onAppEnter}>
           {/*<Route path=""/>*/}
         </Route>
       </Router>

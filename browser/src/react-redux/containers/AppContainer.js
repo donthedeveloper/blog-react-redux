@@ -9,17 +9,18 @@ import Logout from '../components/Logout';
 import Register from '../components/Register';
 import CreatePost from '../components/CreatePost';
 
-export default class AppContainer extends React.Component {
+class AppContainer extends React.Component {
   constructor(props) {
     super(props);
   }
-  
+
   render() {
     return(
       <div>
         {/*<Navigation />
-        <PostContainer />
+        // <PostContainer />
         <FooterContainer />*/}
+        <PostContainer />
         <Login />
         <Logout />
         <Register />
@@ -28,3 +29,5 @@ export default class AppContainer extends React.Component {
     );
   }
 }
+
+export default AppContainer;

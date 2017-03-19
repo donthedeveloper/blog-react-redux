@@ -3,34 +3,25 @@ import { connect } from 'react-redux';
 
 import Post from '../components/Post';
 
-export default class AppContainer extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  
-  render() {
-    return(
-      <section>
+const PostContainer = (props) => {
+  console.log('props', props);
+
+  return(
+    <section>
         {
-          props.posts.map((post) => (
-            <Post />
-          ))
+          props.posts.map((post, index) =>
+            <Post key={index} post={post} />
+          )
         }
-      </section>
-    );
+    </section>
+  );
+
+}
+
+function mapStateToProps(state) {
+  return {
+    posts: state.posts.posts
   }
 }
 
-// function mapStateToProps(state) {
-//   return {
-    
-//   }
-// }
-
-// function mapDispatchToProps(dispatch) {
-//   return {
-    
-//   }
-// }
-
-// connect(mapStateToProps, mapDispatchToProps)(Post);
+export default connect(mapStateToProps)(PostContainer);
