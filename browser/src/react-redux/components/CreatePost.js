@@ -1,14 +1,21 @@
 import React from 'react';
 
 const CreatePost = (props) => {
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = new FormData(e.target);
-    console.log(data);
+    const post = {
+      title: data.get('title'),
+      introParagraph: data.get('introParagraph'),
+      content: data.get('content')
+    };
+    props.createPost(post);
+    console.log(post);
   }
 
   return(
-    <form onSubmit={(e) => handleSubmit(e)}>
+    <form onSubmit={handleSubmit}>
       <label htmlFor="title">Title: </label>
       <input id="title" name="title" type="text" />
       <br />

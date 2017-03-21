@@ -42,6 +42,6 @@ export const retrievePosts = () =>
 
 export const createPost = (post) =>
   dispatch =>
-    axios.post('/api/posts')
+    axios.post('/api/posts', post)
       .then((post) => dispatch(create(post)))
       .catch((err) => console.error(err.message));

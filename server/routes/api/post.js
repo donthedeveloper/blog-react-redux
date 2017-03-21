@@ -22,6 +22,7 @@ router.get('/:postId', (req, res) => {
 
 // create one post in database (admin)
 router.post('/', (req, res) => {
+  console.log('body:', req.body);
   Post.create({
     title: req.body.title,
     intro_paragraph: req.body.introParagraph,
