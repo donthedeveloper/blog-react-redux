@@ -11,7 +11,6 @@ const CreatePost = (props) => {
       content: data.get('content')
     };
     props.createPost(post);
-    console.log(post);
   }
 
   return(

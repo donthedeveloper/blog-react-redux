@@ -11,6 +11,10 @@ export default (state=initialState, action) => {
     case RETRIEVE_POSTS:
       newState.posts = action.posts;
       break;
+    case CREATE_POST:
+      console.log(action.post);
+      newState.posts = [...newState.posts, action.post];
+      break;
     default:
       return state;
   }
@@ -30,8 +34,8 @@ const retrieve = (posts) => ({
 
 const create = (post) => ({
   type: CREATE_POST,
-  post
-})
+  post: post.data
+});
 
 // THUNKS
 export const retrievePosts = () =>
