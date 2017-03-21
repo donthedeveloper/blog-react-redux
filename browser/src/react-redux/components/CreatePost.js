@@ -1,8 +1,21 @@
 import React from 'react';
 
-export default (props) => {
+const CreatePost = (props) => {
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = new FormData(e.target);
+    const post = {
+      title: data.get('title'),
+      introParagraph: data.get('introParagraph'),
+      content: data.get('content')
+    };
+    props.createPost(post);
+    console.log(post);
+  }
+
   return(
-    <form method="post" action="api/posts">
+    <form onSubmit={handleSubmit}>
       <label htmlFor="title">Title: </label>
       <input id="title" name="title" type="text" />
       <br />
@@ -16,3 +29,5 @@ export default (props) => {
     </form>
   );
 }
+
+export default CreatePost;

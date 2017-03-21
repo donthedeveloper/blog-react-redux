@@ -1,11 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
 import Post from '../components/Post';
 
 const PostContainer = (props) => {
-  console.log('props', props);
-
   return(
     <section>
         {
@@ -15,13 +12,6 @@ const PostContainer = (props) => {
         }
     </section>
   );
+};
 
-}
-
-function mapStateToProps(state) {
-  return {
-    posts: state.posts.posts
-  }
-}
-
-export default connect(mapStateToProps)(PostContainer);
+export default PostContainer;

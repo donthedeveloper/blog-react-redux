@@ -4,7 +4,7 @@ const initialState = {
   posts: []
 }
 
-const reducer = (state=initialState, action) => {
+export default (state=initialState, action) => {
   const newState = Object.assign({}, state);
 
   switch(action.type) {
@@ -18,19 +18,30 @@ const reducer = (state=initialState, action) => {
   return newState;
 }
 
-// ACTION CREATERS
+// CONSTANTS
 const RETRIEVE_POSTS = 'RETRIEVE_POSTS';
+const CREATE_POST = 'CREATE_POST';
+
+// ACTION CREATERS
 const retrieve = (posts) => ({
   type: RETRIEVE_POSTS,
   posts
 });
 
+const create = (post) => ({
+  type: CREATE_POST,
+  post
+})
+
 // THUNKS
-const retrievePosts = () =>
+export const retrievePosts = () =>
   dispatch =>
     axios.get('/api/posts')
     .then((posts) => dispatch(retrieve(posts.data)))
     .catch((err) => console.error(err.message));
 
-export default reducer;
-export { retrieve, retrievePosts };
+export const createPost = (post) =>
+  dispatch =>
+    axios.post('/api/posts', post)
+      .then((post) => dispatch(create(post)))
+      .catch((err) => console.error(err.message));
