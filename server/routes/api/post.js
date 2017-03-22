@@ -42,14 +42,17 @@ router.put('/:postId', (req, res) => {
 });
 
 // delete one post from database (admin)
-router.delete('/:postId'), (req, res) => {
+router.delete('/:postId', (req, res) => {
   Post.destroy({
     where: {
       id: req.params.postId
     }
   })
-  .then(res.send)
+  .then((deletedCount) => {
+    console.log(req.params.postId);
+    res.status(204).send(req.params.postId)
+  })
   .catch(console.error);
-}
+});
 
 module.exports = router;

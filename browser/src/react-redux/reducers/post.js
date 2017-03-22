@@ -17,6 +17,8 @@ export default (state=initialState, action) => {
     case REMOVE_POST:
       newState.posts = [...newState.posts];
       newState.posts.forEach((post, index) => {
+        console.log('post id:', post.id);
+        console.log('action id:', action.id);
         if (post.id === action.id) {
           newState.posts[index].splice(2, 1);
           // break;
