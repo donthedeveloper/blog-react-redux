@@ -45,7 +45,7 @@ router.put('/:postId', (req, res) => {
 router.delete('/:postId'), (req, res) => {
   Post.destroy({
     where: {
-      id: req.params.id
+      id: req.params.postId
     }
   })
   .then(res.send)

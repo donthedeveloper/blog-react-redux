@@ -7,7 +7,7 @@ const PostContainer = (props) => {
     <section>
         {
           props.posts.map((post, index) =>
-            <Post key={index} post={post} />
+            <Post key={index} post={post} removePost={props.removePost} />
           )
         }
     </section>
