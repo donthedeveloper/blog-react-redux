@@ -49,7 +49,7 @@ router.delete('/:postId', (req, res) => {
     }
   })
   .then((deletedCount) => {
-    console.log(req.params.postId);
+    console.log('post id:', req.params.postId);
     res.status(204).send(req.params.postId)
   })
   .catch(console.error);

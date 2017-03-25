@@ -17,11 +17,8 @@ export default (state=initialState, action) => {
     case REMOVE_POST:
       newState.posts = [...newState.posts];
       newState.posts.forEach((post, index) => {
-        console.log('post id:', post.id);
-        console.log('action id:', action.id);
         if (post.id === action.id) {
-          newState.posts[index].splice(2, 1);
-          // break;
+          newState.posts.splice(index, 1);
         }
       });
       break;
@@ -69,4 +66,5 @@ export const createPost = (post) =>
 export const removePost = (id) =>
   dispatch =>
     axios.delete(`/api/posts/${id}`)
-      .then((id) => dispatch(remove(id)));
+      .then((deletedCount) => dispatch(remove(id)))
+      .catch((err) => console.error(err.message));
