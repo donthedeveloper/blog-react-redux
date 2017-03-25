@@ -11,12 +11,13 @@ import Register from '../components/Register';
 import CreatePost from '../components/CreatePost';
 
 // actions
-import {createPost} from '../reducers/post';
+import {createPost, removePost} from '../reducers/post';
 
 class AppContainer extends React.Component {
   constructor(props) {
     super(props);
     this.createPost = props.createPost.bind(this);
+    this.removePost = props.removePost.bind(this);
   }
 
   render() {
@@ -25,7 +26,7 @@ class AppContainer extends React.Component {
         {/*<Navigation />
         // <PostContainer />
         <FooterContainer />*/}
-        <PostContainer posts={this.props.posts} />
+        <PostContainer posts={this.props.posts} removePost={this.props.removePost} />
         <Login />
         <Logout />
         <Register />
@@ -44,7 +45,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     createPost: (post) =>
-     dispatch(createPost(post))
+      dispatch(createPost(post)),
+    removePost: (id) =>
+      dispatch(removePost(id))
   }
 }
 
