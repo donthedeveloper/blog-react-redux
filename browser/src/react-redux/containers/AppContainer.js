@@ -18,6 +18,7 @@ class AppContainer extends React.Component {
     super(props);
     this.createPost = props.createPost.bind(this);
     this.removePost = props.removePost.bind(this);
+    this.editPost = props.editPost.bind(this);
   }
 
   render() {
@@ -47,7 +48,9 @@ function mapDispatchToProps(dispatch) {
     createPost: (post) =>
       dispatch(createPost(post)),
     removePost: (id) =>
-      dispatch(removePost(id))
+      dispatch(removePost(id)),
+    editPost: (post) =>
+      dispatch(editPost(post))
   }
 }
 
