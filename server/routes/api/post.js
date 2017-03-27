@@ -36,8 +36,19 @@ router.post('/', (req, res) => {
 
 // update one post in database (admin)
 router.put('/:postId', (req, res) => {
-  Post.update(req.body)
-  .then(res.send)
+  Post.update({
+    title: req.body.title,
+    intro_paragraph: req. body.introParagraph,
+    content: req.body.content
+  }, {
+    where: {
+      id: req.params.postId
+    }
+  })
+  .then((updatedCount) => {
+    console.log('updated count', updatedCount[0]);
+    res.status(200).send(updatedCount[0]);
+  })
   .catch(console.error);
 });
 
@@ -49,8 +60,8 @@ router.delete('/:postId', (req, res) => {
     }
   })
   .then((deletedCount) => {
-    console.log('post id:', req.params.postId);
-    res.status(204).send(req.params.postId)
+    // console.log('post id:', req.params.postId);
+    res.status(200).send(deletedCount)
   })
   .catch(console.error);
 });

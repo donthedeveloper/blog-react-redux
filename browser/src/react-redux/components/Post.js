@@ -15,7 +15,13 @@ class Post extends React.Component {
   }
 
   savePost() {
-    
+    const data = new FormData(e.target);
+    const post = {
+      title: data.get('title'),
+      introParagraph: data.get('introParagraph'),
+      content: data.get('content')
+    };
+    props.updatePost(post);
   }
 
   render() {

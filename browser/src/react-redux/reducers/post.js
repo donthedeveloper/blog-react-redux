@@ -45,6 +45,11 @@ const create = (post) => ({
   post: post.data
 });
 
+const update = (post) => ({
+  type: UPDATE_POST,
+  id
+})
+
 const remove = (id) => ({
   type: REMOVE_POST,
   id
@@ -61,6 +66,12 @@ export const createPost = (post) =>
   dispatch =>
     axios.post('/api/posts', post)
       .then((post) => dispatch(create(post)))
+      .catch((err) => console.error(err.message));
+
+export const updatePost = (post) =>
+  dispatch =>
+    axios.post(`/api/posts/${post.id}`)
+      .then((updatedCount) => dispatch(update(post)))
       .catch((err) => console.error(err.message));
 
 export const removePost = (id) =>
