@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import Navigation from '../components/Navigation';
-import PostContainer from './PostContainer';
+import IntroPostContainer from './IntroPostContainer';
 import FooterContainer from './FooterContainer';
 
 import Login from '../components/Login';
@@ -24,14 +24,20 @@ class AppContainer extends React.Component {
   render() {
     return(
       <div>
-        {/*<Navigation />
-        // <PostContainer />
-        <FooterContainer />*/}
-        <PostContainer posts={this.props.posts} removePost={this.props.removePost} />
-        <Login />
+        <Navigation />
+        <IntroPostContainer posts={this.props.posts} />
+        {/*<Login />
         <Logout />
         <Register />
-        <CreatePost createPost={this.createPost} />
+        <CreatePost createPost={this.createPost} />*/}
+        <div className="subscribe-container text-center">
+          <form>
+            <input type="email" name="input-email" placeholder="Enter your email address" />
+            <button>Notify Me</button>
+          </form>
+        </div>
+        <FooterContainer />
+        <div className='footer2' />
       </div>
     );
   }

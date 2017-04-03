@@ -1,13 +1,12 @@
 import React from 'react';
+import {Link} from 'react-router';
 
 export default (props) => {
   return(
-    <ul>
-      {
-        props.social.map((link) => (
-          <Link to={ link.route } />
-        ))
-      }
+    <ul className='social-nav'>
+      <li><i className='fa fa-twitter' aria-hidden='true'></i></li>
+      <li><i className='fa fa-youtube-play' aria-hidden='true'></i></li>
+      <li><i className='fa fa-linkedin' aria-hidden='true'></i></li>
     </ul>
   );
 }
