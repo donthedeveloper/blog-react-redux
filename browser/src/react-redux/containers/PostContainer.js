@@ -1,8 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-// import Post from '../components/Post';
-
 class PostContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -11,7 +9,6 @@ class PostContainer extends React.Component {
     this.removePost = props.removePost.bind(this);
     this.editPost = props.editPost.bind(this);
   }
-// const PostContainer = (props) => {
   render() {
     console.log('props', this.props);
     return(
@@ -22,13 +19,13 @@ class PostContainer extends React.Component {
     )
   }
 }
-// };
 
 const mapStateToProps = (state) => {
+  console.log('map', state);
   return {
     post: state.posts.selectedPost
   }
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -39,6 +36,6 @@ const mapDispatchToProps = (dispatch) => {
     editPost: (post) =>
       dispatch(editPost(post))
   }
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostContainer);

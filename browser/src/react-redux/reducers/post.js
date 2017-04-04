@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const initialState = {
   posts: [],
-  selectedPost: null
+  selectedPost: {}
 };
 
 export default (state=initialState, action) => {
@@ -13,9 +13,7 @@ export default (state=initialState, action) => {
       newState.posts = action.posts;
       break;
     case RETRIEVE_POST:
-      console.log('action:', action);
-      newState.selectedPost = Object.assign({}, action.post);
-      // newState.selectedPost = action.post;
+      newState.selectedPost = action.post;
       break;
     case CREATE_POST:
       newState.posts = [...newState.posts, action.post];
