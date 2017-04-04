@@ -6,9 +6,9 @@ import store from './store';
 
 // import containers
 import AppContainer from './containers/AppContainer';
+import IntroPostContainer from './containers/IntroPostContainer';
 
 // import components
-// import form from './components/Form.js';
 
 // import action creators for onEnter(s)
 import { retrievePosts } from './reducers/post.js';
@@ -22,8 +22,8 @@ export default () => {
   return (
     <Provider store={store}>
       <Router history={hashHistory}>
-        <Route path='/'>
-          <Route path='/posts' component={AppContainer} onEnter={onAppEnter} />
+        <Route path='/' component={AppContainer} onEnter={onAppEnter}>
+          <Route path='/posts' component={IntroPostContainer} />
           <Route path='/posts/:postId' />
           <IndexRedirect to='/posts' />
         </Route>
