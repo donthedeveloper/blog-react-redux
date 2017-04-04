@@ -15,8 +15,10 @@ router.get('/', (req, res) => {
 
 // get one post from database
 router.get('/:postId', (req, res) => {
-  Post.findById(req.body.id)
-  .then(res.send)
+  Post.findById(req.params.postId)
+  .then((post) => {
+    res.send(post)
+  })
   .catch(console.error);
 });
 

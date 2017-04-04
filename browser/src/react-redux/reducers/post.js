@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const initialState = {
-  posts: []
+  posts: [],
+  selectedPost: null
 };
 
 export default (state=initialState, action) => {
@@ -10,6 +11,11 @@ export default (state=initialState, action) => {
   switch(action.type) {
     case RETRIEVE_POSTS:
       newState.posts = action.posts;
+      break;
+    case RETRIEVE_POST:
+      console.log('action:', action);
+      newState.selectedPost = Object.assign({}, action.post);
+      // newState.selectedPost = action.post;
       break;
     case CREATE_POST:
       newState.posts = [...newState.posts, action.post];
@@ -31,6 +37,7 @@ export default (state=initialState, action) => {
 
 // CONSTANTS
 const RETRIEVE_POSTS = 'RETRIEVE_POSTS';
+const RETRIEVE_POST = 'RETRIEVE_POST';
 const CREATE_POST = 'CREATE_POST';
 const REMOVE_POST = 'REMOVE_POST';
 
@@ -39,6 +46,11 @@ const retrieve = (posts) => ({
   type: RETRIEVE_POSTS,
   posts
 });
+
+const retrieveOne = (post) => ({
+  type: RETRIEVE_POST,
+  post
+})
 
 const create = (post) => ({
   type: CREATE_POST,
@@ -60,6 +72,12 @@ export const retrievePosts = () =>
   dispatch =>
     axios.get('/api/posts')
     .then((posts) => dispatch(retrieve(posts.data)))
+    .catch((err) => console.error(err.message));
+
+export const retrievePost = (id) =>
+  dispatch =>
+    axios.get(`./api/posts/${id}`)
+    .then((post) => dispatch(retrieveOne(post.data)))
     .catch((err) => console.error(err.message));
 
 export const createPost = (post) =>

@@ -7,9 +7,9 @@ class IntroPostContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.createPost = props.createPost.bind(this);
-    this.removePost = props.removePost.bind(this);
-    this.editPost = props.editPost.bind(this);
+    // this.createPost = props.createPost.bind(this);
+    // this.removePost = props.removePost.bind(this);
+    // this.editPost = props.editPost.bind(this);
   }
 
   render() {
@@ -38,15 +38,15 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    createPost: (post) =>
-      dispatch(createPost(post)),
-    removePost: (id) =>
-      dispatch(removePost(id)),
-    editPost: (post) =>
-      dispatch(editPost(post))
-  }
-}
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     createPost: (post) =>
+//       dispatch(createPost(post)),
+//     removePost: (id) =>
+//       dispatch(removePost(id)),
+//     editPost: (post) =>
+//       dispatch(editPost(post))
+//   }
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(IntroPostContainer);
+export default connect(mapStateToProps)(IntroPostContainer);
