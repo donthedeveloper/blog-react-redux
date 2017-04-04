@@ -1,9 +1,4 @@
 body {
-/*   font-family: 'Raleway', sans-serif; */
-/*   font-family: 'Open Sans', sans-serif; */
-/*   font-family: 'Montserrat', sans-serif; */
-/*   font-family: 'Merriweather', serif; */
-/*   font-family: 'Droid Sans', sans-serif; */
   background-color: #fcfdff;
 }
 
@@ -33,14 +28,14 @@ nav li {
   padding: 1rem 1.5rem;
 }
 
+nav .selected {
+  background-color: #fff;
+}
+
 nav a {
   color: #fff;
   text-decoration: none;
   text-transform: uppercase;
-}
-
-nav .selected {
-  background-color: #fff;
 }
 
 .selected a {
@@ -61,7 +56,6 @@ nav .selected {
 
 .nav {
   width: 100%;
-/*   position: fixed; */
   color: #222;
   background-color: #fff;
   margin-bottom: 5rem;
@@ -169,10 +163,7 @@ section:after {
 
 section h2 {
   position: relative;
-/*   background-color: #222; */
-/*   padding: 1rem 1rem; */
   color: #3366cc;
-/*   margin-bottom: 2rem; */
 
   border-radius: 5px;
 
@@ -181,7 +172,6 @@ section h2 {
   text-align: left;
 
   font-family: 'Montserrat', serif;
-/*   font-size: 18px; */
 }
 section h2:before {
   content: "Feb 11";
@@ -193,19 +183,6 @@ section h2:before {
   position: absolute;
   left: -125px;
 }
-/* section h2:after {
-  content: "";
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 10px 13px 0 13px;
-  border-color: #222 transparent transparent transparent;
-
-  position: absolute;
-  right: 50%;
-  bottom: -9px;
-  transform: translateX(50%);
-} */
 
 section p {
   max-width: 750px;
@@ -241,7 +218,6 @@ section a {
   text-transform: uppercase;
   background-color: #3366cc;
   padding: .5rem 1.5rem;
-/*   border-radius: 5px; */
   color: #fff;
   border: 1px solid #2952a3;
   font-weight: 600;
@@ -261,7 +237,6 @@ section a {
 .subscribe-container {
   font-family: 'Montserrat', serif;
   padding: 5rem 0;
-/*   margin-top: 10rem; */
   text-align: center;
 }
 
@@ -271,7 +246,6 @@ section a {
   font-size: 14px;
   padding-top: .5rem;
   padding-bottom: .5rem;
-/*   border: none; */
 }
 
 .subscribe-container input {
@@ -292,12 +266,6 @@ section a {
   border: 1px solid #2952a3;
   font-weight: 600;
   letter-spacing: 2px;
-
-/*   font-family: 'Raleway', sans-serif; */
-/*   font-family: 'Open Sans', sans-serif;
-  font-family: 'Montserrat', sans-serif;
-  font-family: 'Merriweather', serif;
-  font-family: 'Droid Sans', sans-serif; */
 }
 
 
@@ -350,9 +318,4 @@ section a {
   color: #fff;
   text-transform: uppercase;
   text-decoration: none;
-}
-
-.footer2 {
-  height: 5px;
-  background-color: #3366cc;
 }
