@@ -287,6 +287,8 @@ section a {
   background-color: #222;
   color: #fff;
   text-align: center;
+
+  border-bottom: 5px solid #3366cc;
 }
 
 .footer1 ul {

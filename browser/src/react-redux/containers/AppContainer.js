@@ -37,7 +37,6 @@ class AppContainer extends React.Component {
           </form>
         </div>
         <FooterContainer />
-        <div className='footer2' />
       </div>
     );
   }
