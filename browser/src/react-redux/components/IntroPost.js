@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router';
 
 const IntroPost = (props) => {
   return (
@@ -6,7 +7,7 @@ const IntroPost = (props) => {
       <h2>{props.post.title}</h2>
       <p>{props.post.introParagraph}</p>
       <p>{props.post.content}</p>
-      <button className='btn-read-more'>Read More</button>
+      <Link to={`/posts/${props.post.id}`} className='btn-read-more'>Read More</Link>
       <img src='http://lorempixel.com/200/200/' alt='' />
     </section>
   );
