@@ -12,7 +12,7 @@ class PostContainer extends React.Component {
   render() {
     console.log('props', this.props);
     return(
-      <article>
+      <article className='post-full'>
         <h2>{this.props.post.title}</h2>
         <p>{this.props.post.content}</p>
       </article>
