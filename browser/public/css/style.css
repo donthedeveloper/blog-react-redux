@@ -326,7 +326,7 @@ hr {
 }
 
 
-
+/* ----------------- START FOOTER ----------------- */
 .footer1 {
   padding: 3.5rem 0;
   background-color: #222;
@@ -350,12 +350,21 @@ hr {
 }
 
 .social-nav li {
-  color: #222;
   background-color: #3366cc;
   border-radius: 50%;
   padding: 6px 8px;
   font-size: 20px;
   margin: 0 7px;
+}
+
+.social-twitter a,
+.social-youtube a,
+.social-linkedin a {
+  color: #222;
+}
+
+.social-youtube {
+  display: none;
 }
 
 .footer-nav {
@@ -376,3 +385,4 @@ hr {
   text-transform: uppercase;
   text-decoration: none;
 }
+/* ----------------- END FOOTER ----------------- */
