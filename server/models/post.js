@@ -14,7 +14,7 @@ const Post = db.define('post', {
     type: Sequelize.STRING,
     get: function() {
       let intro = this.getDataValue('intro_paragraph');
-      
+
       if (intro) {
         return intro;
       } else {
@@ -37,7 +37,7 @@ const Post = db.define('post', {
       return title.replace(/\s+/g, '-');
     }
   }
-  
+
 });
 
 module.exports = { Sequelize, db, Post };
