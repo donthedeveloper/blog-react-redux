@@ -221,7 +221,7 @@ hr {
 .post-full {
   max-width: 800px;
   margin: 0 auto;
-  text-align: center;
+  /*text-align: center;*/
   padding: 0 10%;
   position: relative;
 }
@@ -265,8 +265,8 @@ hr {
   font-family: 'Merriweather', serif;
   text-align: left;
 
-  float: left;
-  width: 70%;
+  /*float: left;*/
+  /*width: 70%;*/
 }
 /* ----------------- END INDIVIDUAL POSTS ----------------- */
 

@@ -58,25 +58,25 @@ const permissions = [
 db.sync({ force: true })
 .then(() => {
   console.log(chalk.blue("Dropped old data."));
-  
+
   // CREATE USERS
   return User.create(users[0]);
 })
 .then((users) => {
   console.log(chalk.green("Successfully seeded users table."));
-  
+
   // CREATE POSTS
   return Post.bulkCreate(posts, { individualHooks: true });
 })
 .then(function(posts) {
   console.log(chalk.green("Successfully seeded posts table"));
-  
+
   // CREATE ROLES
   return Role.bulkCreate(roles, { individualHooks: true });
 })
 .then((roles) => {
   console.log(chalk.green("Successfully seeded roles table"));
-  
+
   // CREATE PERMISSIONS
   return Permission.bulkCreate(permissions, { individualHooks: true });
 })

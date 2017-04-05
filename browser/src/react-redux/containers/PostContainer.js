@@ -1,6 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
+// import marked from 'marked';
+var ReactMarkdown = require('react-markdown');
+
 class PostContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -10,11 +13,13 @@ class PostContainer extends React.Component {
     this.editPost = props.editPost.bind(this);
   }
   render() {
+    const content = this.props.post.content || '';
     console.log('props', this.props);
     return(
       <article className='post-full'>
         <h2>{this.props.post.title}</h2>
-        <p>{this.props.post.content}</p>
+        <ReactMarkdown source={content} />
+
       </article>
     )
   }
