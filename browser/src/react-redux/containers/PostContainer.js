@@ -1,17 +1,41 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
-import Post from '../components/Post';
+class PostContainer extends React.Component {
+  constructor(props) {
+    super(props);
 
-const PostContainer = (props) => {
-  return(
-    <section>
-        {
-          props.posts.map((post, index) =>
-            <Post key={index} post={post} removePost={props.removePost} editPost={props.editPost} />
-          )
-        }
-    </section>
-  );
+    this.createPost = props.createPost.bind(this);
+    this.removePost = props.removePost.bind(this);
+    this.editPost = props.editPost.bind(this);
+  }
+  render() {
+    console.log('props', this.props);
+    return(
+      <article className='post-full'>
+        <h2>{this.props.post.title}</h2>
+        <p>{this.props.post.content}</p>
+      </article>
+    )
+  }
+}
+
+const mapStateToProps = (state) => {
+  console.log('map', state);
+  return {
+    post: state.posts.selectedPost
+  }
 };
 
-export default PostContainer;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    createPost: (post) =>
+      dispatch(createPost(post)),
+    removePost: (id) =>
+      dispatch(removePost(id)),
+    editPost: (post) =>
+      dispatch(editPost(post))
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostContainer);

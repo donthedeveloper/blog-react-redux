@@ -1,24 +1,35 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 import IntroPost from '../components/IntroPost';
 
-const IntroPostContainer = (props) => {
-  const maxIndex = props.posts.length-1;
+class IntroPostContainer extends React.Component {
+  render() {
+    console.log('intropostcontainer:', this.props);
+    const maxIndex = this.props.posts.length-1;
 
-  return (
-    <div>
-      {
-        props.posts.map((post, index) => {
-          return (
-          <div key={post.id}>
-            <IntroPost index={index} post={post} />
-            {index < maxIndex && <hr />}
-          </div>
-          )
-        })
-      }
-    </div>
-  )
-};
+    return (
+      <div>
+        {
+          this.props.posts.map((post, index) => {
+            return (
+            <div key={post.id}>
+              <IntroPost index={index} post={post} />
+              {index < maxIndex && <hr />}
+            </div>
+            )
+          })
+        }
+      </div>
+    )
+  }
+}
 
-export default IntroPostContainer;
+const mapStateToProps = (state) => {
+  console.log('state stuff', state);
+  return {
+    posts: state.posts.posts
+  }
+}
+
+export default connect(mapStateToProps)(IntroPostContainer);
