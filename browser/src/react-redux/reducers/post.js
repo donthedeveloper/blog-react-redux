@@ -19,6 +19,7 @@ export default (state=initialState, action) => {
       newState.posts = [...newState.posts, action.post];
       break;
     case REMOVE_POST:
+      console.log('reducer remove post');
       newState.posts = [...newState.posts];
       newState.posts.forEach((post, index) => {
         if (post.id === action.id) {
@@ -91,7 +92,10 @@ export const updatePost = (post) =>
       .catch((err) => console.error(err.message));
 
 export const removePost = (id) =>
+{
+  console.log('id:', id);
   dispatch =>
     axios.delete(`/api/posts/${id}`)
       .then((deletedCount) => dispatch(remove(id)))
       .catch((err) => console.error(err.message));
+    }

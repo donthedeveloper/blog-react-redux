@@ -1,26 +1,78 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import ReactMarkdown from 'react-markdown';
 
-// import marked from 'marked';
-var ReactMarkdown = require('react-markdown');
+import {removePost} from '../reducers/post';
 
 class PostContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.createPost = props.createPost.bind(this);
+    this.state={
+      editMode: false,
+    }
+
+    // this.createPost = props.createPost.bind(this);
     this.removePost = props.removePost.bind(this);
     this.editPost = props.editPost.bind(this);
   }
+
+  toggleEditMode() {
+    this.setState({
+      editMode: !this.state.editMode
+    });
+  }
+
+  savePost() {
+    const data = new FormData(e.target);
+    const post = {
+      title: data.get('title'),
+      introParagraph: data.get('introParagraph'),
+      content: data.get('content')
+    };
+    props.updatePost(post);
+  }
+
+  postIsDeleted() {
+
+  }
+
+  deletePost(id) {
+    this.props.removePost(id);
+  }
+
   render() {
     const content = this.props.post.content || '';
-    console.log('props', this.props);
     return(
-      <article className='post-full'>
-        <h2>{this.props.post.title}</h2>
-        <ReactMarkdown source={content} />
+      <div className='post-full'>
+        <div className='post-admin'>
+          <button onClick={(e) => this.removePost(this.props.post.id)}>Delete</button>
+          <button onClick={(e) => this.toggleEditMode()}>
+            { (this.state.editMode) ? 'Save' : 'Edit' }
+          </button>
+        </div>
+      {
 
-      </article>
+      }
+      { !this.state.editMode &&
+        <article>
+          <h2>{this.props.post.title}</h2>
+          <ReactMarkdown source={content} />
+        </article>
+      }
+      { this.state.editMode &&
+        <form>
+          <label htmlFor="post-title">Title:</label><br />
+          <input id="input-post-title" name="title" type="text" defaultValue={this.props.post.title} /><br />
+
+          <label htmlFor="input-introParagraph">Intro Paragraph:</label><br />
+          <input id="input-introParagraph" name="introParagraph" type="text" defaultValue={this.props.post.intro_paragraph} /><br />
+
+          <label htmlFor="input-content">Content:</label><br />
+          <textarea id="input-content" name="content" defaultValue={this.props.post.content} />
+        </form>
+      }
+      </div>
     )
   }
 }
