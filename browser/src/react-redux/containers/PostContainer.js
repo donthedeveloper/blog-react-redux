@@ -78,7 +78,6 @@ class PostContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log('map', state);
   return {
     post: state.posts.selectedPost
   }

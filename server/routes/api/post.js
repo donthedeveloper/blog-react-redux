@@ -24,7 +24,6 @@ router.get('/:postId', (req, res) => {
 
 // create one post in database (admin)
 router.post('/', (req, res) => {
-  console.log('body:', req.body);
   Post.create({
     title: req.body.title,
     intro_paragraph: req.body.introParagraph,
@@ -48,7 +47,6 @@ router.put('/:postId', (req, res) => {
     }
   })
   .then((updatedCount) => {
-    console.log('updated count', updatedCount[0]);
     res.status(200).send(updatedCount[0]);
   })
   .catch(console.error);
@@ -62,8 +60,11 @@ router.delete('/:postId', (req, res) => {
     }
   })
   .then((deletedCount) => {
-    // console.log('post id:', req.params.postId);
-    res.status(200).send(deletedCount)
+    if (deletedCount > 0) {
+      res.sendStatus(202);
+    } else {
+      res.sendStatus(404);
+    }
   })
   .catch(console.error);
 });

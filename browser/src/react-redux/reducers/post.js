@@ -92,10 +92,14 @@ export const updatePost = (post) =>
       .catch((err) => console.error(err.message));
 
 export const removePost = (id) =>
-{
-  console.log('id:', id);
   dispatch =>
     axios.delete(`/api/posts/${id}`)
-      .then((deletedCount) => dispatch(remove(id)))
-      .catch((err) => console.error(err.message));
-    }
+      .then((statusObj) => {
+        console.log('status code:', statusObj.status);
+        if (statusObj.status === 202) {
+          dispatch(remove(id))
+        }
+      })
+      .catch((err) => {
+        console.error(err.message);
+      });
