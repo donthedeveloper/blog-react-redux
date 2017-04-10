@@ -19,7 +19,7 @@ export default (state=initialState, action) => {
       newState.posts = [...newState.posts, action.post];
       break;
     case REMOVE_POST:
-      console.log('reducer remove post');
+      console.log('remove post action:', action);
       newState.posts = [...newState.posts];
       newState.posts.forEach((post, index) => {
         if (post.id === action.id) {
@@ -95,7 +95,6 @@ export const removePost = (id) =>
   dispatch =>
     axios.delete(`/api/posts/${id}`)
       .then((statusObj) => {
-        console.log('status code:', statusObj.status);
         if (statusObj.status === 202) {
           dispatch(remove(id))
         }
