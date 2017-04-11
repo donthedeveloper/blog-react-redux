@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import ReactMarkdown from 'react-markdown';
 
-import {removePost} from '../reducers/post';
+import {removePost, updatePost} from '../reducers/post';
 
 class PostContainer extends React.Component {
   constructor(props) {
@@ -10,35 +10,66 @@ class PostContainer extends React.Component {
 
     this.state={
       editMode: false,
+      post: {
+        id: null,
+        title: null,
+        introParagraph: null,
+        content: null
+      }
     }
 
     // this.createPost = props.createPost.bind(this);
     this.removePost = props.removePost.bind(this);
-    this.editPost = props.editPost.bind(this);
+    this.updatePost = props.updatePost.bind(this);
+    this.onTitleChange = this.onTitleChange.bind(this);
+    this.onIntroParagraphChange = this.onIntroParagraphChange.bind(this);
+    this.onContentChange = this.onContentChange.bind(this);
+  }
+
+  componentWillReceiveProps(newProps) {
+    this.setState({
+      post: {
+        id: newProps.post.id,
+        title: newProps.post.title,
+        introParagraph: newProps.post.intro_paragraph,
+        content: newProps.post.content
+      }
+    })
+  }
+
+  onTitleChange(e) {
+    this.setState({
+      // post: Object.assign({}, this.state.post, {title: e.target.value})
+      post: {...this.state.post, ...{title: e.target.value}}
+    })
+  }
+
+  onIntroParagraphChange(e) {
+    this.setState({
+      // post: Object.assign({}, this.state.post, {introParagraph: e.target.value})
+      post: {...this.state.post, ...{introParagraph: e.target.value}}
+    })
+  }
+
+  onContentChange(e) {
+    this.setState({
+      // post: Object.assign({}, this.state.post, {title: e.target.value})
+      post: {...this.state.post, ...{content: e.target.value}}
+    })
   }
 
   toggleEditMode() {
+    if (this.state.editMode) {
+      this.savePost()
+    }
+
     this.setState({
       editMode: !this.state.editMode
     });
   }
 
   savePost() {
-    const data = new FormData(e.target);
-    const post = {
-      title: data.get('title'),
-      introParagraph: data.get('introParagraph'),
-      content: data.get('content')
-    };
-    props.updatePost(post);
-  }
-
-  postIsDeleted() {
-
-  }
-
-  deletePost(id) {
-    this.props.removePost(id);
+    this.updatePost(this.state.post);
   }
 
   render() {
@@ -56,20 +87,20 @@ class PostContainer extends React.Component {
       }
       { !this.state.editMode &&
         <article>
-          <h2>{this.props.post.title}</h2>
+          <h2>{this.state.post.title}</h2>
           <ReactMarkdown source={content} />
         </article>
       }
       { this.state.editMode &&
         <form>
           <label htmlFor="post-title">Title:</label><br />
-          <input id="input-post-title" name="title" type="text" defaultValue={this.props.post.title} /><br />
+          <input id="input-post-title" name="title" type="text" defaultValue={this.state.post.title} onChange={this.onTitleChange} /><br />
 
           <label htmlFor="input-introParagraph">Intro Paragraph:</label><br />
-          <input id="input-introParagraph" name="introParagraph" type="text" defaultValue={this.props.post.intro_paragraph} /><br />
+          <input id="input-introParagraph" name="introParagraph" type="text" defaultValue={this.state.post.introParagraph} onChange={this.introParagraphChange} /><br />
 
           <label htmlFor="input-content">Content:</label><br />
-          <textarea id="input-content" name="content" defaultValue={this.props.post.content} />
+          <textarea id="input-content" name="content" defaultValue={this.state.post.content} onChange={this.onContentChange} />
         </form>
       }
       </div>
@@ -85,12 +116,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    createPost: (post) =>
-      dispatch(createPost(post)),
+    // createPost: (post) =>
+    //   dispatch(createPost(post)),
     removePost: (id) =>
       dispatch(removePost(id)),
-    editPost: (post) =>
-      dispatch(editPost(post))
+    updatePost: (post) =>
+      dispatch(updatePost(post))
   }
 };
 

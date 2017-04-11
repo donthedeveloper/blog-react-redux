@@ -37,6 +37,7 @@ router.post('/', (req, res) => {
 
 // update one post in database (admin)
 router.put('/:postId', (req, res) => {
+  console.log('we hit update:', req.body);
   Post.update({
     title: req.body.title,
     intro_paragraph: req. body.introParagraph,
@@ -47,7 +48,12 @@ router.put('/:postId', (req, res) => {
     }
   })
   .then((updatedCount) => {
-    res.status(200).send(updatedCount[0]);
+    console.log(updatedCount);
+    if (updatedCount[0]) {
+      res.sendStatus(200);
+    } else {
+      res.sendStatus(204);
+    }
   })
   .catch(console.error);
 });
@@ -61,9 +67,9 @@ router.delete('/:postId', (req, res) => {
   })
   .then((deletedCount) => {
     if (deletedCount > 0) {
-      res.sendStatus(202);
+      res.sendStatus(200);
     } else {
-      res.sendStatus(404);
+      res.sendStatus(204);
     }
   })
   .catch(console.error);

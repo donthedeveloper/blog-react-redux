@@ -9,6 +9,10 @@ class Post extends React.Component {
   }
 
   toggleEditMode() {
+    if (this.state.editMode) {
+      this.savePost()
+    }
+
     this.setState({
       editMode: !this.state.editMode
     });
