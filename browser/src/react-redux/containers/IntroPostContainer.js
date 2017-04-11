@@ -5,7 +5,6 @@ import IntroPost from '../components/IntroPost';
 
 class IntroPostContainer extends React.Component {
   render() {
-    console.log('intropostcontainer:', this.props);
     const maxIndex = this.props.posts.length-1;
 
     return (
@@ -26,7 +25,6 @@ class IntroPostContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log('state stuff', state);
   return {
     posts: state.posts.posts
   }

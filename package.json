@@ -44,5 +44,8 @@
     "redux-thunk": "^2.2.0",
     "sequelize": "^3.30.2",
     "webpack": "^2.2.1"
+  },
+  "devDependencies": {
+    "babel-preset-stage-1": "^6.24.1"
   }
 }
