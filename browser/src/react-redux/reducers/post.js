@@ -19,13 +19,16 @@ export default (state=initialState, action) => {
       newState.posts = [...newState.posts, action.post];
       break;
     case REMOVE_POST:
-      console.log('remove post action:', action);
       newState.posts = [...newState.posts];
-      newState.posts.forEach((post, index) => {
-        if (post.id === action.id) {
-          newState.posts.splice(index, 1);
+
+      for (let i = 0; i < newState.posts.length; i++) {
+        if (newState.posts[i].id === action.id) {
+          newState.posts.splice(i, 1); // remove post object from posts array
+          newState.selectedPost = {}; // clear selectedPost object
+          break;
         }
-      });
+      }
+
       break;
     default:
       return state;
