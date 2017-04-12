@@ -6,7 +6,9 @@ const { Post } = require('../../models');
 
 // get all of posts from database
 router.get('/', (req, res) => {
-  Post.findAll()
+  Post.findAll({
+    order: [['id', 'ASC']]
+  })
   .then((posts) => {
     res.send(posts);
   })

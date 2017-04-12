@@ -7,6 +7,7 @@ const initialState = {
 
 export default (state=initialState, action) => {
   const newState = Object.assign({}, state);
+  let index;
 
   switch(action.type) {
     case RETRIEVE_POSTS:
@@ -18,18 +19,29 @@ export default (state=initialState, action) => {
     case CREATE_POST:
       newState.posts = [...newState.posts, action.post];
       break;
-    case REMOVE_POST:
-      newState.posts = [...newState.posts];
-
-      for (let i = 0; i < newState.posts.length; i++) {
-        if (newState.posts[i].id === action.id) {
-          newState.posts.splice(i, 1); // remove post object from posts array
-          newState.selectedPost = {}; // clear selectedPost object
-          break;
-        }
-      }
-
-      break;
+    // case REMOVE_POST:
+    //   newState.posts = [...newState.posts];
+    //
+    //   index = newState.posts.findIndex(post => post.id === action.postId);
+    //   newState.posts.splice(index, 1);
+    //   newState.selectedPost = {};
+    //
+    //   break;
+    // case UPDATE_POST:
+    //   newState.posts = [...newState.posts];
+    //
+    //   index = newState.posts.findIndex(post => post.id === action.post.id);
+    //
+    //   console.log('index:', index);
+    //   console.log('before posts array:', newState.posts[index]);
+    //
+    //   newState.posts[index] = {...newState.posts[index], ...action.post};
+    //
+    //   console.log('after posts array:', newState.posts[index]);
+    //
+    //   newState.selectedPost = {...action.post};
+    //
+    //   break;
     default:
       return state;
   }
@@ -60,20 +72,15 @@ const create = (post) => ({
   post: post.data
 });
 
-const update = (post) => ({
-  type: UPDATE_POST,
-  post
-});
-
-const remove = (id) => ({
-  type: REMOVE_POST,
-  id
-});
-
-// const edit = (post) => ({
-//   type: EDIT_POST,
+// const update = (post) => ({
+//   type: UPDATE_POST,
 //   post
-// })
+// });
+
+// const remove = (postId) => ({
+//   type: REMOVE_POST,
+//   postId
+// });
 
 // THUNKS
 export const retrievePosts = () =>
@@ -94,38 +101,28 @@ export const createPost = (post) =>
       .then((post) => dispatch(create(post)))
       .catch((err) => console.error(err.message));
 
-export const updatePost = (post) => 
+export const updatePost = (post) =>
 dispatch =>
   axios.put(`/api/posts/${post.id}`, post)
     .then((statusObj) => {
       if (statusObj.status === 200) {
-        dispatch(update(post))
+        dispatch(retrievePosts());
+        dispatch(retrievePost(post.id));
       }
     })
     .catch((err) => {
       console.error(err.message)
     });
 
-export const removePost = (id) =>
+export const removePost = (postId) =>
   dispatch =>
-    axios.delete(`/api/posts/${id}`)
+    axios.delete(`/api/posts/${postId}`)
       .then((statusObj) => {
         if (statusObj.status === 200) {
-          dispatch(remove(id))
+          dispatch(retrievePosts());
+          dispatch(retrievePost(postId));
         }
       })
       .catch((err) => {
         console.error(err.message);
       });
-
-// export const editPost = (post) =>
-//   dispatch =>
-//     axios.put(`/api/posts/${id}`)
-//       .then((statusObj) => {
-//         if (statusObj.status === 200) {
-//           dispatch(edit(post))
-//         }
-//       })
-//       .catch((err) => {
-//         console.error(err.message)
-//       });
