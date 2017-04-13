@@ -2,6 +2,7 @@ import React from 'react';
 
 import Navigation from '../components/Navigation';
 import FooterContainer from './FooterContainer';
+import SubscriptionContainer from './SubscriptionContainer';
 
 import Login from '../components/Login';
 import Logout from '../components/Logout';
@@ -22,12 +23,7 @@ class AppContainer extends React.Component {
         <Logout />
         <Register />
         <CreatePost createPost={this.createPost} />*/}
-        <div className="subscribe-container text-center">
-          <form>
-            <input type="email" name="input-email" placeholder="Enter your email address" />
-            <button>Notify Me</button>
-          </form>
-        </div>
+        <SubscriptionContainer />
         <FooterContainer />
       </div>
     );
