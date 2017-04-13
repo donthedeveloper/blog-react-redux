@@ -317,15 +317,14 @@ hr {
   text-align: center;
 }
 
-.subscribe-container input,
-.subscribe-container button {
+.subscribe-container input {
   border-radius: 1px;
   font-size: 14px;
   padding-top: .5rem;
   padding-bottom: .5rem;
 }
 
-.subscribe-container input {
+.input-subscribe--email {
   background-color: #e6ebf4;
   width: 400px;
   margin-right: 1rem;
@@ -334,7 +333,7 @@ hr {
   border: 2px solid #dce3ef;
 }
 
-.subscribe-container button {
+.input-subscribe--submit {
   text-transform: uppercase;
   background-color: #3366cc;
   padding: .5rem 3rem;
