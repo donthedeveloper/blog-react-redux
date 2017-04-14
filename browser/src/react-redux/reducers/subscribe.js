@@ -11,7 +11,7 @@ export default (state=initialState, action) => {
 
   switch(action.type) {
     case SUBSCRIBE:
-      newState.isSubscriber: true;
+      newState.isSubscriber = true;
       break;
     default:
       return state;
@@ -32,8 +32,20 @@ const subscribe = () => ({
 
 
 // THUNKS
-export const subscribeEmail = () =>
+export const subscribeEmail = (email) =>
   dispatch =>
-    axios.post('/api/subscribe')
-    .then((statusCode) => dispatch(subscribe()))
-    .catch((err) => console.error(err.message));
+    axios.post('/api/subscribe', {email})
+    .then((statusObj) => {
+      if (statusObj.status === 200) {
+        dispatch(subscribe());
+      } else if (statusObj.status === 209) {
+        console.log('update error code');
+      } else {
+        console.log('validation error');
+      }
+    })
+    .catch((err) => {
+      // 400 status code will most likely be triggered here for validation errors
+      // route still needs to be set up to handle validation errors and send appropriate status code
+      console.error(err.message)
+    });

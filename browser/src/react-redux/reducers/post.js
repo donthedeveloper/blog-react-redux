@@ -19,29 +19,6 @@ export default (state=initialState, action) => {
     case CREATE_POST:
       newState.posts = [...newState.posts, action.post];
       break;
-    // case REMOVE_POST:
-    //   newState.posts = [...newState.posts];
-    //
-    //   index = newState.posts.findIndex(post => post.id === action.postId);
-    //   newState.posts.splice(index, 1);
-    //   newState.selectedPost = {};
-    //
-    //   break;
-    // case UPDATE_POST:
-    //   newState.posts = [...newState.posts];
-    //
-    //   index = newState.posts.findIndex(post => post.id === action.post.id);
-    //
-    //   console.log('index:', index);
-    //   console.log('before posts array:', newState.posts[index]);
-    //
-    //   newState.posts[index] = {...newState.posts[index], ...action.post};
-    //
-    //   console.log('after posts array:', newState.posts[index]);
-    //
-    //   newState.selectedPost = {...action.post};
-    //
-    //   break;
     default:
       return state;
   }
@@ -72,15 +49,6 @@ const create = (post) => ({
   post: post.data
 });
 
-// const update = (post) => ({
-//   type: UPDATE_POST,
-//   post
-// });
-
-// const remove = (postId) => ({
-//   type: REMOVE_POST,
-//   postId
-// });
 
 // THUNKS
 export const retrievePosts = () =>
