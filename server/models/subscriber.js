@@ -3,7 +3,7 @@ const chalk = require('chalk');
 
 const Subscriber = db.define('subscriber', {
   email: {
-    type: Sequelize.EMAIL,
+    type: Sequelize.STRING,
     allowNull: false,
     unique: true,
     validate: {
@@ -12,4 +12,4 @@ const Subscriber = db.define('subscriber', {
   }
 });
 
-module.exports = { Sequelize, db Subscriber };
+module.exports = { Sequelize, db, Subscriber };
