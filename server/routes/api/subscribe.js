@@ -17,11 +17,11 @@ router.post('/', (req, res) => {
     if (subscriber[1]) {
       res.sendStatus(200);
     } else {
-      res.sendStatus(409);
+      res.sendStatus(209);
     }
   })
   .catch((err) => {
-    console.error('we hit an error:', err.message);
+    res.sendStatus(409);
   });
 
 });
