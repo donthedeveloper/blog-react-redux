@@ -74,13 +74,10 @@ export const subscribeEmail = (email) =>
     .then((statusObj) => {
       if (statusObj.status === 200) {
         const successMessage = 'You have successfully subscribed to the blog, and will receive notifications when new content is posted';
-        console.log('status code:', statusObj.status);
         dispatch(subscribe());
         dispatch(addSuccessMessage(successMessage));
         dispatch(resetErrorMessage());
       } else if (statusObj.status === 209) {
-        console.log('duplicate email. oh no!');
-        console.log('status code:', statusObj.status);
         const errorMessage = 'It looks like this email is already subscribed.';
 
         dispatch(addErrorMessage(errorMessage));

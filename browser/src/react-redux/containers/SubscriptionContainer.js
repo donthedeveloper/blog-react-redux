@@ -1,12 +1,16 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
+import SuccessMessage from '../components/SuccessMessage';
+import ErrorMessage from '../components/ErrorMessage';
+import SubscribeForm from '../components/SubscribeForm';
+
 import {subscribeEmail} from '../reducers/subscribe';
 
 class SubscriptionContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.subscribeEmail = props.subscribeEmail.bind(this);
+    this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
   onFormSubmit(e) {
@@ -16,16 +20,20 @@ class SubscriptionContainer extends React.Component {
       email: data.get('input-email')
     };
 
-    this.subscribeEmail(subscribeForm.email);
+    this.props.subscribeEmail(subscribeForm.email);
   }
 
   render() {
     return (
       <div className="subscribe-container text-center">
-        <form onSubmit={this.onFormSubmit.bind(this)}>
-          <input className='input-subscribe--email' type="text" name="input-email" placeholder="Enter your email address" />
-          <input className='input-subscribe--submit' type='submit' defaultValue='Subscribe' />
-        </form>
+        { this.props.errorMessage &&
+          <ErrorMessage errorMessage={this.props.errorMessage} />
+        }
+
+        {(this.props.isSubscriber) ?
+          (<SuccessMessage successMessage={this.props.successMessage} />) :
+          (<SubscribeForm onFormSubmit={this.onFormSubmit} />)
+        }
       </div>
     )
   }
@@ -33,7 +41,9 @@ class SubscriptionContainer extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    isSubscriber: state.subscribe.subscribed
+    isSubscriber: state.subscribe.isSubscriber,
+    successMessage: state.subscribe.successMessage,
+    errorMessage: state.subscribe.errorMessage
   }
 }
 
