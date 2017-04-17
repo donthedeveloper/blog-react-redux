@@ -33,6 +33,9 @@ const create = (post) => {
 // THUNKS
 export const createUser = (user) =>
   dispatch =>
-    axios.post('/api/users', post)
-      .then((post) => dispatch(create(post)))
+    axios.post('/api/users', user)
+      .then((post) => {
+        console.log('user created');
+        dispatch(create(post))
+      })
       .catch((err) => console.error(err.message));

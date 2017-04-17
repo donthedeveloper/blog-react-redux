@@ -1,15 +1,15 @@
 const { db, User, Post, Role, Permission } = require('./index');
 const chalk = require('chalk');
 
-const users = [
-  {
-    firstname: "Don",
-    lastname: "Hansen",
-    username: "donthedeveloper",
-    password: "password",
-    email: "test@gmail.com"
-  }
-];
+// const users = [
+//   {
+//     first_name: "Don",
+//     lastname: "Hansen",
+//     username: "donthedeveloper",
+//     password: "password",
+//     email: "test@gmail.com"
+//   }
+// ];
 
 const posts = [
   {
@@ -58,12 +58,12 @@ const permissions = [
 db.sync({ force: true })
 .then(() => {
   console.log(chalk.blue("Dropped old data."));
-
-  // CREATE USERS
-  return User.create(users[0]);
-})
-.then((users) => {
-  console.log(chalk.green("Successfully seeded users table."));
+//
+//   // CREATE USERS
+//   return User.create(users[0]);
+// })
+// .then((users) => {
+//   console.log(chalk.green("Successfully seeded users table."));
 
   // CREATE POSTS
   return Post.bulkCreate(posts, { individualHooks: true });
