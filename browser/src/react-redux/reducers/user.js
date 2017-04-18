@@ -39,3 +39,15 @@ export const createUser = (user) =>
         dispatch(create(post))
       })
       .catch((err) => console.error(err.message));
+
+export const login = (user) =>
+  dispatch =>
+    axios.post('/api/login', user)
+      .then((statusCode) => {
+        console.log('we got status code back:', statusCode.status);
+      })
+      .catch((err) => console.error(err.message));
+
+// export const whoAmI = () => 
+//   dispatch =>
+//     axios.post('/api/login')
