@@ -7,24 +7,27 @@ const { User } = require('../../models');
 router.post('/', (req, res) => {
   console.log(chalk.yellow('Session:'));
   console.dir(req.session);
-  
+
   User.findOne({
     where: {
-      username: req.body.username,
-      password: req.body.password
+      email: req.body.email
     }
   })
   .then((user) => {
-    if (user) {
+
+    // validated plain password with encrypted password
+    if (user.validPassword(req.body.password)) {
       req.session.user = user;
+      res.sendStatus(200);
+    } else {
+      res.sendStatus(401);
     }
-    
-    res.send();
+
   })
   .catch((err) => {
     console.error(chalk.red(err.message));
   });
-  
+
 //   res.send();
 });
 

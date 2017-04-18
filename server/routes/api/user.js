@@ -32,7 +32,9 @@ router.post('/', (req, res) => {
       last_name: req.body.lastName
     }
   })
-  .then(res.send)
+  .then((post) => {
+    res.send(post);
+  })
   .catch(console.error)
 });
 
