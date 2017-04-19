@@ -2,7 +2,8 @@ const { Sequelize, db } = require('./db');
 
 const Permission = db.define('permission', {
   name: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    unique: false
   }
 });
 

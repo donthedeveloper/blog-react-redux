@@ -12,6 +12,9 @@ export default (state=initialState, action) => {
   const newState = Object.assign({}, state);
 
   switch (action.type) {
+    case RESET_USER:
+      newState.user = null;
+      break;
     default:
       return state;
   }
@@ -25,29 +28,57 @@ const CREATE_USER = 'CREATE_USER';
 
 
 // ACTION CREATERS
-const create = (post) => {
-  type: CREATE_USER,
-  post
-};
+// const create = (user) => {
+//   type: CREATE_USER,
+//   user
+// };
+
+const resetUser = () => {
+  type: RESET_USER
+}
 
 // THUNKS
 export const createUser = (user) =>
   dispatch =>
     axios.post('/api/users', user)
-      .then((post) => {
-        console.log('user created');
-        dispatch(create(post))
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch(login(user))
+        } else {
+          console.log('Sorry, user is taken');
+        }
       })
-      .catch((err) => console.error(err.message));
+      .catch((err) => {
+        console.error(err.message);
+      });
 
 export const login = (user) =>
   dispatch =>
     axios.post('/api/login', user)
-      .then((statusCode) => {
-        console.log('we got status code back:', statusCode.status);
+      .then((response) => {
+        dispatch(whoAmI());
       })
-      .catch((err) => console.error(err.message));
+      .catch((err) => {
+        // assume au
+        console.log('status code:', err.response.status);
+      });
 
-// export const whoAmI = () => 
-//   dispatch =>
-//     axios.post('/api/login')
+export const logout = () =>
+  dispatch =>
+    axios.get('/api/logout')
+      .then((response) => {
+
+      })
+      .catch((err) => {
+        console.error(err.message);
+      });
+
+export const whoAmI = () =>
+  dispatch =>
+    axios.get('/api/whoami')
+      .then((user) => {
+        console.log('user:', user.data);
+      })
+      .catch((err) => {
+        console.error(err.message);
+      });

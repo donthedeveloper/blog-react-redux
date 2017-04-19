@@ -39,17 +39,15 @@ const roles = [
 ];
 
 const permissions = [
-  { name: 'user_add' },
-  { name: 'user_edit' },
-  { name: 'comment_add' },
-  { name: 'comment_edit' },
-  { name: 'comment_delete' },
-  { name: 'user_add' },
-  { name: 'user_edit' },
-  { name: 'user_delete' },
-  { name: 'post_add' },
-  { name: 'post_edit' },
-  { name: 'post_delete' }
+  { name: 'comment_add', roleId: 1 },
+  { name: 'comment_edit', roleId: 1 },
+  { name: 'comment_delete', roleId: 1 },
+  { name: 'user_add', roleId: 1 },
+  { name: 'user_edit', roleId: 1 },
+  { name: 'user_delete', roleId: 2 },
+  { name: 'post_add', roleId: 2 },
+  { name: 'post_edit', roleId: 2 },
+  { name: 'post_delete', roleId: 2 }
 ];
 
 

@@ -6,7 +6,7 @@ const { User } = require('../../models');
 
 router.post('/', (req, res) => {
   req.session.reset();
-  res.send();
+  res.sendStatus(200);
 });
 
 module.exports = router;
