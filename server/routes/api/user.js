@@ -31,7 +31,8 @@ router.post('/', (req, res) => {
       email: req.body.email,
       password: req.body.password,
       first_name: req.body.firstName,
-      last_name: req.body.lastName
+      last_name: req.body.lastName,
+      roleId: 1
     }
   })
   .then((user) => {

@@ -1,7 +1,6 @@
 const { Sequelize, db } = require('./db');
 
 const bcrypt = require('bcrypt');
-// const saltRounds = 10;
 
 const User = db.define('user', {
   email: {
@@ -24,11 +23,7 @@ const User = db.define('user', {
   },
   last_name: {
     type: Sequelize.STRING
-  },
-  // displayName: {
-  //   type: Sequelize.STRING,
-  //   allowNull: false
-  // }
+  }
 }, {
   instanceMethods: {
     generateHash: function(plainPassword) {
