@@ -14,9 +14,6 @@ router.post('/', (req, res) => {
   })
   .then((user) => {
 
-    console.log('\n\n');
-    console.dir(user);
-
     // validated plain password with encrypted password
     if (user && user.validPassword(req.body.password)) {
       req.session.user = user;
