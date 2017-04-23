@@ -2,30 +2,31 @@ const express = require('express');
 const router = express.Router();
 const chalk = require('chalk');
 
-const { User } = require('../../models');
+const { User, Role } = require('../../models');
 
 router.post('/', (req, res) => {
-  console.log(chalk.yellow('Session:'));
-  console.dir(req.session);
-  
+
   User.findOne({
     where: {
-      username: req.body.username,
-      password: req.body.password
-    }
+      email: req.body.email
+    },
+    include: [{model: Role}]
   })
   .then((user) => {
-    if (user) {
+
+    // validated plain password with encrypted password
+    if (user && user.validPassword(req.body.password)) {
       req.session.user = user;
+      res.sendStatus(200);
+    } else {
+      res.sendStatus(401);
     }
-    
-    res.send();
+
   })
   .catch((err) => {
-    console.error(chalk.red(err.message));
+    console.error(chalk.red(err));
   });
-  
-//   res.send();
+
 });
 
 module.exports = router;

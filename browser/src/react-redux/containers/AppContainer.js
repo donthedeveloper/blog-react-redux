@@ -3,6 +3,7 @@ import React from 'react';
 import Navigation from '../components/Navigation';
 import FooterContainer from './FooterContainer';
 import SubscriptionContainer from './SubscriptionContainer';
+import AdminContainer from './AdminContainer';
 
 import Login from '../components/Login';
 import Logout from '../components/Logout';
@@ -17,6 +18,7 @@ class AppContainer extends React.Component {
     return(
       <div>
         <Navigation />
+        <AdminContainer />
         { this.props.children }
 
         {/*<Login />

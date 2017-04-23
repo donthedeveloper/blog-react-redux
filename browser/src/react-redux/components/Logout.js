@@ -1,9 +1,11 @@
 import React from 'react';
 
-export default (props) => {
+const Logout = (props) => {
   return(
     <form method="post" action="api/logout">
       <input type="submit" value="Logout" />
     </form>
   );
 }
+
+export default Logout;

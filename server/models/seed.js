@@ -1,16 +1,6 @@
 const { db, User, Post, Role, Permission } = require('./index');
 const chalk = require('chalk');
 
-const users = [
-  {
-    firstname: "Don",
-    lastname: "Hansen",
-    username: "donthedeveloper",
-    password: "password",
-    email: "test@gmail.com"
-  }
-];
-
 const posts = [
   {
     title: "Guest Post",
@@ -38,18 +28,27 @@ const roles = [
   }
 ];
 
+// PERMISSION CONSTANTS
+const COMMENTADD = 'comment_add';
+const COMMENTEDIT = 'comment_edit';
+const COMMENTDELETE = 'comment_delete';
+const USERADD = 'user_add';
+const USEREDIT = 'user_edit';
+const USERDELETE = 'user_delete';
+const POSTADD = 'post_add';
+const POSTEDIT = 'post_edit';
+const POSTDELETE = 'post_delete';
+
 const permissions = [
-  { name: 'user_add' },
-  { name: 'user_edit' },
-  { name: 'comment_add' },
-  { name: 'comment_edit' },
-  { name: 'comment_delete' },
-  { name: 'user_add' },
-  { name: 'user_edit' },
-  { name: 'user_delete' },
-  { name: 'post_add' },
-  { name: 'post_edit' },
-  { name: 'post_delete' }
+  { name: COMMENTADD },
+  { name: COMMENTEDIT },
+  { name: COMMENTDELETE },
+  { name: USERADD },
+  { name: USEREDIT },
+  { name: USERDELETE },
+  { name: POSTADD },
+  { name: POSTEDIT },
+  { name: POSTDELETE }
 ];
 
 
@@ -58,12 +57,6 @@ const permissions = [
 db.sync({ force: true })
 .then(() => {
   console.log(chalk.blue("Dropped old data."));
-
-  // CREATE USERS
-  return User.create(users[0]);
-})
-.then((users) => {
-  console.log(chalk.green("Successfully seeded users table."));
 
   // CREATE POSTS
   return Post.bulkCreate(posts, { individualHooks: true });
@@ -81,7 +74,59 @@ db.sync({ force: true })
   return Permission.bulkCreate(permissions, { individualHooks: true });
 })
 .then((permissions) => {
+
   console.log(chalk.green("Successfully seeded permissions table"));
+
+  // console.log('permissions:\n');
+  permissions.forEach((permission) => {
+    const roleIdArr = [];
+
+    switch (permission.name) {
+
+      case COMMENTADD:
+        roleIdArr.push(1, 2);
+        break;
+
+      case COMMENTEDIT:
+        roleIdArr.push(1, 2);
+        break;
+
+      case COMMENTDELETE:
+        roleIdArr.push(1, 2);
+        break;
+
+      case USERADD:
+        roleIdArr.push(1, 2);
+        break;
+
+      case USEREDIT:
+        roleIdArr.push(1, 2)
+        break;
+
+      case USERDELETE:
+        roleIdArr.push(2);
+        break;
+
+      case POSTADD:
+        roleIdArr.push(2);
+        break;
+
+      case POSTEDIT:
+        roleIdArr.push(2);
+        break;
+
+      case POSTDELETE:
+        roleIdArr.push(2);
+        break;
+
+    }
+
+    roleIdArr.forEach((roleId) => {
+      permission.addRole(roleId);
+    })
+
+  })
+
 })
 .catch((err) => {
   console.error(chalk.red('There was totally a problem:'), err.message);

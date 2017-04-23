@@ -21,8 +21,29 @@ router.get('/:userId', (req, res) => {
 
 // create user in database
 router.post('/', (req, res) => {
-  User.create(req.body)
-  .then(res.send)
+  console.log('user model:', User);
+
+  User.findOrCreate({
+    where: {
+      email: req.body.email
+    },
+    defaults: {
+      email: req.body.email,
+      password: req.body.password,
+      first_name: req.body.firstName,
+      last_name: req.body.lastName,
+      roleId: 1
+    }
+  })
+  .then((user) => {
+    const wasCreated = user[1];
+
+    if (wasCreated) {
+      res.sendStatus(200);
+    } else {
+      res.sendStatus(204);
+    }
+  })
   .catch(console.error)
 });
 

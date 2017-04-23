@@ -11,6 +11,8 @@ import PostContainer from './containers/PostContainer';
 
 // import components
 import CreatePost from './components/CreatePost';
+import Signup from './components/Signup';
+import Login from './components/Login';
 
 // import action creators for onEnter(s)
 import { retrievePosts, retrievePost } from './reducers/post.js';
@@ -31,7 +33,11 @@ export default () => {
         <Route path='/' component={AppContainer} onEnter={onAppEnter}>
           <Route path='/posts' component={IntroPostContainer} />
           <Route path='/posts/:postId' component={PostContainer} onEnter={onPostEnter} />
+
           <Route path='/create-post' component={CreatePost} />
+          <Route path='/signup' component={Signup} />
+          <Route path='/login' component={Login} />
+
           <IndexRedirect to='/posts' />
         </Route>
       </Router>
