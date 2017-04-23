@@ -3,7 +3,8 @@ import axios from 'axios';
 
 // INITIAL STATE
 const initialState = ({
-  user: null
+  user: null,
+  errorMessage: null
 });
 
 
@@ -12,8 +13,17 @@ export default (state=initialState, action) => {
   const newState = Object.assign({}, state);
 
   switch (action.type) {
+    case UPDATE_CURRENT_USER:
+      newState.user = {...action.user};
+      break;
     case RESET_CURRENT_USER:
       newState.user = null;
+      break;
+    case UPDATE_ERROR_MESSAGE:
+      newState.errorMessage = action.errorMessage;
+      break;
+    case RESET_ERROR_MESSAGE:
+      newState.errorMessage = null;
       break;
     default:
       return state;
@@ -25,11 +35,28 @@ export default (state=initialState, action) => {
 
 // CONSTANTS
 const CREATE_USER = 'CREATE_USER';
+const UPDATE_CURRENT_USER = 'UPDATE_CURRENT_USER';
 const RESET_CURRENT_USER = 'RESET_CURRENT_USER';
+const UPDATE_ERROR_MESSAGE = 'UPDATE_ERROR_MESSAGE';
+const RESET_ERROR_MESSAGE = 'RESET_ERROR_MESSAGE';
 
-const resetCurrentUser = () => {
+const updateCurrentUser = (user) => ({
+  type: UPDATE_CURRENT_USER,
+  user
+});
+
+const resetCurrentUser = () => ({
   type: RESET_CURRENT_USER
-}
+});
+
+const updateErrorMessage = (errorMessage) => ({
+  type: UPDATE_ERROR_MESSAGE,
+  errorMessage
+});
+
+const resetErrorMessage = () => ({
+  type: RESET_ERROR_MESSAGE
+});
 
 // THUNKS
 export const createUser = (user) =>
@@ -53,9 +80,10 @@ export const login = (user) =>
         dispatch(whoAmI());
       })
       .catch((err) => {
-        console.log('status code:', err.response.status);
-
-        // TODO: update error message on user object in state
+        if (err.response.status === 401) {
+          const errorMessage = 'Sorry, your email and password combination is incorrect.';
+          dispatch(updateErrorMessage(errorMessage));
+        }
       });
 
 export const logout = () =>
@@ -72,10 +100,15 @@ export const whoAmI = () =>
   dispatch =>
     axios.get('/api/whoami')
       .then((user) => {
-        // TODO: if user is null, call reset current user
-        // TODO: if user exists, update current user in state
+        if (user) {
+          dispatch(updateCurrentUser(user.data));
+          dispatch(resetErrorMessage());
+        } else {
+          dispatch(resetCurrentUser());
+        }
 
-        console.log('user:', user.data);
+        // currently resets error message when successfully logged in or user logs out
+        dispatch(resetErrorMessage());
       })
       .catch((err) => {
         console.error(err.message);
