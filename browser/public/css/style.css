@@ -90,13 +90,23 @@ nav a {
 .login-panel {
   float: right;
   color: #fff;
-  margin: 12px 1.5rem;
+  margin: 10px 1.5rem;
   font-size: 24px;
 }
+
+.login-panel button {
+  padding: 0;
+  background-color: inherit;
+  border: none;
+}
+
+
 
 .icon-user--loggedout {
   color: #ff9999;
 }
+
+
 
 .icon-user--loggedin {
   color: #99ff99;

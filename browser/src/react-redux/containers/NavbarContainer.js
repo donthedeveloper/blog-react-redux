@@ -9,9 +9,9 @@ const NavbarContainer = (props) => {
       <Navigation />
       <div className='login-panel'>
         { !props.user &&
-        <i className="fa fa-user-times icon-user--loggedout" aria-hidden="true"></i> }
+        <button><i className="fa fa-user-times icon-user--loggedout" aria-hidden="true"></i></button> }
         { props.user &&
-        <i className="fa fa-user icon-user--loggedin" aria-hidden="true"></i> }
+        <button><i className="fa fa-user icon-user--loggedin" aria-hidden="true"></i></button> }
       </div>
     </div>
   );
