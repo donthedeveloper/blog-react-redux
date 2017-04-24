@@ -94,6 +94,14 @@ nav a {
   font-size: 24px;
 }
 
+.icon-user--loggedout {
+  color: #ff9999;
+}
+
+.icon-user--loggedin {
+  color: #99ff99;
+}
+
 
 /* .post {
   text-align: center;
