@@ -17,6 +17,7 @@ export default (state=initialState, action) => {
       newState.user = {...action.user};
       break;
     case RESET_CURRENT_USER:
+      newState.user = Object.assign({}, newState.user);
       newState.user = null;
       break;
     case UPDATE_ERROR_MESSAGE:
@@ -100,7 +101,8 @@ export const whoAmI = () =>
   dispatch =>
     axios.get('/api/whoami')
       .then((user) => {
-        if (user) {
+        // console.log('user:', user);
+        if (user.data) {
           dispatch(updateCurrentUser(user.data));
           dispatch(resetErrorMessage());
         } else {

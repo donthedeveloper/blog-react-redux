@@ -15,10 +15,12 @@ import Signup from './components/Signup';
 import Login from './components/Login';
 
 // import action creators for onEnter(s)
-import { retrievePosts, retrievePost } from './reducers/post.js';
+import {retrievePosts, retrievePost} from './reducers/post';
+import {whoAmI} from './reducers/user';
 
 // on enters
 const onAppEnter = () => {
+  store.dispatch(whoAmI());
   store.dispatch(retrievePosts())
 }
 
