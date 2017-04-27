@@ -11,7 +11,7 @@ body {
 
 
 /* ----------------- START DESKTOP NAVIGATION ----------------- */
-.layout-nav--desktop {
+.layout-navbar nav {
   display: inline-block;
   /*background-color: #222;*/
   color: #fff;
@@ -26,23 +26,23 @@ body {
   font-size: 14px;
 }
 
-.layout-nav--desktop ul {
+.layout-nav--main {
   display: inline-block;
   list-style-type: none;
   padding-left: 0;
   margin: 0 auto;
 }
 
-.layout-nav--desktop li {
+.layout-nav--main li {
   display: inline-block;
   padding: 1rem 1.5rem;
 }
 
-.layout-nav--desktop .selected {
+.layout-nav--main .selected {
   background-color: #fff;
 }
 
-.layout-nav--desktop a {
+.layout-nav--main a {
   color: #fff;
   text-decoration: none;
   text-transform: uppercase;
@@ -114,22 +114,22 @@ body {
 }
 
 
-.layout-nav--mobile {
+.layout-nav--dropdown {
   float: left;
   display: inline-block;
 }
 
-.layout-nav--mobile ul {
+.layout-nav--dropdown ul {
   display: inline-block;
 }
 
-.layout-nav--mobile li {
+.layout-nav--dropdown li {
   border-top: 1px solid #fff;
   padding: 1rem 2rem;
   display: inline-block;
 }
 
-.layout-nav--mobile a {
+.layout-nav--dropdown a {
   color: #fff;
   text-decoration: none;
   text-transform: uppercase;
@@ -410,8 +410,15 @@ hr {
 }
 /* ----------------- END FOOTER ----------------- */
 
+
+
+
 .clear-floats:after {
   content: "";
   display: block;
   clear: both;
+}
+
+.hidden {
+  display: none;
 }

@@ -2,8 +2,7 @@ import React from 'react';
 import {Link} from 'react-router';
 
 export default (props) => {
-  console.log('drop down:', props.dropdown);
-  const htmlClass = (props.dropdown) ? 'layout-nav--mobile' : 'layout-nav--desktop';
+  const htmlClass = (props.dropdown) ? 'layout-nav--dropdown' : 'layout-nav--main';
 
   return(
     <ul className={htmlClass}>

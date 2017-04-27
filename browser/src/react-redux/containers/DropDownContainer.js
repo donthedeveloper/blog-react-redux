@@ -11,8 +11,15 @@ class DropDownContainer extends React.Component {
     super(props);
 
     this.state = {
-      navDropDownActive: false
+      navDropDownIsClass: null,
+      loginDropDownClass: (props.loginDropDownIsActive) ? 'dropdown-login' : 'hidden'
     }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      loginDropDownClass: (nextProps.loginDropDownIsActive) ? 'dropdown-login' : 'hidden'
+    })
   }
 
   render() {
@@ -22,12 +29,12 @@ class DropDownContainer extends React.Component {
           <Navigation dropdown={true} />
 
           { !this.props.user &&
-          <ul className='dropdown-login'>
+          <ul className={this.state.loginDropDownClass}>
             <li><Link to='/login'>Login</Link></li>
             <li><Link to='/signup'>Sign Up</Link></li>
           </ul>}
           { this.props.user &&
-          <ul className='dropdown-login'>
+          <ul className={this.state.loginDropDownClass}>
             <li><button onClick={this.props.logout}>Logout</button></li>
           </ul>}
       </div>
@@ -36,6 +43,8 @@ class DropDownContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
+  navDropDownIsActive: state.dropdown.navDropDownIsActive,
+  loginDropDownIsActive: state.dropdown.loginDropDownIsActive,
   user: state.user.user
 });
 
