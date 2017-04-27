@@ -1,9 +1,10 @@
 import React from 'react';
 
-import Navigation from '../components/Navigation';
 import FooterContainer from './FooterContainer';
 import SubscriptionContainer from './SubscriptionContainer';
 import AdminContainer from './AdminContainer';
+import NavbarContainer from './NavbarContainer';
+import DropDownContainer from './DropDownContainer';
 
 import Login from '../components/Login';
 import Logout from '../components/Logout';
@@ -17,9 +18,12 @@ class AppContainer extends React.Component {
   render() {
     return(
       <div>
-        <Navigation />
+        <NavbarContainer />
+        <DropDownContainer />
         <AdminContainer />
-        { this.props.children }
+        <div className='layout-content'>
+          { this.props.children }
+        </div>
 
         {/*<Login />
         <Logout />

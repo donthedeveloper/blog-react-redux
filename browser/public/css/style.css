@@ -2,11 +2,21 @@ body {
   background-color: #fcfdff;
 }
 
-nav {
+.layout-navbar {
   background-color: #222;
+  text-align: center;
+  /*margin-bottom: 5rem;*/
+}
+
+
+
+/* ----------------- START DESKTOP NAVIGATION ----------------- */
+.layout-navbar nav {
+  display: inline-block;
+  /*background-color: #222;*/
   color: #fff;
   font-size: 16px;
-  margin-bottom: 5rem;
+  /*margin-bottom: 5rem;*/
   font-weight: 700;
   text-align: center;
 
@@ -16,23 +26,23 @@ nav {
   font-size: 14px;
 }
 
-nav ul {
+.layout-nav--main {
   display: inline-block;
   list-style-type: none;
   padding-left: 0;
   margin: 0 auto;
 }
 
-nav li {
+.layout-nav--main li {
   display: inline-block;
   padding: 1rem 1.5rem;
 }
 
-nav .selected {
+.layout-nav--main .selected {
   background-color: #fff;
 }
 
-nav a {
+.layout-nav--main a {
   color: #fff;
   text-decoration: none;
   text-transform: uppercase;
@@ -41,106 +51,100 @@ nav a {
 .selected a {
   color: #222;
 }
+/* ----------------- END DESKTOP NAVIGATION ----------------- */
 
-.nav h1,
-.nav ul,
-.nav li {
-  display: inline-block;
-}
 
-.nav h1,
-.nav ul {
-  line-height: 24px;
-  margin: 1rem;
-}
 
-.nav {
-  width: 100%;
-  color: #222;
-  background-color: #fff;
-  margin-bottom: 5rem;
-}
-.nav:after {
-  display: block;
-  content: "";
-  clear: both;
-}
-
-.nav h1 {
-  float: left;
-  font-size: 1.5rem;
-}
-
-.nav ul {
+.login-panel {
   float: right;
-}
-
-.nav li {
-  margin: 0 1rem;
-  font-weight: 700;
-}
-
-
-
-/* .post {
-  text-align: center;
-  padding: 5rem 9rem;
-}
-.post p {
-  line-height: 1.5;
-  font-size: 16px;
-  font-family: 'Merriweather', serif;
-}
-.post h2 {
-  font-family: 'Montserrat', serif;
-}
-.post hr {
-  width: 50px;
-  border-width: 2px 0 1px;
-  border-color: #fff;
-  border-style: solid;
-}
-.guest {
-  background-color: #B20000;
-  color: #E0FFFF;
-}
-.guest a {
-  display: inline-block;
-  padding: .75rem 1.5rem;
-  margin-top: 1rem;
-  text-decoration: none;
-  font-weight: 700;
-  background-color: white;
-  border-radius: 15px;
-  color: #000;
-}
-.fullstack {
-  background-color: #222;
   color: #fff;
+  margin: 10px 1.5rem;
+  font-size: 24px;
 }
-.fullstack a {
-  display: inline-block;
-  padding: .75rem 1.5rem;
-  border-radius: 15px;
-  background-color: #E13B3A;
-  text-decoration: none;
-  margin-top: 1rem;
-  color: white;
-  font-weight: 700;
+
+.login-panel button {
+  padding: 0;
+  background-color: inherit;
+  border: none;
 }
-.fullstack h2 {
-  color: #E13B3A;
+
+
+
+.icon-user--loggedout {
+  color: #ff9999;
 }
-.developer a {
+
+
+
+.icon-user--loggedin {
+  color: #99ff99;
+}
+
+
+
+/* ----------------- START DROPDOWN CONTAINER ----------------- */
+.layout-drop {
+
+}
+
+.layout-dropdown ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+  border-left: 1px solid #222;
+}
+
+.dropdown-login {
+  /*position: absolute;
+  top: 0;
+  right: 0;*/
+  float: right;
+
   background-color: #222;
-  padding: .75rem 1.5rem;
-  display: inline-block;
-  border-radius: 15px;
-  color: white;
-  font-weight: 700;
+}
+
+.dropdown-login li {
+  border-top: 1px solid #fff;
+  padding: 1rem 2rem;
+}
+
+.dropdown-login a {
+  color: #fff;
   text-decoration: none;
-  margin-top: 1rem;
-} */
+}
+
+
+.layout-nav--dropdown {
+  float: left;
+  display: inline-block;
+}
+
+.layout-nav--dropdown ul {
+  display: inline-block;
+}
+
+.layout-nav--dropdown li {
+  border-top: 1px solid #fff;
+  padding: 1rem 2rem;
+  display: inline-block;
+}
+
+.layout-nav--dropdown a {
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+/* ----------------- END DROPDOWN CONTAINER ----------------- */
+
+
+
+/* ----------------- START CONTENT CONTAINER ----------------- */
+.layout-content {
+  margin-top: 5rem;
+}
+/* ----------------- END CONTENT CONTAINER ----------------- */
+
+
 
 /* ----------------- START INTRO POSTS ----------------- */
 section {
@@ -405,3 +409,16 @@ hr {
   text-decoration: none;
 }
 /* ----------------- END FOOTER ----------------- */
+
+
+
+
+.clear-floats:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.hidden {
+  display: none;
+}
