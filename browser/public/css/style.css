@@ -8,6 +8,19 @@ body {
   /*margin-bottom: 5rem;*/
 }
 
+.nav-toggle {
+  float: left;
+  color: #fff;
+  margin: 10px 1.5rem;
+  font-size: 24px;
+}
+
+.nav-toggle button {
+  padding: 0;
+  background-color: inherit;
+  border: none;
+}
+
 
 
 /* ----------------- START DESKTOP NAVIGATION ----------------- */
@@ -95,11 +108,7 @@ body {
 }
 
 .dropdown-login {
-  /*position: absolute;
-  top: 0;
-  right: 0;*/
   float: right;
-
   background-color: #222;
 }
 
@@ -117,16 +126,12 @@ body {
 .layout-nav--dropdown {
   float: left;
   display: inline-block;
-}
-
-.layout-nav--dropdown ul {
-  display: inline-block;
+  background-color: #222;
 }
 
 .layout-nav--dropdown li {
   border-top: 1px solid #fff;
   padding: 1rem 2rem;
-  display: inline-block;
 }
 
 .layout-nav--dropdown a {
