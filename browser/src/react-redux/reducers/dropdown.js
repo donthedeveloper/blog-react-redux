@@ -11,6 +11,9 @@ export default (state=initialState, action) => {
     case TOGGLE_LOGIN_DROP_DOWN:
       newState.loginDropDownIsActive = (newState.loginDropDownIsActive) ? false : true;
       break;
+    case TOGGLE_NAV_DROP_DOWN:
+      newState.navDropDownIsActive = (newState.navDropDownIsActive) ? false : true;
+      break;
     default:
       return state;
   }
@@ -26,10 +29,15 @@ export default (state=initialState, action) => {
 // const DEACTIVATE_NAV_DROPDOWN = 'DEACTIVATE_LOGIN_DROPDOWN';
 
 const TOGGLE_LOGIN_DROP_DOWN = 'TOGGLE_LOGIN_DROP_DOWN';
+const TOGGLE_NAV_DROP_DOWN = 'TOGGLE_NAV_DROP_DOWN';
 
 
 export const toggleLoginDropDown = () => ({
   type: TOGGLE_LOGIN_DROP_DOWN
+});
+
+export const toggleNavDropDown = () => ({
+  type: TOGGLE_NAV_DROP_DOWN
 });
 
 // export const activateLoginDropdown = () => ({
