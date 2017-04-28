@@ -39,7 +39,6 @@ router.post('/', (req, res) => {
 
 // update one post in database (admin)
 router.put('/:postId', (req, res) => {
-  console.log('we hit update:', req.body);
   Post.update({
     title: req.body.title,
     intro_paragraph: req. body.introParagraph,
@@ -50,7 +49,6 @@ router.put('/:postId', (req, res) => {
     }
   })
   .then((updatedCount) => {
-    console.log(updatedCount);
     if (updatedCount[0]) {
       res.sendStatus(200);
     } else {
