@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 const chalk = require('chalk');
 
-const { Comment } = require('../../models');
+const { Comments } = require('../../models');
 
 router.get('/', (req, res) => {
-  Comment.findAll({
+  Comments.findAll({
     where: req.body.postId
   })
   .then((comments) => {
@@ -17,10 +17,11 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  Comment.create({
+  console.log('content:', req.body);
+  Comments.create({
     content: req.body.content,
-    author: req.body.userId,
-    parent: req.body.parentId
+    // author: req.body.userId,
+    // parentId: req.body.parentId
   })
   .then((comment) => {
     res.send(comment);
@@ -31,7 +32,7 @@ router.post('/', (req, res) => {
 });
 
 router.put('/:commentId', (req, res) => {
-  Comment.update({
+  Comments.update({
     content: req.body.content
   }, {
     where: {
@@ -51,7 +52,7 @@ router.put('/:commentId', (req, res) => {
 });
 
 router.delete('/:commentId', (req, res) => {
-  Comment.destroy({
+  Comments.destroy({
     where: {
       id: req.params.commentId
     }
@@ -67,3 +68,5 @@ router.delete('/:commentId', (req, res) => {
     console.error(err.message);
   })
 });
+
+module.exports = router;
