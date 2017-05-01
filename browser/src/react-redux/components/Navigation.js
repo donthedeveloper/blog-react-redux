@@ -11,4 +11,4 @@ export default (props) => {
       <li><Link to="/contact">Contact</Link></li>
     </ul>
   );
-}
+};

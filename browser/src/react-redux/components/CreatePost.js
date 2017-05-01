@@ -14,7 +14,7 @@ const CreatePost = (props) => {
       content: data.get('content')
     };
     props.createPost(post);
-  }
+  };
 
   return(
     <form onSubmit={handleSubmit}>
@@ -30,19 +30,19 @@ const CreatePost = (props) => {
       <input type="submit" />
     </form>
   );
-}
+};
 
 const mapStateToProps = (state) => {
   return {
 
-  }
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     createPost: (post) =>
       dispatch(createPost(post)),
-  }
-}
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreatePost);

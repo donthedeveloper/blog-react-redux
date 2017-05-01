@@ -21,12 +21,12 @@ import {whoAmI} from './reducers/user';
 // on enters
 const onAppEnter = () => {
   store.dispatch(whoAmI());
-  store.dispatch(retrievePosts())
-}
+  store.dispatch(retrievePosts());
+};
 
 const onPostEnter = (nextState) => {
   store.dispatch(retrievePost(nextState.params.postId));
-}
+};
 
 export default () => {
   return (
@@ -44,5 +44,5 @@ export default () => {
         </Route>
       </Router>
     </Provider>
-  )
-}
+  );
+};

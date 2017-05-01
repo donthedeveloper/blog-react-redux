@@ -6,6 +6,6 @@ const Logout = (props) => {
       <input type="submit" value="Logout" />
     </form>
   );
-}
+};
 
 export default Logout;

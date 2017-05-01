@@ -11,6 +11,6 @@ const IntroPost = (props) => {
       <img src='http://lorempixel.com/200/200/' alt='' />
     </section>
   );
-}
+};
 
 export default IntroPost;

@@ -5,12 +5,12 @@ class Post extends React.Component {
     super(props);
     this.state={
       editMode: false
-    }
+    };
   }
 
   toggleEditMode() {
     if (this.state.editMode) {
-      this.savePost()
+      this.savePost();
     }
 
     this.setState({

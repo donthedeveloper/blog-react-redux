@@ -35,7 +35,7 @@ class SubscriptionContainer extends React.Component {
           (<SubscribeForm onFormSubmit={this.onFormSubmit} />)
         }
       </div>
-    )
+    );
   }
 }
 
@@ -44,14 +44,14 @@ const mapStateToProps = (state) => {
     isSubscriber: state.subscribe.isSubscriber,
     successMessage: state.subscribe.successMessage,
     errorMessage: state.subscribe.errorMessage
-  }
-}
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
     subscribeEmail: (email) =>
       dispatch(subscribeEmail(email))
-  }
-}
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(SubscriptionContainer);

@@ -22,7 +22,7 @@ export default class AppContainer extends React.Component {
           </ul>
         </div>
       </div>
-    )
+    );
   }
 }
 

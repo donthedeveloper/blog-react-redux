@@ -1,25 +1,25 @@
 const initialState = {
   loginDropDownIsActive: false,
   navDropDownIsActive: false
-}
+};
 
 
 export default (state=initialState, action) => {
   const newState = Object.assign({}, state);
 
   switch (action.type) {
-    case TOGGLE_LOGIN_DROP_DOWN:
-      newState.loginDropDownIsActive = (newState.loginDropDownIsActive) ? false : true;
-      break;
-    case TOGGLE_NAV_DROP_DOWN:
-      newState.navDropDownIsActive = (newState.navDropDownIsActive) ? false : true;
-      break;
-    default:
-      return state;
+  case TOGGLE_LOGIN_DROP_DOWN:
+    newState.loginDropDownIsActive = (newState.loginDropDownIsActive) ? false : true;
+    break;
+  case TOGGLE_NAV_DROP_DOWN:
+    newState.navDropDownIsActive = (newState.navDropDownIsActive) ? false : true;
+    break;
+  default:
+    return state;
   }
 
   return newState;
-}
+};
 
 
 // const ACTIVATE_LOGIN_DROPDOWN = 'ACTIVATE_LOGIN_DROPDOWN';
