@@ -10,21 +10,21 @@ export default (state=initialState, action) => {
   let index;
 
   switch(action.type) {
-    case RETRIEVE_POSTS:
-      newState.posts = action.posts;
-      break;
-    case RETRIEVE_POST:
-      newState.selectedPost = action.post;
-      break;
-    case CREATE_POST:
-      newState.posts = [...newState.posts, action.post];
-      break;
-    default:
-      return state;
+  case RETRIEVE_POSTS:
+    newState.posts = action.posts;
+    break;
+  case RETRIEVE_POST:
+    newState.selectedPost = action.post;
+    break;
+  case CREATE_POST:
+    newState.posts = [...newState.posts, action.post];
+    break;
+  default:
+    return state;
   }
 
   return newState;
-}
+};
 
 // CONSTANTS
 const RETRIEVE_POSTS = 'RETRIEVE_POSTS';
@@ -79,7 +79,7 @@ dispatch =>
       }
     })
     .catch((err) => {
-      console.error(err.message)
+      console.error(err.message);
     });
 
 export const removePost = (postId) =>

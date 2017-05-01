@@ -13,14 +13,14 @@ class DropDownContainer extends React.Component {
     this.state = {
       // navDropDownIsClass: (props.navDropDownIsActive) ? 'layout-nav--dropdown' : 'hidden',
       loginDropDownClass: (props.loginDropDownIsActive) ? 'dropdown-login' : 'hidden'
-    }
+    };
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({
       // navDropDownIsClass: (nextProps.navDropDownIsActive) ? 'layout-nav--dropdown' : 'hidden',
       loginDropDownClass: (nextProps.loginDropDownIsActive) ? 'dropdown-login' : 'hidden'
-    })
+    });
   }
 
   render() {
@@ -52,6 +52,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   logout: () =>
     dispatch(logout())
-})
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(DropDownContainer);

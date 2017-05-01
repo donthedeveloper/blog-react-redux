@@ -13,25 +13,25 @@ export default (state=initialState, action) => {
   const newState = Object.assign({}, state);
 
   switch (action.type) {
-    case UPDATE_CURRENT_USER:
-      newState.user = {...action.user};
-      break;
-    case RESET_CURRENT_USER:
-      newState.user = Object.assign({}, newState.user);
-      newState.user = null;
-      break;
-    case UPDATE_ERROR_MESSAGE:
-      newState.errorMessage = action.errorMessage;
-      break;
-    case RESET_ERROR_MESSAGE:
-      newState.errorMessage = null;
-      break;
-    default:
-      return state;
+  case UPDATE_CURRENT_USER:
+    newState.user = {...action.user};
+    break;
+  case RESET_CURRENT_USER:
+    newState.user = Object.assign({}, newState.user);
+    newState.user = null;
+    break;
+  case UPDATE_ERROR_MESSAGE:
+    newState.errorMessage = action.errorMessage;
+    break;
+  case RESET_ERROR_MESSAGE:
+    newState.errorMessage = null;
+    break;
+  default:
+    return state;
   }
 
   return newState;
-}
+};
 
 
 // CONSTANTS
@@ -65,7 +65,7 @@ export const createUser = (user) =>
     axios.post('/api/users', user)
       .then((response) => {
         if (response.status === 200) {
-          dispatch(login(user))
+          dispatch(login(user));
         } else {
           console.log('Sorry, user is taken');
         }

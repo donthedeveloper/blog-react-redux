@@ -8,4 +8,4 @@ export default (props) => {
       <li className='social-linkedin'><a href='https://www.linkedin.com/in/don-hansen-72394264/' target='_blank'><i className='fa fa-linkedin' aria-hidden='true'></i></a></li>
     </ul>
   );
-}
+};

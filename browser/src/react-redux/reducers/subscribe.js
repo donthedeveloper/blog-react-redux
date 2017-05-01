@@ -12,27 +12,27 @@ export default (state=initialState, action) => {
   const newState = Object.assign({}, state);
 
   switch(action.type) {
-    case SUBSCRIBE:
-      newState.isSubscriber = true;
-      break;
-    case ADDSUCCESSMESSAGE:
-      newState.successMessage = action.message;
-      break;
-    case ADDERRORMESSAGE:
-      newState.errorMessage = action.message;
-      break;
-    case RESETSUCCESSMESSAGE:
-      newState.successMessage = null;
-      break;
-    case RESETERRORMESSAGE:
-      newState.errorMessage = null;
-      break;
-    default:
-      return state;
+  case SUBSCRIBE:
+    newState.isSubscriber = true;
+    break;
+  case ADDSUCCESSMESSAGE:
+    newState.successMessage = action.message;
+    break;
+  case ADDERRORMESSAGE:
+    newState.errorMessage = action.message;
+    break;
+  case RESETSUCCESSMESSAGE:
+    newState.successMessage = null;
+    break;
+  case RESETERRORMESSAGE:
+    newState.errorMessage = null;
+    break;
+  default:
+    return state;
   }
 
   return newState;
-}
+};
 
 
 // CONSTANTS

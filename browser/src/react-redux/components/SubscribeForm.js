@@ -7,6 +7,6 @@ const SubscribeForm = (props) => {
       <input className='input-subscribe--submit' type='submit' defaultValue='Subscribe' />
     </form>
   );
-}
+};
 
 export default SubscribeForm;

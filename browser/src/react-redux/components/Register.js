@@ -21,4 +21,4 @@ export default (props) => {
       <input type="submit" value="Register" />
     </form>
   );
-}
+};

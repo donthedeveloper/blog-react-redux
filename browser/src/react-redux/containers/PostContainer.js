@@ -16,7 +16,7 @@ class PostContainer extends React.Component {
         introParagraph: null,
         content: null
       }
-    }
+    };
 
     // this.createPost = props.createPost.bind(this);
     this.removePost = props.removePost.bind(this);
@@ -34,33 +34,33 @@ class PostContainer extends React.Component {
         introParagraph: newProps.post.intro_paragraph,
         content: newProps.post.content
       }
-    })
+    });
   }
 
   onTitleChange(e) {
     this.setState({
       // post: Object.assign({}, this.state.post, {title: e.target.value})
       post: {...this.state.post, ...{title: e.target.value}}
-    })
+    });
   }
 
   onIntroParagraphChange(e) {
     this.setState({
       // post: Object.assign({}, this.state.post, {introParagraph: e.target.value})
       post: {...this.state.post, ...{introParagraph: e.target.value}}
-    })
+    });
   }
 
   onContentChange(e) {
     this.setState({
       // post: Object.assign({}, this.state.post, {title: e.target.value})
       post: {...this.state.post, ...{content: e.target.value}}
-    })
+    });
   }
 
   toggleEditMode() {
     if (this.state.editMode) {
-      this.savePost()
+      this.savePost();
     }
 
     this.setState({
@@ -104,14 +104,14 @@ class PostContainer extends React.Component {
         </form>
       }
       </div>
-    )
+    );
   }
 }
 
 const mapStateToProps = (state) => {
   return {
     post: state.posts.selectedPost
-  }
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -122,7 +122,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(removePost(id)),
     updatePost: (post) =>
       dispatch(updatePost(post))
-  }
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostContainer);

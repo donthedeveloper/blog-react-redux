@@ -16,18 +16,18 @@ class IntroPostContainer extends React.Component {
               <IntroPost index={index} post={post} />
               {index < maxIndex && <hr />}
             </div>
-            )
+            );
           })
         }
       </div>
-    )
+    );
   }
 }
 
 const mapStateToProps = (state) => {
   return {
     posts: state.posts.posts
-  }
-}
+  };
+};
 
 export default connect(mapStateToProps)(IntroPostContainer);
