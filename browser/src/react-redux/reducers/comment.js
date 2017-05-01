@@ -34,17 +34,17 @@ export const retrieveComments = () =>
   dispatch =>
     axios.get('/api/comments')
       .then((comments) => {
-        dispatch(update(comments));
+        dispatch(retrieve(comments));
       })
       .catch((err) => {
         console.error(err.message);
       });
 
 export const addComment = (comment) =>
-  dispatch => 
+  dispatch =>
     axios.post('/api/comments', comment)
       .then((comment) => {
-        dispatch(update(comments));
+        // dispatch(retrieveComments());
       })
       .catch((err) => {
         console.error(err.message);

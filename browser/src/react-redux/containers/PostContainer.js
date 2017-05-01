@@ -75,7 +75,8 @@ class PostContainer extends React.Component {
   }
 
   render() {
-    const content = this.props.post.content || '';
+    const content = this.state.post.content || '';
+
     return(
       <div className='post-full'>
         <div className='post-admin'>
