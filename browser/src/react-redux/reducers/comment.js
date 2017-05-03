@@ -2,16 +2,18 @@ import axios from 'axios';
 
 
 const initialState = ({
-  comments: null
+  comments: []
 });
 
 
 export default (state=initialState, action) => {
   const newState = Object.assign({}, state);
 
+  // console.log('action:', action.comments);
+
   switch (action.type) {
-    case UPDATE_COMMENTS:
-      newState.comments = [...newState.comments, action.comments];
+    case RETRIEVE_COMMENTS:
+      newState.comments = action.comments;
       break;
     default:
       return state;
@@ -21,20 +23,20 @@ export default (state=initialState, action) => {
 }
 
 
-const UPDATE_COMMENTS = 'UPDATE_COMMENTS';
+const RETRIEVE_COMMENTS = 'RETRIEVE_COMMENTS';
 
 
 const retrieve = (comments) => ({
-  type: UPDATE_COMMENTS,
+  type: RETRIEVE_COMMENTS,
   comments
 });
 
 
-export const retrieveComments = () =>
+export const retrieveComments = (postId) =>
   dispatch =>
-    axios.get('/api/comments')
+    axios.get(`/api/comments?postId=${postId}`)
       .then((comments) => {
-        dispatch(retrieve(comments));
+        dispatch(retrieve(comments.data));
       })
       .catch((err) => {
         console.error(err.message);
@@ -44,7 +46,7 @@ export const addComment = (comment) =>
   dispatch =>
     axios.post('/api/comments', comment)
       .then((comment) => {
-        // dispatch(retrieveComments());
+        dispatch(retrieveComments(comment.postId));
       })
       .catch((err) => {
         console.error(err.message);

@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
+import CommentCard from '../components/CommentCard';
 import CommentForm from '../components/CommentForm';
 
 import {addComment} from '../reducers/comment';
@@ -40,6 +41,12 @@ class CommentContainer extends React.Component {
   render() {
     return (
       <div className='layout-comment-container'>
+        <ul>
+        {
+          this.props.comments.map((comment) => <CommentCard key={comment.id} comment={comment} />)
+        }
+        </ul>
+
         <CommentForm postId={this.state.postId} userId={this.state.userId} parentId={null} handleSubmit={this.handleSubmit.bind(this)}/>
       </div>
     );
@@ -49,7 +56,8 @@ class CommentContainer extends React.Component {
 const mapStateToProps = (state) => ({
   comments: state.comment.comments,
   user: state.user.user,
-  post: state.posts.selectedPost
+  post: state.posts.selectedPost,
+  comments: state.comment.comments
 });
 
 const mapDispatchToProps = (dispatch) => ({

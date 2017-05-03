@@ -6,7 +6,9 @@ const { Comments } = require('../../models');
 
 router.get('/', (req, res) => {
   Comments.findAll({
-    where: req.body.postId
+    where: {
+      postId: req.query.postId
+    }
   })
   .then((comments) => {
     res.send(comments)
