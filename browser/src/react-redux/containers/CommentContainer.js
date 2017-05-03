@@ -27,11 +27,12 @@ class CommentContainer extends React.Component {
     e.preventDefault();
 
     const data = new FormData(e.target);
+    const parentId = data.get('input-parentId');
 
     const commentForm = {
       content: data.get('input-content'),
       userId: data.get('input-userId'),
-      parentId: data.get('input-parentId'),
+      parentId: (parentId.length) ? parentId : null,
       postId: data.get('input-postId')
     };
 

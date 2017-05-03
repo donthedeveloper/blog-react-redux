@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const initialState = {
   posts: [],
-  selectedPost: null
+  selectedPost: {}
 };
 
 export default (state=initialState, action) => {

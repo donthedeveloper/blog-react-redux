@@ -46,7 +46,7 @@ export const addComment = (comment) =>
   dispatch =>
     axios.post('/api/comments', comment)
       .then((comment) => {
-        dispatch(retrieveComments(comment.postId));
+        dispatch(retrieveComments(comment.data.postId));
       })
       .catch((err) => {
         console.error(err.message);

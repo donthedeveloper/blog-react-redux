@@ -19,12 +19,10 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  console.log('content:', req.body);
   Comments.create({
     content: req.body.content,
     authorId: req.body.userId,
     postId: req.body.postId
-    // parentId: req.body.parentId
   })
   .then((comment) => {
     res.send(comment);
