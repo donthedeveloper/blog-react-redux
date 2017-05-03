@@ -2,6 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import ReactMarkdown from 'react-markdown';
 
+import CommentContainer from './CommentContainer';
+
 import {removePost, updatePost} from '../reducers/post';
 
 class PostContainer extends React.Component {
@@ -73,7 +75,8 @@ class PostContainer extends React.Component {
   }
 
   render() {
-    const content = this.props.post.content || '';
+    const content = this.state.post.content || '';
+
     return(
       <div className='post-full'>
         <div className='post-admin'>
@@ -103,6 +106,7 @@ class PostContainer extends React.Component {
           <textarea className='input-content' id='input-content' name='content' defaultValue={this.state.post.content} onChange={this.onContentChange} />
         </form>
       }
+        <CommentContainer />
       </div>
     )
   }

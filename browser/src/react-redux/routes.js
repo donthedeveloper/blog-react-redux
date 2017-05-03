@@ -1,7 +1,7 @@
 import React from 'react';
-import { Router, Route, hashHistory, IndexRoute, IndexRedirect } from 'react-router';
-import { Provider } from 'react-redux';
-import { axios } from 'axios';
+import {Router, Route, hashHistory, IndexRoute, IndexRedirect} from 'react-router';
+import {Provider} from 'react-redux';
+import {axios} from 'axios';
 import store from './store';
 
 // import containers
@@ -16,6 +16,7 @@ import Login from './components/Login';
 
 // import action creators for onEnter(s)
 import {retrievePosts, retrievePost} from './reducers/post';
+import {retrieveComments} from './reducers/comment';
 import {whoAmI} from './reducers/user';
 
 // on enters
@@ -26,6 +27,7 @@ const onAppEnter = () => {
 
 const onPostEnter = (nextState) => {
   store.dispatch(retrievePost(nextState.params.postId));
+  store.dispatch(retrieveComments(nextState.params.postId));
 }
 
 export default () => {

@@ -1,9 +1,9 @@
 const { Sequelize, db } = require('./db');
 
-const Comment = db.define('comment', {
+const Comments = db.define('comment', {
   content: {
     type: Sequelize.TEXT
   }
 });
 
-module.exports = { Sequelize, db, Comment };
+module.exports = { Sequelize, db, Comments };
