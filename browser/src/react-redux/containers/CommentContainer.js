@@ -48,7 +48,8 @@ class CommentContainer extends React.Component {
         }
         </ul>
 
-        <CommentForm postId={this.state.postId} userId={this.state.userId} parentId={null} handleSubmit={this.handleSubmit.bind(this)}/>
+        { this.props.user && this.props.user.permissions.indexOf('comment_add') > -1 &&
+        <CommentForm postId={this.state.postId} userId={this.state.userId} parentId={null} handleSubmit={this.handleSubmit.bind(this)}/>}
       </div>
     );
   }
