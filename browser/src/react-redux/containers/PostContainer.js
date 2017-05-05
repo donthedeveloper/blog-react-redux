@@ -20,7 +20,6 @@ class PostContainer extends React.Component {
       }
     }
 
-    // this.createPost = props.createPost.bind(this);
     this.removePost = props.removePost.bind(this);
     this.updatePost = props.updatePost.bind(this);
     this.onTitleChange = this.onTitleChange.bind(this);
@@ -41,21 +40,18 @@ class PostContainer extends React.Component {
 
   onTitleChange(e) {
     this.setState({
-      // post: Object.assign({}, this.state.post, {title: e.target.value})
       post: {...this.state.post, ...{title: e.target.value}}
     })
   }
 
   onIntroParagraphChange(e) {
     this.setState({
-      // post: Object.assign({}, this.state.post, {introParagraph: e.target.value})
       post: {...this.state.post, ...{introParagraph: e.target.value}}
     })
   }
 
   onContentChange(e) {
     this.setState({
-      // post: Object.assign({}, this.state.post, {title: e.target.value})
       post: {...this.state.post, ...{content: e.target.value}}
     })
   }
@@ -79,11 +75,17 @@ class PostContainer extends React.Component {
 
     return(
       <div className='post-full'>
+
         <div className='post-admin'>
-          <button onClick={(e) => this.removePost(this.props.post.id)}>Delete</button>
+
+          { this.props.user && this.props.user.permissions.indexOf('post_delete') > -1 &&
+          <button onClick={(e) => this.removePost(this.props.post.id)}>Delete</button>}
+
+          { this.props.user && this.props.user.permissions.indexOf('post_edit') > -1 &&
           <button onClick={(e) => this.toggleEditMode()}>
             { (this.state.editMode) ? 'Save' : 'Edit' }
-          </button>
+          </button>}
+
         </div>
       {
 
@@ -114,7 +116,8 @@ class PostContainer extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    post: state.posts.selectedPost
+    post: state.posts.selectedPost,
+    user: state.user.user
   }
 };
 
