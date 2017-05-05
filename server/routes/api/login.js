@@ -9,14 +9,16 @@ router.post('/', (req, res) => {
   User.findOne({
     where: {
       email: req.body.email
-    },
-    include: [{model: Role}]
+    }
   })
   .then((user) => {
 
     // validated plain password with encrypted password
     if (user && user.validPassword(req.body.password)) {
-      req.session.user = user;
+
+      req.session.user = user.dataValues;
+      delete req.session.user.password;
+
       res.sendStatus(200);
     } else {
       res.sendStatus(401);
