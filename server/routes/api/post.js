@@ -26,6 +26,12 @@ router.get('/:postId', (req, res) => {
 
 // create one post in database (admin)
 router.post('/', (req, res) => {
+
+  if ( !req.session.user || (req.session.user && req.session.user.permissions.indexOf('post_add') === -1) ) {
+    res.sendStatus(401);
+    return;
+  }
+
   Post.create({
     title: req.body.title,
     intro_paragraph: req.body.introParagraph,
@@ -39,6 +45,11 @@ router.post('/', (req, res) => {
 
 // update one post in database (admin)
 router.put('/:postId', (req, res) => {
+  if ( !req.session.user || (!req.session.user && req.session.user.permissions.indexOf('post_edit') === -1) ) {
+    res.sendStatus(401);
+    return;
+  }
+
   Post.update({
     title: req.body.title,
     intro_paragraph: req. body.introParagraph,
@@ -60,6 +71,11 @@ router.put('/:postId', (req, res) => {
 
 // delete one post from database (admin)
 router.delete('/:postId', (req, res) => {
+  if (req.session.user || (!req.session.user && req.session.user.permissions.indexOf('post_delete') === -1) ) {
+    res.sendStatus(401);
+    return;
+  }
+
   Post.destroy({
     where: {
       id: req.params.postId
