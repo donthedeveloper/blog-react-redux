@@ -25,7 +25,7 @@ class SubscriptionContainer extends React.Component {
 
   render() {
     return (
-      <div className="subscribe-container text-center">
+      <div className="subscribe">
         { this.props.errorMessage &&
           <ErrorMessage errorMessage={this.props.errorMessage} />
         }
