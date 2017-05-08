@@ -200,55 +200,6 @@ hr {
   font-weight: 600;
   letter-spacing: 2px; }
 
-/* ----------------- START FOOTER ----------------- */
-.footer1 {
-  padding: 3.5rem 0;
-  background-color: #222;
-  color: #fff;
-  text-align: center;
-  border-bottom: 5px solid #3366cc; }
-
-.footer1 ul {
-  list-style-type: none;
-  padding-left: 0; }
-
-.footer1 li {
-  display: inline-block; }
-
-.social-nav {
-  margin: 0 auto 1rem; }
-
-.social-nav li {
-  background-color: #3366cc;
-  border-radius: 50%;
-  padding: 6px 8px;
-  font-size: 20px;
-  margin: 0 7px; }
-
-.social-twitter a,
-.social-youtube a,
-.social-linkedin a {
-  color: #222; }
-
-.social-youtube {
-  display: none; }
-
-.footer-nav {
-  margin-bottom: 0;
-  font-family: 'Montserrat', serif;
-  font-weight: 700;
-  letter-spacing: 2px;
-  font-size: 12px; }
-
-.footer-nav li {
-  margin: 0 10px; }
-
-.footer-nav a {
-  color: #fff;
-  text-transform: uppercase;
-  text-decoration: none; }
-
-/* ----------------- END FOOTER ----------------- */
 .clear-floats:after {
   content: "";
   display: block;

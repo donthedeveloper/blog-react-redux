@@ -5,17 +5,17 @@ import {Link} from 'react-router';
 import Social from '../components/Social';
 import Navigation from '../components/Navigation';
 
-export default class AppContainer extends React.Component {
+class AppContainer extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
     return(
-      <div className='footer1'>
+      <div className='footer'>
         <div className='container text-center'>
           <Social />
-          <ul className='footer-nav'>
+          <ul className='footerNav'>
             <li><Link to="/">Blog</Link></li>
             <li><Link to="/portfolio">Portfolio</Link></li>
             <li><Link to="/contact">Contact</Link></li>
@@ -26,16 +26,4 @@ export default class AppContainer extends React.Component {
   }
 }
 
-// function mapStateToProps(state) {
-//   return {
-
-//   }
-// }
-
-// function mapDispatchToProps(dispatch) {
-//   return {
-
-//   }
-// }
-
-// connect(mapStateToProps, mapDispatchToProps)(Post);
+export default AppContainer;

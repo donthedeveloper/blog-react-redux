@@ -1,0 +1,21 @@
+.footerNav {
+  margin: 1.5rem 0 0;
+  font-family: 'Montserrat', serif;
+  font-weight: 700;
+  letter-spacing: 2px;
+  font-size: .75rem;
+
+  li {
+    margin: 0 .75rem;
+
+    @media (min-width: 720px) {
+      margin: 0 1.25rem;
+    }
+  }
+
+  a {
+    color: #fff;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+}
