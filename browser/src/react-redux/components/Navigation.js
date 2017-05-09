@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
 
-export default (props) => {
+const Navigation = (props) => {
   const htmlClass = (props.dropdown) ? 'layout-nav--dropdown' : 'layout-nav--main';
 
   return(
@@ -12,3 +12,5 @@ export default (props) => {
     </ul>
   );
 }
+
+export default Navigation;
