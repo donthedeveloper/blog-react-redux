@@ -1,3 +1,37 @@
+/* ----------------- START DROPDOWN CONTAINER ----------------- */
+.layout-dropdown ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+  border-left: 1px solid #222; }
+
+.dropdown-login {
+  float: right;
+  background-color: #222; }
+
+.dropdown-login li {
+  border-top: 1px solid #fff;
+  padding: 1rem 2rem; }
+
+.dropdown-login a {
+  color: #fff;
+  text-decoration: none; }
+
+.layout-nav--dropdown {
+  float: left;
+  display: inline-block;
+  background-color: #222; }
+
+.layout-nav--dropdown li {
+  border-top: 1px solid #fff;
+  padding: 1rem 2rem; }
+
+.layout-nav--dropdown a {
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase; }
+
+/* ----------------- END DROPDOWN CONTAINER ----------------- */
 /* ----------------- START CONTENT CONTAINER ----------------- */
 .layout-content {
   margin-top: 5rem; }
