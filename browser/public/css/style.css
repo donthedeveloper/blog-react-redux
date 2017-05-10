@@ -1,63 +1,12 @@
-/* ----------------- START DROPDOWN CONTAINER ----------------- */
-.layout-dropdown ul {
-  list-style-type: none;
-  padding-left: 0;
-  margin: 0;
-  border-left: 1px solid #222; }
-
-.dropdown-login {
-  float: right;
-  background-color: #222; }
-
-.dropdown-login li {
-  border-top: 1px solid #fff;
-  padding: 1rem 2rem; }
-
-.dropdown-login a {
-  color: #fff;
-  text-decoration: none; }
-
-.layout-nav--dropdown {
-  float: left;
-  display: inline-block;
-  background-color: #222; }
-
-.layout-nav--dropdown li {
-  border-top: 1px solid #fff;
-  padding: 1rem 2rem; }
-
-.layout-nav--dropdown a {
-  color: #fff;
-  text-decoration: none;
-  text-transform: uppercase; }
-
-/* ----------------- END DROPDOWN CONTAINER ----------------- */
-/* ----------------- START CONTENT CONTAINER ----------------- */
-.layout-content {
-  margin-top: 5rem; }
-
-/* ----------------- END CONTENT CONTAINER ----------------- */
 /* ----------------- START INTRO POSTS ----------------- */
 section {
-  max-width: 800px;
-  margin: 0 auto;
-  text-align: center;
-  padding: 0 10%;
-  position: relative; }
-
-section:after {
-  content: "";
-  display: block;
-  clear: both; }
+  padding: 0 10%; }
 
 section h2 {
   position: relative;
-  color: #3366cc;
   border-radius: 5px;
-  max-width: 750px;
   margin-bottom: 2rem;
-  text-align: left;
-  font-family: 'Montserrat', serif; }
+  text-align: left; }
 
 section h2:before {
   content: "Feb 11";
@@ -69,18 +18,11 @@ section h2:before {
   left: -125px; }
 
 section p {
-  max-width: 750px;
-  display: inline-block;
   margin: 0;
-  line-height: 1.5;
   font-size: 16px;
-  font-family: 'Merriweather', serif;
   text-align: left;
   float: left;
   width: 70%; }
-
-section img {
-  float: right; }
 
 section a {
   background-color: #3366cc;
@@ -91,11 +33,6 @@ section a {
   font-weight: 700;
   text-decoration: none;
   margin-top: 1rem; }
-
-hr {
-  width: 80%;
-  margin: 3rem auto;
-  max-width: 800px; }
 
 /* ----------------- END INTRO POSTS ----------------- */
 /* ----------------- START INDIVIDUAL POSTS ----------------- */

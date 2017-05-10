@@ -8,7 +8,7 @@ class IntroPostContainer extends React.Component {
     const maxIndex = this.props.posts.length-1;
 
     return (
-      <div>
+      <div className='introPost'>
         {
           this.props.posts.map((post, index) => {
             return (
