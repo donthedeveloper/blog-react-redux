@@ -2,19 +2,24 @@ const express = require('express');
 const router = express.Router();
 const chalk = require('chalk');
 
-const { Comments } = require('../../models');
+const { Comments, User } = require('../../models');
 
 router.get('/', (req, res) => {
   Comments.findAll({
     where: {
       postId: req.query.postId
-    }
+    }, 
+    include: [{
+      model: User,
+      as: 'author',
+      attributes: ['first_name', 'last_name']
+    }]
   })
   .then((comments) => {
-    res.send(comments)
+    res.send(comments);
   })
   .catch((err) => {
-    console.error(err.message);
+    console.error(chalk.red(err.message));
   })
 });
 
