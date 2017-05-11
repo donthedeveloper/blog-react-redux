@@ -2,7 +2,10 @@ import React from 'react';
 
 const CommentCard = (props) => {
   return (
-    <li>{props.comment.content}</li>
+    <li>
+      <p></p>
+      <p>{props.comment.content}</p>
+    </li>
   );
 };
 
