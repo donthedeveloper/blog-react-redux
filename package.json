@@ -7,7 +7,7 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "nodemon --watch server --watch app.js app.js",
     "webpack": "webpack -w",
     "seed": "node server/models/seed.js"
   },
