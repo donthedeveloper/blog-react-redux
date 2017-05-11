@@ -11,23 +11,26 @@ class DropDownContainer extends React.Component {
     super(props);
 
     this.state = {
-      // navDropDownIsClass: (props.navDropDownIsActive) ? 'layout-nav--dropdown' : 'hidden',
+      navDropDownClass: (props.navDropDownIsActive) ? 'dropdown-nav' : 'hidden',
       loginDropDownClass: (props.loginDropDownIsActive) ? 'dropdown-login' : 'hidden'
     }
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      // navDropDownIsClass: (nextProps.navDropDownIsActive) ? 'layout-nav--dropdown' : 'hidden',
+      navDropDownClass: (nextProps.navDropDownIsActive) ? 'dropdown-nav' : 'hidden',
       loginDropDownClass: (nextProps.loginDropDownIsActive) ? 'dropdown-login' : 'hidden'
     })
   }
 
   render() {
     return (
-      <div className='layout-dropdown clear-floats'>
-          { this.props.navDropDownIsActive && 
-          <Navigation dropdown={true} /> }
+      <div className='layout-dropdown'>
+          <ul className={this.state.navDropDownClass}>
+            <li className='selected'><Link to="/">Blog</Link></li>
+            <li><Link to="/portfolio">Portfolio</Link></li>
+            <li><Link to="/contact">Contact</Link></li>
+          </ul>
 
           { !this.props.user &&
           <ul className={this.state.loginDropDownClass}>

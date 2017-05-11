@@ -1,86 +1,114 @@
 /* ----------------- START DROPDOWN CONTAINER ----------------- */
+.layout-drop {
+
+}
+
 .layout-dropdown ul {
   list-style-type: none;
   padding-left: 0;
   margin: 0;
-  border-left: 1px solid #222; }
+  border-left: 1px solid #222;
+}
 
 .dropdown-login {
   float: right;
-  background-color: #222; }
+  background-color: #222;
+}
 
 .dropdown-login li {
   border-top: 1px solid #fff;
-  padding: 1rem 2rem; }
+  padding: 1rem 2rem;
+}
 
 .dropdown-login a {
   color: #fff;
-  text-decoration: none; }
+  text-decoration: none;
+}
+
 
 .layout-nav--dropdown {
   float: left;
   display: inline-block;
-  background-color: #222; }
+  background-color: #222;
+}
 
 .layout-nav--dropdown li {
   border-top: 1px solid #fff;
-  padding: 1rem 2rem; }
+  padding: 1rem 2rem;
+}
 
 .layout-nav--dropdown a {
   color: #fff;
   text-decoration: none;
-  text-transform: uppercase; }
-
+  text-transform: uppercase;
+}
 /* ----------------- END DROPDOWN CONTAINER ----------------- */
+
+
+
 /* ----------------- START CONTENT CONTAINER ----------------- */
 .layout-content {
-  margin-top: 5rem; }
-
+  margin-top: 5rem;
+}
 /* ----------------- END CONTENT CONTAINER ----------------- */
+
+
+
 /* ----------------- START INTRO POSTS ----------------- */
 section {
   max-width: 800px;
   margin: 0 auto;
   text-align: center;
   padding: 0 10%;
-  position: relative; }
-
+  position: relative;
+}
 section:after {
   content: "";
   display: block;
-  clear: both; }
+  clear: both;
+}
 
 section h2 {
   position: relative;
   color: #3366cc;
+
   border-radius: 5px;
+
   max-width: 750px;
   margin-bottom: 2rem;
   text-align: left;
-  font-family: 'Montserrat', serif; }
 
+  font-family: 'Montserrat', serif;
+}
 section h2:before {
   content: "Feb 11";
   font-size: 12px;
   background-color: #222;
   color: #fff;
   padding: .5rem 1.5rem;
+
   position: absolute;
-  left: -125px; }
+  left: -125px;
+}
 
 section p {
   max-width: 750px;
   display: inline-block;
+
   margin: 0;
+
   line-height: 1.5;
   font-size: 16px;
   font-family: 'Merriweather', serif;
   text-align: left;
+
   float: left;
-  width: 70%; }
+  width: 70%;
+}
 
 section img {
-  float: right; }
+  float: right;
+}
 
 section a {
   background-color: #3366cc;
@@ -90,72 +118,91 @@ section a {
   color: #fff;
   font-weight: 700;
   text-decoration: none;
-  margin-top: 1rem; }
+  margin-top: 1rem;
+}
 
 hr {
   width: 80%;
   margin: 3rem auto;
-  max-width: 800px; }
-
+  max-width: 800px;
+}
 /* ----------------- END INTRO POSTS ----------------- */
+
+
 /* ----------------- START INDIVIDUAL POSTS ----------------- */
 .post-full {
   max-width: 800px;
   margin: 0 auto;
   /*text-align: center;*/
   padding: 0 10%;
-  position: relative; }
-
+  position: relative;
+}
 .post-full:after {
   content: "";
   display: block;
-  clear: both; }
+  clear: both;
+}
 
 .post-full h2 {
   position: relative;
   color: #3366cc;
+
   border-radius: 5px;
+
   max-width: 750px;
   margin-bottom: 2rem;
   text-align: left;
-  font-family: 'Montserrat', serif; }
 
+  font-family: 'Montserrat', serif;
+}
 .post-full h2:before {
   content: "Feb 11";
   font-size: 12px;
   background-color: #222;
   color: #fff;
   padding: .5rem 1.5rem;
+
   position: absolute;
-  left: -125px; }
+  left: -125px;
+}
 
 .post-full p {
   max-width: 750px;
   display: inline-block;
+
   margin: 0;
+
   line-height: 1.5;
   font-size: 16px;
   font-family: 'Merriweather', serif;
   text-align: left;
+
   /*float: left;*/
-  /*width: 70%;*/ }
+  /*width: 70%;*/
+}
 
 .post-full label {
-  font-size: 18px; }
+  font-size: 18px;
+}
 
 .post-full input,
 .post-full textarea {
   margin: .3rem auto 2rem;
-  width: 100%; }
+  width: 100%;
+}
 
 .input-introParagraph {
-  height: 100px; }
+  height: 100px;
+}
 
 .input-content {
   /*resize: none;*/
-  height: 300px; }
+  height: 300px;
+}
 
 /* ----------------- END INDIVIDUAL POSTS ----------------- */
+
+
 .btn-read-more {
   text-transform: uppercase;
   background-color: #3366cc;
@@ -164,17 +211,25 @@ hr {
   border: 1px solid #2952a3;
   font-weight: 600;
   letter-spacing: 2px;
+
   border-radius: 5px;
   font-size: 14px;
   font-family: 'Montserrat', serif;
+
   position: absolute;
   bottom: 0;
-  left: 135px; }
+  left: 135px;
+}
+
+
+
 
 .clear-floats:after {
   content: "";
   display: block;
-  clear: both; }
+  clear: both;
+}
 
 .hidden {
-  display: none; }
+  display: none;
+}

@@ -74,7 +74,7 @@ class PostContainer extends React.Component {
     const content = this.state.post.content || '';
 
     return(
-      <div className='post-full'>
+      <div className='fullPost'>
 
         <div className='post-admin'>
 
@@ -92,7 +92,7 @@ class PostContainer extends React.Component {
       }
       { !this.state.editMode &&
         <article>
-          <h2>{this.state.post.title}</h2>
+          <h2 className='fullPost-title'>{this.state.post.title}</h2>
           <ReactMarkdown source={content} />
         </article>
       }

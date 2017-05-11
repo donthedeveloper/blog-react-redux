@@ -1,0 +1,102 @@
+/* test placeholder */
+/* more placeholder */
+/* more */
+/* yay */
+
+/* ----------------- START INTRO POSTS ----------------- */
+section {
+  padding: 0 10%;
+}
+
+section h2 {
+  position: relative;
+ }
+
+section h2:before {
+  content: "Feb 11";
+  font-size: 12px;
+  background-color: #222;
+  color: #fff;
+  padding: .5rem 1.5rem;
+  position: absolute;
+  left: -125px; }
+
+/* ----------------- END INTRO POSTS ----------------- */
+/* ----------------- START INDIVIDUAL POSTS ----------------- */
+.post-full {
+  padding: 0 10%;
+  position: relative; }
+
+.post-full:after {
+  content: "";
+  display: block;
+  clear: both; }
+
+.post-full h2 {
+  position: relative;
+  /*color: #3366cc;
+  border-radius: 5px;
+  max-width: 750px;
+  margin-bottom: 2rem;
+  text-align: left;
+  font-family: 'Montserrat', serif;*/
+}
+
+.post-full h2:before {
+  content: "Feb 11";
+  font-size: 12px;
+  background-color: #222;
+  color: #fff;
+  padding: .5rem 1.5rem;
+  position: absolute;
+  left: -125px; }
+
+.post-full p {
+  /*max-width: 750px;*/
+  /*display: inline-block;*/
+  /*margin: 0;*/
+  line-height: 1.5;
+  font-size: 16px;
+  font-family: 'Merriweather', serif;
+  text-align: left;
+  /*float: left;*/
+  /*width: 70%;*/ }
+
+/*.post-full label {
+  font-size: 18px; }
+
+.post-full input,
+.post-full textarea {
+  margin: .3rem auto 2rem;
+  width: 100%; }*/
+
+.input-introParagraph {
+  height: 100px; }
+
+.input-content {
+  /*resize: none;*/
+  height: 300px; }
+
+/* ----------------- END INDIVIDUAL POSTS ----------------- */
+/*.btn-read-more {
+  text-transform: uppercase;
+  background-color: #3366cc;
+  padding: .5rem 1.5rem;
+  color: #fff;
+  border: 1px solid #2952a3;
+  font-weight: 600;
+  letter-spacing: 2px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-family: 'Montserrat', serif;
+  position: absolute;
+  bottom: 0;
+  left: 135px; }*/
+
+.clear-floats:after {
+  content: "";
+  display: block;
+  clear: both; }
+
+.hidden {
+  display: none; }

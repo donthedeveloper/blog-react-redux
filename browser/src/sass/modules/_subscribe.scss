@@ -1,0 +1,61 @@
+.subscribe {
+  font-family: 'Montserrat', serif;
+  padding: 3rem 0;
+  text-align: center;
+
+  @media (min-width: 720px) {
+    padding: 5rem 0;
+  }
+
+  form {
+    margin: 0 auto;
+    width: 80%;
+
+    @media (min-width: 720px) {
+      width: auto;
+    }
+  }
+
+
+  input {
+    border-radius: 1px;
+    font-size: .95rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    text-align: center;
+
+    display: block;
+    width: 100%;
+
+    @media (min-width: 720px) {
+      display: inline-block;
+      // width: auto;
+    }
+  }
+
+  .inputEmail {
+    background-color: #e6ebf4;
+    border: 2px solid #dce3ef;
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    @media (min-width: 720px) {
+      width: 400px;
+      text-align: left;
+    }
+  }
+
+  .inputSubmit {
+    text-transform: uppercase;
+    background-color: #3366cc;
+    padding: .5rem 3rem;
+    color: #fff;
+    border: 1px solid #2952a3;
+    font-weight: 600;
+    letter-spacing: 2px;
+
+    @media (min-width: 720px) {
+      width: auto;
+    }
+  }
+}
