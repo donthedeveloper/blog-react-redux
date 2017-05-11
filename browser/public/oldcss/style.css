@@ -24,9 +24,6 @@ section h2:before {
 /* ----------------- END INTRO POSTS ----------------- */
 /* ----------------- START INDIVIDUAL POSTS ----------------- */
 .post-full {
-  max-width: 800px;
-  margin: 0 auto;
-  /*text-align: center;*/
   padding: 0 10%;
   position: relative; }
 
@@ -37,12 +34,13 @@ section h2:before {
 
 .post-full h2 {
   position: relative;
-  color: #3366cc;
+  /*color: #3366cc;
   border-radius: 5px;
   max-width: 750px;
   margin-bottom: 2rem;
   text-align: left;
-  font-family: 'Montserrat', serif; }
+  font-family: 'Montserrat', serif;*/
+}
 
 .post-full h2:before {
   content: "Feb 11";
@@ -54,9 +52,9 @@ section h2:before {
   left: -125px; }
 
 .post-full p {
-  max-width: 750px;
-  display: inline-block;
-  margin: 0;
+  /*max-width: 750px;*/
+  /*display: inline-block;*/
+  /*margin: 0;*/
   line-height: 1.5;
   font-size: 16px;
   font-family: 'Merriweather', serif;
@@ -64,13 +62,13 @@ section h2:before {
   /*float: left;*/
   /*width: 70%;*/ }
 
-.post-full label {
+/*.post-full label {
   font-size: 18px; }
 
 .post-full input,
 .post-full textarea {
   margin: .3rem auto 2rem;
-  width: 100%; }
+  width: 100%; }*/
 
 .input-introParagraph {
   height: 100px; }
@@ -80,7 +78,7 @@ section h2:before {
   height: 300px; }
 
 /* ----------------- END INDIVIDUAL POSTS ----------------- */
-.btn-read-more {
+/*.btn-read-more {
   text-transform: uppercase;
   background-color: #3366cc;
   padding: .5rem 1.5rem;
@@ -93,7 +91,7 @@ section h2:before {
   font-family: 'Montserrat', serif;
   position: absolute;
   bottom: 0;
-  left: 135px; }
+  left: 135px; }*/
 
 .clear-floats:after {
   content: "";

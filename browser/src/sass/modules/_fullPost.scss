@@ -1,0 +1,33 @@
+.fullPost {
+    max-width: 800px;
+    font-family: 'Merriweather', serif;
+    margin: 0 auto;
+
+    .fullPost-title {
+        color: #3366cc;
+        max-width: 750px;
+        margin: 0 0 2.5rem;
+
+        @media (min-width: 720px) {
+            font-size: 1.75rem;
+        }
+    }
+
+    p {
+        max-width: 750px;
+        line-height: 1.5;
+        margin-bottom: 2rem;
+    }
+
+    label {
+        font-size: 18px;
+    }
+
+    input {
+        margin: .3rem auto 2rem;
+    }
+
+    textarea {
+        margin: .3rem auto 2rem;
+    }
+}
