@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {hashHistory} from 'react-router';
 
 
 // INITIAL STATE
@@ -105,6 +106,7 @@ export const whoAmI = () =>
         if (user.data) {
           dispatch(updateCurrentUser(user.data));
           dispatch(resetErrorMessage());
+          hashHistory.push('/');
         } else {
           dispatch(resetCurrentUser());
         }
