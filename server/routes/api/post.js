@@ -45,7 +45,7 @@ router.post('/', (req, res) => {
 
 // update one post in database (admin)
 router.put('/:postId', (req, res) => {
-  if ( !req.session.user || (!req.session.user && req.session.user.permissions.indexOf('post_edit') === -1) ) {
+  if ( !req.session.user || (req.session.user && req.session.user.permissions.indexOf('post_edit') === -1) ) {
     res.sendStatus(401);
     return;
   }
@@ -71,7 +71,7 @@ router.put('/:postId', (req, res) => {
 
 // delete one post from database (admin)
 router.delete('/:postId', (req, res) => {
-  if (req.session.user || (!req.session.user && req.session.user.permissions.indexOf('post_delete') === -1) ) {
+  if ( !req.session.user || (req.session.user && req.session.user.permissions.indexOf('post_delete') === -1) ) {
     res.sendStatus(401);
     return;
   }
