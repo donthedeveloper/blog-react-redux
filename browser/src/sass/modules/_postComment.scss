@@ -1,0 +1,34 @@
+.postComment {
+
+    ul {
+        list-style-type: none;
+        padding-left: 0;
+    }
+
+    li {
+        position: relative;
+        margin-bottom: 2rem;
+
+        background-color: #ebf0fa;
+
+        border-left: 5px solid #222;
+        padding: 1rem;
+
+        &:before {
+            font-family: FontAwesome;
+            content: "\f075";
+            top: .5rem;
+            right: .5rem;
+            color: #4d4d4d;
+            position: absolute;
+        }
+
+        p {
+            margin: 0;
+        }
+
+        p:first-child {
+            margin-bottom: 1rem;
+        }
+    }
+}

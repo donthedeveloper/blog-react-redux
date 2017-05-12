@@ -41,7 +41,7 @@ class CommentContainer extends React.Component {
 
   render() {
     return (
-      <div className='layout-comment-container'>
+      <div className='postComment'>
         <ul>
         {
           this.props.comments.map((comment) => <CommentCard key={comment.id} comment={comment} />)
