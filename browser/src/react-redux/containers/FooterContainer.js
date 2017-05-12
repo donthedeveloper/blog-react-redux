@@ -17,8 +17,6 @@ class AppContainer extends React.Component {
           <Social />
           <ul className='footerNav'>
             <li><Link to="/">Blog</Link></li>
-            <li><Link to="/portfolio">Portfolio</Link></li>
-            <li><Link to="/contact">Contact</Link></li>
           </ul>
         </div>
       </div>

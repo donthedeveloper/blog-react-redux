@@ -7,8 +7,6 @@ const Navigation = (props) => {
   return(
     <ul className={htmlClass}>
       <li className='selected'><Link to="/">Blog</Link></li>
-      <li><Link to="/portfolio">Portfolio</Link></li>
-      <li><Link to="/contact">Contact</Link></li>
     </ul>
   );
 }
