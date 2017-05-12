@@ -52,7 +52,7 @@ router.put('/:postId', (req, res) => {
 
   Post.update({
     title: req.body.title,
-    intro_paragraph: req. body.introParagraph,
+    intro_paragraph: req.body.introParagraph,
     content: req.body.content
   }, {
     where: {

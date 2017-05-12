@@ -102,7 +102,7 @@ class PostContainer extends React.Component {
           <input id='input-post-title' name='title' type='text' defaultValue={this.state.post.title} onChange={this.onTitleChange} /><br />
 
           <label htmlFor='input-introParagraph'>Intro Paragraph:</label><br />
-          <textarea className='input-introParagraph' id="input-introParagraph" name="introParagraph" type="text" defaultValue={this.state.post.introParagraph} onChange={this.introParagraphChange}></textarea><br />
+          <textarea className='input-introParagraph' id="input-introParagraph" name="introParagraph" type="text" defaultValue={this.state.post.introParagraph} onChange={this.onIntroParagraphChange}></textarea><br />
 
           <label htmlFor='input-content'>Content:</label><br />
           <textarea className='input-content' id='input-content' name='content' defaultValue={this.state.post.content} onChange={this.onContentChange} />
