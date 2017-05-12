@@ -12,7 +12,6 @@ const Login = (props) => {
         password: data.get('password')
       };
 
-      console.log('user:', user);
       props.login(user);
     }
 
