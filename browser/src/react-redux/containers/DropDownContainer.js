@@ -28,8 +28,6 @@ class DropDownContainer extends React.Component {
       <div className='layout-dropdown'>
           <ul className={this.state.navDropDownClass}>
             <li className='selected'><Link to="/">Blog</Link></li>
-            <li><Link to="/portfolio">Portfolio</Link></li>
-            <li><Link to="/contact">Contact</Link></li>
           </ul>
 
           { !this.props.user &&
