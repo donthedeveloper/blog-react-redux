@@ -14,6 +14,8 @@ class DropDownContainer extends React.Component {
       navDropDownClass: (props.navDropDownIsActive) ? 'dropdown-nav' : 'hidden',
       loginDropDownClass: (props.loginDropDownIsActive) ? 'dropdown-login' : 'hidden'
     }
+
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -21,6 +23,11 @@ class DropDownContainer extends React.Component {
       navDropDownClass: (nextProps.navDropDownIsActive) ? 'dropdown-nav' : 'hidden',
       loginDropDownClass: (nextProps.loginDropDownIsActive) ? 'dropdown-login' : 'hidden'
     })
+  }
+
+  handleLogout(e) {
+    e.preventDefault();
+    this.props.logout();
   }
 
   render() {
@@ -37,7 +44,7 @@ class DropDownContainer extends React.Component {
           </ul>}
           { this.props.user &&
           <ul className={this.state.loginDropDownClass}>
-            <li><button onClick={this.props.logout}>Logout</button></li>
+            <li><a onClick={this.handleLogout}>Logout</a></li>
           </ul>}
       </div>
     );
@@ -53,6 +60,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   logout: () =>
     dispatch(logout())
-})
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(DropDownContainer);
