@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 import FooterContainer from './FooterContainer';
 import SubscriptionContainer from './SubscriptionContainer';
@@ -25,6 +26,15 @@ class AppContainer extends React.Component {
     this.toggleLoginForm = this.toggleLoginForm.bind(this);
     this.toggleSignupForm = this.toggleSignupForm.bind(this);
     this.deactivateAllForms = this.deactivateAllForms.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.userLoggedIn) {
+      this.setState({
+        loginFormIsActive: false, 
+        signupFormIsActive: false
+      })
+    }
   }
 
   toggleLoginForm(e) {
@@ -88,4 +98,8 @@ class AppContainer extends React.Component {
   }
 }
 
-export default AppContainer;
+const mapStateToProps = (state) => ({
+  userLoggedIn: (state.user.user) ? true : false
+});
+
+export default connect(mapStateToProps)(AppContainer);
