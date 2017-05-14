@@ -18,6 +18,7 @@ const LoginForm = (props) => {
     return (
       <form className='loginForm' onSubmit={handleSubmit}>
         <button className='closeFormButton' type='button' onClick={props.toggleLoginForm}><i className="fa fa-times" aria-hidden="true"></i></button>
+        <p className='loginForm-errorMessage'>{props.errorMessage}</p>
         <label className='loginForm-email' htmlFor="login-form--email">Email: </label>
         <input className='loginForm-email' id="login-form--email" name="email" type="text" placeholder='Email' />
         
