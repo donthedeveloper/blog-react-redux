@@ -1,0 +1,47 @@
+.loginForm {
+    background-color: #fff;
+    padding: 4rem;
+    position: relative;
+
+    input {
+        display: block;
+        border-radius: 2px;
+        padding: .5rem 1rem;
+        margin-bottom: 1rem;
+        width: 100%;
+        border: none;
+    }
+    label {
+        display: none;
+    }
+
+    input.loginForm-email {
+        background-color: #d9d9d9;
+        color: #000;
+    }
+
+    .loginForm-password {
+        background-color: #d9d9d9;
+        color: #000;
+    }
+
+    input.loginForm-submit {
+        background-color: #3366cc;
+        text-transform: uppercase;
+        color: #fff;
+        border: none;
+        margin-bottom: 0;
+    }
+
+    .closeFormButton {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+
+    .closeFormButton {
+        background-color: #fff;
+        border: none;
+        font-size: 2rem;
+    }
+}

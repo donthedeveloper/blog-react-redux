@@ -39,8 +39,8 @@ class DropDownContainer extends React.Component {
 
           { !this.props.user &&
           <ul className={this.state.loginDropDownClass}>
-            <li><Link to='/login'>Login</Link></li>
-            <li><Link to='/signup'>Sign Up</Link></li>
+            <li><a href='' onClick={this.props.toggleLoginForm}>Login</a></li>
+            <li><a href='' onClick={this.props.toggleSignupForm}>Sign Up</a></li>
           </ul>}
           { this.props.user &&
           <ul className={this.state.loginDropDownClass}>

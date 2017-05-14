@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 import {createUser} from '../reducers/user';
 
-const Signup = (props) => {
+const SignupForm = (props) => {
     const handleSubmit = (e) => {
       e.preventDefault();
       const data = new FormData(e.target);
@@ -18,6 +18,7 @@ const Signup = (props) => {
 
     return (
       <form onSubmit={handleSubmit}>
+        <button className='closeFormButton' type='button' onClick={props.toggleSignupForm}><i className="fa fa-times" aria-hidden="true"></i></button>
         <label htmlFor='user-form--email'>Email: </label>
         <input id='user-form--email' type='email' name='email' />
         <br />
@@ -47,4 +48,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Signup);
+export default connect(mapStateToProps, mapDispatchToProps)(SignupForm);
