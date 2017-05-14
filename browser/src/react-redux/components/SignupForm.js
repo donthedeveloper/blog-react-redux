@@ -17,35 +17,27 @@ const SignupForm = (props) => {
     }
 
     return (
-      <form onSubmit={handleSubmit}>
+      <form className='signupForm' onSubmit={handleSubmit}>
         <button className='closeFormButton' type='button' onClick={props.toggleSignupForm}><i className="fa fa-times" aria-hidden="true"></i></button>
-        <label htmlFor='user-form--email'>Email: </label>
-        <input id='user-form--email' type='email' name='email' />
-        <br />
-        <label htmlFor='user-form--password'>Password: </label>
-        <input id='user-form--password' type='password' name='password' />
-        <br />
-        <label htmlFor='user-form--first_name'>First Name: </label>
-        <input id='user-form--first_name' type='text' name='first_name' />
-        <br />
-        <label htmlFor='user-form--last_name'>Last Name: </label>
-        <input id='user-form--last_name' type='text' name='last_name' />
-        <input type='submit' />
+        <p className='signupForm-errorMessage'></p>
+        <label htmlFor='email'>Email: </label>
+        <input className='signupForm-email' type='email' name='email' placeholder='Email' />
+        <label htmlFor='password'>Password: </label>
+        <input className='signupForm-password' type='password' name='password' placeholder='Password' />
+        <label htmlFor='signupForm-firstName'>First Name: </label>
+        <input className='signupForm-firstName' type='text' name='firstName' placeholder='First Name' />
+        <label htmlFor='signupForm-lastName'>Last Name: </label>
+        <input className='signupForm-lastName' type='text' name='lastName' placeholder='Last Name' />
+        <input className='signupForm-submit' type='submit' />
       </form>
     );
 };
 
-const mapStateToProps = (state) => {
-  return {
+const mapStateToProps = (state) => ({});
 
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    createUser: (user) =>
-      dispatch(createUser(user))
-  }
-}
+const mapDispatchToProps = (dispatch) => ({
+  createUser: (user) =>
+    dispatch(createUser(user))
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignupForm);
