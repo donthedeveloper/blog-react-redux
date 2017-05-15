@@ -4,7 +4,7 @@ const chalk = require('chalk');
 
 const { User } = require('../../models');
 
-router.get('/', (req, res) => {
+router.get('/', (req, res) => { // tested & working as intended
   req.session.reset();
   res.sendStatus(200);
 });
