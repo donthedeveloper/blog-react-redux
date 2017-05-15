@@ -68,11 +68,14 @@ export const createUser = (user) =>
         if (response.status === 200) {
           dispatch(login(user))
         } else {
-          console.log('Sorry, user is taken');
+          dispatch(updateErrorMessage('Sorry, email is already taken.'));
         }
       })
       .catch((err) => {
-        console.error(err.message);
+        if (err.response.status === 406) {
+          const errorMessage = 'Sorry, email address is invalid.';
+          dispatch(updateErrorMessage(errorMessage));
+        }
       });
 
 export const login = (user) =>

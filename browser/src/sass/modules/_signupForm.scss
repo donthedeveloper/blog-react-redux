@@ -1,4 +1,4 @@
-.loginForm {
+.signupForm {
     background-color: #fff;
     padding: 4rem;
     position: relative;
@@ -11,21 +11,32 @@
         width: 100%;
         border: none;
     }
+
     label {
         display: none;
     }
 
-    input.loginForm-email {
+    input.signupForm-email {
         background-color: #d9d9d9;
         color: #000;
     }
 
-    input.loginForm-password {
+    input.signupForm-password {
         background-color: #d9d9d9;
         color: #000;
     }
 
-    input.loginForm-submit {
+    input.signupForm-firstName {
+        background-color: #d9d9d9;
+        color: #000;
+    }
+
+    input.signupForm-lastName {
+        background-color: #d9d9d9;
+        color: #000;
+    }
+
+    input.signupForm-submit {
         background-color: #3366cc;
         text-transform: uppercase;
         color: #fff;
@@ -43,3 +54,4 @@
         font-size: 2rem;
     }
 }
+

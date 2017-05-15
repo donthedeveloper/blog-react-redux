@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const chalk = require('chalk');
 
 const { User } = require('../../models');
 
@@ -43,7 +44,9 @@ router.post('/', (req, res) => {
       res.sendStatus(204);
     }
   })
-  .catch(console.error)
+  .catch((err) => {
+    res.sendStatus(406);
+  })
 });
 
 // edit user in database ( admin or user(own) )
