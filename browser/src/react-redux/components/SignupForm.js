@@ -19,7 +19,7 @@ const SignupForm = (props) => {
     return (
       <form className='signupForm' onSubmit={handleSubmit}>
         <button className='closeFormButton' type='button' onClick={props.toggleSignupForm}><i className="fa fa-times" aria-hidden="true"></i></button>
-        <p className='signupForm-errorMessage'></p>
+        <p className='signupForm-errorMessage'>{props.errorMessage}</p>
         <label htmlFor='email'>Email: </label>
         <input className='signupForm-email' type='email' name='email' placeholder='Email' />
         <label htmlFor='password'>Password: </label>
