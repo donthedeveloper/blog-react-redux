@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "engines": {
-    "node" "6.9.4"
+    "node": "6.9.4"
   },
   "directories": {
     "test": "tests"
