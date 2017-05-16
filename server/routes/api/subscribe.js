@@ -17,11 +17,11 @@ router.post('/', (req, res) => {
     if (subscriber[1]) {
       res.sendStatus(200);
     } else {
-      res.sendStatus(209);
+      res.sendStatus(409); // email taken already
     }
   })
   .catch((err) => {
-    res.sendStatus(409);
+    res.sendStatus(400); // invalid email
   });
 
 });

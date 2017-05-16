@@ -4,8 +4,7 @@ const chalk = require('chalk');
 
 const { User, Role } = require('../../models');
 
-router.post('/', (req, res) => {
-
+router.post('/', (req, res) => { // tested: secure, but should not be able to be accessed if user is already logged in
   User.findOne({
     where: {
       email: req.body.email

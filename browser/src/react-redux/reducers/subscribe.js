@@ -74,26 +74,21 @@ export const subscribeEmail = (email) =>
     .then((statusObj) => {
       if (statusObj.status === 200) {
         const successMessage = 'You have successfully subscribed to the blog, and will receive notifications when new content is posted';
+        
         dispatch(subscribe());
         dispatch(addSuccessMessage(successMessage));
         dispatch(resetErrorMessage());
-      } else if (statusObj.status === 209) {
-        const errorMessage = 'It looks like this email is already subscribed.';
-
-        dispatch(addErrorMessage(errorMessage));
-        dispatch(resetSuccessMessage());
-        // create dispatch to reset subscriber status (toggle);
       }
     })
     .catch((err) => {
-      let errorMessage;
+      let errorMessage = '';
 
-      if (err.response.status) {
+      if (err.response.status === 400) {
         errorMessage = 'This email is invalid. Please provide a valid email address';
+      } else if (err.response.status === 409) {
+        errorMessage = 'It looks like this email is already subscribed.';
       }
 
       dispatch(addErrorMessage(errorMessage));
       dispatch(resetSuccessMessage());
-
-      // create 500 error
     });
