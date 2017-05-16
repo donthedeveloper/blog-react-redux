@@ -28,6 +28,6 @@ app.use('/public', express.static('browser/public'));
 
 app.use('/', router);
 
-app.listen(3001, function() {
-  console.log( chalk.blue('App is listening on port 3001.') );
+app.listen(process.env.PORT || 3001, function() {
+  console.log( chalk.blue(`App is listening on port ${this.address().port}`) );
 });
