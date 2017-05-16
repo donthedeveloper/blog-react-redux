@@ -23,9 +23,6 @@ router.get('/', (req, res) => {
 
     req.session.user.roleName = role.getDataValue('name');
 
-    console.log(chalk.yellow('Session:'));
-    console.dir(req.session.user);
-
     res.send(req.session.user);
   })
   .catch((err) => {
