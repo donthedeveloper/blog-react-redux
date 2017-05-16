@@ -26,6 +26,7 @@ app.use(session({
 app.use(express.static('server/templates'));
 // app.use('/public', express.static('browser/public'));
 app.use(express.static(__dirname + '/browser/public'));
+console.log(__dirname + '/browser/public');
 
 app.use('/', router);
 
