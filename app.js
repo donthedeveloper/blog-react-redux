@@ -24,8 +24,9 @@ app.use(session({
 }));
 
 app.use(express.static('server/templates'));
-process.env.PWD = process.cwd();
-app.use('/public', express.static(path.join(process.env.PWD, 'browser/public')));
+app.use(express.static('browser/public'));
+// process.env.PWD = process.cwd();
+// app.use('/public', express.static(path.join(process.env.PWD, 'browser/public')));
 
 app.use('/', router);
 
