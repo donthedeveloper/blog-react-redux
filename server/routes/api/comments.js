@@ -30,7 +30,7 @@ router.post('/', (req, res) => { //
   const commentPostId = req.body.postId;
 
   // user is NOT logged in OR user does NOT have permission to create comment
-  if (!sessionUser || (!sessionUser && sessionUser.permissions.indexOf('comment_add') === -1) ) {
+  if (!sessionUser || !sessionUser.permissions || (sessionUser && sessionUser.permissions.indexOf('comment_add') === -1) ) {
     res.sendStatus(401);
     return;
   }
@@ -69,7 +69,7 @@ router.post('/', (req, res) => { //
     }
   })
   .catch((err) => {
-    console.error(chalk.red(err));
+    res.sendStatus(400);
   });
 });
 
