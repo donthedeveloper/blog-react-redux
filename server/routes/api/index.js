@@ -6,7 +6,7 @@ const userApi = require('./user');
 const commentApi = require('./comments');
 const loginApi = require('./login');
 const logoutApi = require('./logout');
-const whoAmIApi = require('./whoAmI');
+const whoAmIApi = require('./whoami');
 const subscribeApi = require('./subscribe');
 
 router.use('/posts', postApi);
