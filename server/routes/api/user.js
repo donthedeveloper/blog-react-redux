@@ -23,29 +23,38 @@ const { User } = require('../../models');
 
 // create user in database
 router.post('/', (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+  const firstName = req.body.firstName;
+  const lastName = req.body.lastName;
+
+  if (!email || !password) {
+    res.status(400).send('Please fill out all required fields.');;
+    return;
+  }
+
   User.findOrCreate({
     where: {
-      email: req.body.email
+      email: email
     },
     defaults: {
-      email: req.body.email,
-      password: req.body.password,
-      first_name: req.body.firstName,
-      last_name: req.body.lastName,
+      email: email,
+      password: password,
+      first_name: firstName,
+      last_name: lastName,
       roleId: 1
     }
   })
   .then((user) => {
-    const wasCreated = user[1];
-
-    if (wasCreated) {
+    console.dir(user);
+    if (user[1]) {
       res.sendStatus(200);
     } else {
-      res.sendStatus(204);
+      res.sendStatus(409);
     }
   })
   .catch((err) => {
-    res.sendStatus(406);
+    res.sendStatus(400);
   })
 });
 

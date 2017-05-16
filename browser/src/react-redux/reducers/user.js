@@ -72,9 +72,13 @@ export const createUser = (user) =>
         }
       })
       .catch((err) => {
-        if (err.response.status === 406) {
-          const errorMessage = 'Sorry, email address is invalid.';
+        const statusCode = err.response.status;
+        const errorMessage = err.response.request.responseText;
+
+        if (statusCode === 400) {
           dispatch(updateErrorMessage(errorMessage));
+        } else if (statusCode === 409) {
+          dispatch(updateErrorMessage('Sorry, email is already taken.'));
         }
       });
 

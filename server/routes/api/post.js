@@ -47,7 +47,7 @@ router.post('/', (req, res) => {
 
   // user left at least 1 field blank
   if (!title || !content) {
-    res.status(200).send('Please fill out all required fields.');;
+    res.status(400).send('Please fill out all required fields.');;
     return;
   }
 
