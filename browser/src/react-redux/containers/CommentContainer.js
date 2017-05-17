@@ -49,7 +49,7 @@ class CommentContainer extends React.Component {
         </ul>
 
         { this.props.user && this.props.user.permissions.indexOf('comment_add') > -1 &&
-        <CommentForm postId={this.state.postId} userId={this.state.userId} parentId={null} handleSubmit={this.handleSubmit.bind(this)}/>}
+        <CommentForm errorMessage={this.props.commentFormError} postId={this.state.postId} userId={this.state.userId} parentId={null} handleSubmit={this.handleSubmit.bind(this)}/>}
       </div>
     );
   }
@@ -57,9 +57,9 @@ class CommentContainer extends React.Component {
 
 const mapStateToProps = (state) => ({
   comments: state.comment.comments,
+  commentFormError: state.comment.errorMessage,
   user: state.user.user,
-  post: state.posts.selectedPost,
-  comments: state.comment.comments
+  post: state.posts.selectedPost
 });
 
 const mapDispatchToProps = (dispatch) => ({
