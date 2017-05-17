@@ -12,6 +12,7 @@
   },
   "scripts": {
     "start": "node app.js",
+    "postinstall": "webpack && gulp sass",
     "dev": "nodemon --watch server --watch app.js app.js",
     "webpack": "webpack -w",
     "seed": "node server/models/seed.js"
