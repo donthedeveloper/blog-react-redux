@@ -7,7 +7,6 @@ const session = require('client-sessions');
 
 const chalk = require('chalk');
 
-
 const router = require('./server/routes');
 
 // middleware
@@ -24,7 +23,9 @@ app.use(session({
 }));
 
 app.use(express.static('server/templates'));
-app.use('/public', express.static('browser/public'));
+app.use(express.static('browser/public'));
+// process.env.PWD = process.cwd();
+// app.use('/public', express.static(path.join(process.env.PWD, 'browser/public')));
 
 app.use('/', router);
 

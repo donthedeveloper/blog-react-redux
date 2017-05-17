@@ -1,4 +1,4 @@
 const Sequelize = require('sequelize');
-const db = new Sequelize('postgres://localhost:5432/blog_react_redux');
+const db = new Sequelize(process.env.DATABASE_URL);
 
 module.exports = { Sequelize, db };
