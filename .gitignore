@@ -3,4 +3,3 @@ bundle.js
 bundle.js.map
 npm-debug.log
 application.css
-server/config.js
