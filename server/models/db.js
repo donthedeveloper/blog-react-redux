@@ -1,9 +1,6 @@
 const {dbConfig} = require('../config');
 
 const Sequelize = require('sequelize');
-const db = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.password, {
-    host: dbConfig.host, 
-    dialect: 'postgres'
-});
+const db = new Sequelize(process.env.DATABASE_URL);
 
 module.exports = { Sequelize, db };
