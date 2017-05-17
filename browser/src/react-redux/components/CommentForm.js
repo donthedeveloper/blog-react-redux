@@ -4,6 +4,7 @@ const CommentForm = (props) => {
   return (
     <form className="commentForm" onSubmit={props.handleSubmit}>
       <label htmlFor='input-comment-content'>Reply</label>
+      <p>{props.errorMessage}</p>
       <textarea id='input-comment-content' name='input-content'></textarea>
       <input type='hidden' name='input-postId' defaultValue={props.postId} />
       <input type='hidden' name='input-userId' defaultValue={props.userId} />
