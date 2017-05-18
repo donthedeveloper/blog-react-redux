@@ -13,7 +13,7 @@
   "scripts": {
     "start": "node app.js",
     "postinstall": "webpack && gulp sass",
-    "dev": "nodemon --watch server --watch app.js app.js",
+    "dev": "DATABASE_URL=postgres://localhost:5432/blog_react_redux nodemon --watch server --watch app.js app.js",
     "webpack": "webpack -w",
     "seed": "node server/models/seed.js"
   },
@@ -40,7 +40,9 @@
     "client-sessions": "^0.7.0",
     "express": "^4.14.1",
     "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^4.0.0",
     "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.6.0",
     "morgan": "^1.8.1",
     "pg": "^6.1.2",
     "react": "^15.4.2",
