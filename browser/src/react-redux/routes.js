@@ -8,6 +8,7 @@ import store from './store';
 import AppContainer from './containers/AppContainer';
 import IntroPostContainer from './containers/IntroPostContainer';
 import PostContainer from './containers/PostContainer';
+import PortfolioContainer from './containers/PortfolioContainer';
 
 // import components
 import CreatePost from './components/CreatePost';
@@ -35,7 +36,7 @@ export default () => {
         <Route path='/' component={AppContainer} onEnter={onAppEnter}>
           <Route path='/posts' component={IntroPostContainer} />
           <Route path='/posts/:postId' component={PostContainer} onEnter={onPostEnter} />
-
+          <Route path='/portfolio' component={PortfolioContainer} />
           <Route path='/create-post' component={CreatePost} />
 
           <IndexRedirect to='/posts' />
