@@ -8,6 +8,7 @@ const CreatePost = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = new FormData(e.target);
+    console.log(data.get('upload'));
     const post = {
       title: data.get('title'),
       introParagraph: data.get('introParagraph'),
@@ -18,14 +19,17 @@ const CreatePost = (props) => {
 
   return(
     <form onSubmit={handleSubmit}>
-      <label htmlFor="title">Title: </label>
-      <input id="title" name="title" type="text" />
+      <label htmlFor='title'>Title: </label>
+      <input id='title' name='title' type='text' />
       <br />
-      <label htmlFor="introParagraph">Intro Paragraph: </label>
-      <textarea id="introParagraph" name="introParagraph"></textarea>
+      <label htmlFor='introParagraph'>Intro Paragraph: </label>
+      <textarea id='introParagraph' name='introParagraph'></textarea>
       <br />
-      <label htmlFor="content">Content: </label>
-      <textarea id="content" name="content"></textarea>
+      <label htmlFor='content'>Content: </label>
+      <textarea id='content' name='content'></textarea>
+      <br />
+      <label htmlFor='upload'>Thumbnail: </label>
+      <input id='upload' type='file' name='upload' />
       <br />
       <input type="submit" />
     </form>
