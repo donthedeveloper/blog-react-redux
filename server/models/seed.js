@@ -1,4 +1,4 @@
-const { db, User, Post, Role, Permission } = require('./index');
+const { db, User, Post, Role, Permission, Resource } = require('./index');
 const chalk = require('chalk');
 
 const posts = [
@@ -51,6 +51,16 @@ const permissions = [
   { name: POSTDELETE }
 ];
 
+const resources = [
+  {
+    resourceType: 'article', 
+    URL: 'https://www.smashingmagazine.com/2017/06/mobile-marketing-experiences-millennial/'
+  }, {
+    resourceType: 'video', 
+    URL: 'https://www.youtube.com/watch?v=3VJItso0MsM'
+  }
+];
+
 
 
 
@@ -77,7 +87,6 @@ db.sync({ force: true })
 
   console.log(chalk.green("Successfully seeded permissions table"));
 
-  // console.log('permissions:\n');
   permissions.forEach((permission) => {
     const roleIdArr = [];
 
@@ -127,6 +136,13 @@ db.sync({ force: true })
 
   })
 
+})
+.then(() => {
+  console.log(chalk.green("Successfully populated roleIdArr with permissions"));
+  Resource.bulkCreate(resources, { individualHooks: true });
+})
+.then((resources) => {
+  console.log(chalk.green('Successfully seeded resources table'));
 })
 .catch((err) => {
   console.error(chalk.red('There was totally a problem:'), err.message);
