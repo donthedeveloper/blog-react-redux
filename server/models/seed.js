@@ -1,3 +1,4 @@
+require('dotenv').config();
 const { db, User, Post, Role, Permission, Resource } = require('./index');
 const chalk = require('chalk');
 
