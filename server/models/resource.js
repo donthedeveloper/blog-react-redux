@@ -1,6 +1,6 @@
 const { Sequelize, db } = require('./db');
 
-const Comments = db.define('comment', {
+const Resource = db.define('resource', {
   resourceType: {
       type: Sequelize.ENUM('article', 'video'), 
       validate: {
