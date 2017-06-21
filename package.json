@@ -15,7 +15,8 @@
     "postinstall": "webpack && gulp sass",
     "dev": "DATABASE_URL=postgres://localhost:5432/blog_react_redux nodemon --watch server --watch app.js app.js",
     "webpack": "webpack -w",
-    "seed": "node server/models/seed.js"
+    "seed": "node server/models/seed.js",
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -57,5 +58,7 @@
     "sequelize": "^3.30.2",
     "webpack": "^2.2.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "mocha": "^3.4.2"
+  }
 }
