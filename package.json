@@ -59,6 +59,7 @@
     "webpack": "^2.2.1"
   },
   "devDependencies": {
+    "chai": "^4.0.2",
     "mocha": "^3.4.2"
   }
 }
