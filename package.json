@@ -8,7 +8,7 @@
     "npm": "4.2.0"
   },
   "directories": {
-    "test": "tests"
+    "test": "test"
   },
   "scripts": {
     "start": "node app.js",
