@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 
 import FooterContainer from './FooterContainer';
 import SubscriptionContainer from './SubscriptionContainer';
-import AdminContainer from './AdminContainer';
 import NavbarContainer from './NavbarContainer';
 import DropDownContainer from './DropDownContainer';
 import LoginContainer from './LoginContainer';

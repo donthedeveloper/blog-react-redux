@@ -8,6 +8,7 @@ import store from './store';
 import AppContainer from './containers/AppContainer';
 import IntroPostContainer from './containers/IntroPostContainer';
 import PostContainer from './containers/PostContainer';
+import AdminContainer from './containers/AdminContainer';
 
 // import components
 import CreatePost from './components/CreatePost';
@@ -40,7 +41,7 @@ export default () => {
 
           <IndexRedirect to='/posts' />
         </Route>*/}
-        <Route path='/' component={AdminContainer}>
+        <Route path='/admin' component={AdminContainer}>
 
         </Route>
       </Router>
