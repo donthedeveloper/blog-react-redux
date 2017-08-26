@@ -8,6 +8,7 @@ import store from './store';
 import AppContainer from './containers/AppContainer';
 import IntroPostContainer from './containers/IntroPostContainer';
 import PostContainer from './containers/PostContainer';
+import AdminContainer from './containers/AdminContainer';
 
 // import components
 import CreatePost from './components/CreatePost';
@@ -32,13 +33,16 @@ export default () => {
   return (
     <Provider store={store}>
       <Router history={hashHistory}>
-        <Route path='/' component={AppContainer} onEnter={onAppEnter}>
+        {/*<Route path='/' component={AppContainer} onEnter={onAppEnter}>
           <Route path='/posts' component={IntroPostContainer} />
           <Route path='/posts/:postId' component={PostContainer} onEnter={onPostEnter} />
 
           <Route path='/create-post' component={CreatePost} />
 
           <IndexRedirect to='/posts' />
+        </Route>*/}
+        <Route path='/admin' component={AdminContainer}>
+
         </Route>
       </Router>
     </Provider>

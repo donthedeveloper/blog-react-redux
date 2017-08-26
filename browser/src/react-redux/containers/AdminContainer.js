@@ -4,7 +4,11 @@ import {connect} from 'react-redux';
 const AdminContainer = (props) => {
   return (
     <div>
-
+      <nav>
+        Create Post
+        Edit Post
+        View Post
+      </nav>
     </div>
   );
 }
