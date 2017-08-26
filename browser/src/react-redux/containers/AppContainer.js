@@ -7,6 +7,7 @@ import AdminContainer from './AdminContainer';
 import NavbarContainer from './NavbarContainer';
 import DropDownContainer from './DropDownContainer';
 import LoginContainer from './LoginContainer';
+import AdminContainer from './AdminContainer';
 
 import Register from '../components/Register';
 import CreatePost from '../components/CreatePost';
