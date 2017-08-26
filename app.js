@@ -4,6 +4,7 @@ const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const session = require('client-sessions');
+const nunjucks = require('nunjucks');
 
 const chalk = require('chalk');
 
@@ -22,7 +23,15 @@ app.use(session({
   activeDuration: 5 * 60 * 100
 }));
 
-app.use(express.static('server/templates'));
+app.engine('html', nunjucks.render);
+app.set('view engine', 'html');
+nunjucks.configure('server/views', {
+  noCache: true, 
+  autoescape: true, 
+  express: app
+});
+
+// app.use(express.static('server/templates'));
 app.use(express.static('browser/public'));
 // process.env.PWD = process.cwd();
 // app.use('/public', express.static(path.join(process.env.PWD, 'browser/public')));

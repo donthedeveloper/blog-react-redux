@@ -12,7 +12,6 @@
   },
   "scripts": {
     "start": "node app.js",
-    "postinstall": "webpack && gulp sass",
     "dev": "DATABASE_URL=postgres://localhost:5432/blog_react_redux nodemon --watch server --watch app.js app.js",
     "webpack": "webpack -w",
     "seed": "node server/models/seed.js"
@@ -34,7 +33,6 @@
     "babel-preset-es2015": "^6.22.0",
     "babel-preset-react": "^6.23.0",
     "babel-preset-stage-1": "^6.24.1",
-    "bcrypt": "^1.0.2",
     "body-parser": "^1.16.1",
     "chalk": "^1.1.3",
     "client-sessions": "^0.7.0",
@@ -44,6 +42,7 @@
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.0",
     "morgan": "^1.8.1",
+    "nunjucks": "^3.0.1",
     "pg": "^6.1.2",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
