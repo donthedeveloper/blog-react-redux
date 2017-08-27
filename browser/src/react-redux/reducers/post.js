@@ -59,7 +59,7 @@ export const retrievePosts = () =>
 
 export const retrievePost = (id) =>
   dispatch =>
-    axios.get(`./api/posts/${id}`)
+    axios.get(`/api/posts/${id}`)
     .then((post) => dispatch(retrieveOne(post.data)))
     .catch((err) => console.error(err.message));
 
