@@ -1,5 +1,5 @@
 import React from 'react';
-import {Router, Route, hashHistory, IndexRoute, IndexRedirect} from 'react-router';
+import {Router, Route, browserHistory, IndexRoute, IndexRedirect} from 'react-router';
 import {Provider} from 'react-redux';
 import {axios} from 'axios';
 import store from './store';
@@ -37,7 +37,7 @@ const onAdminPostsEnter = () => {
 export default () => {
   return (
     <Provider store={store}>
-      <Router history={hashHistory}>
+      <Router history={browserHistory}>
         {/*<Route path='/' component={AppContainer} onEnter={onAppEnter}>
           <Route path='/posts' component={IntroPostContainer} />
           <Route path='/posts/:postId' component={PostContainer} onEnter={onPostEnter} />
@@ -46,8 +46,8 @@ export default () => {
 
           <IndexRedirect to='/posts' />
         </Route>*/}
-        <Route path='/' component={AdminContainer}>
-          <Route path='/posts' component={PostsContainer} onEnter={onAdminPostsEnter} />
+        <Route path='/admin' component={AdminContainer}>
+          <Route path='/admin/posts' component={PostsContainer} onEnter={onAdminPostsEnter} />
         </Route>
       </Router>
     </Provider>
