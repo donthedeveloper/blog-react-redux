@@ -1,8 +1,16 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import Routes from './routes';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import { BrowserRouter, Route } from 'react-router-dom';
 
-ReactDOM.render(
-  <Routes />,
-  document.getElementById('app')
-);
+// import store from './store';
+
+import AdminContainer from './Admin/AdminContainer.js';
+
+render((
+  // <Provider store={store}>
+    <BrowserRouter>
+      <Route path='/admin' component={AdminContainer} />
+    </BrowserRouter>
+  // </Provider>
+), document.getElementById('app'));

@@ -1,5 +1,6 @@
 import React from 'react';
-import {Router, Route, browserHistory, IndexRoute, IndexRedirect} from 'react-router';
+// import {Router, Route, browserHistory, IndexRoute, IndexRedirect} from 'react-router';
+import {BrowserRouter,Route} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import {axios} from 'axios';
 import store from './store';
@@ -37,19 +38,11 @@ const onAdminPostsEnter = () => {
 export default () => {
   return (
     <Provider store={store}>
-      <Router history={browserHistory}>
-        {/*<Route path='/' component={AppContainer} onEnter={onAppEnter}>
-          <Route path='/posts' component={IntroPostContainer} />
-          <Route path='/posts/:postId' component={PostContainer} onEnter={onPostEnter} />
-
-          <Route path='/create-post' component={CreatePost} />
-
-          <IndexRedirect to='/posts' />
-        </Route>*/}
-        <Route path='/admin' component={AdminContainer}>
-          <Route path='/admin/posts' component={PostsContainer} onEnter={onAdminPostsEnter} />
-        </Route>
-      </Router>
+      <BrowserRouter>
+        <Route exact path='/admin' component={AdminContainer} />
+        <Route exact path='/admin/posts' component={PostsContainer} onEnter={onAdminPostsEnter} />
+        <Route path='/admin/posts/:title' />
+      </BrowserRouter>
     </Provider>
   )
 }
