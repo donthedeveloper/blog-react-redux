@@ -5,7 +5,7 @@ const apiRouter = require('./api');
 
 router.use('/api', apiRouter);
 
-router.get('/admin', (req,res) => {
+router.get('/admin*', (req,res) => {
     res.render('admin');
 });
 
