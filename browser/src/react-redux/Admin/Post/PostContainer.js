@@ -22,7 +22,8 @@ class PostContainer extends React.Component {
                 <p>hello</p>
                 <Switch>
                     <Route path='/admin/posts/:title' />
-                    <Route path='/admin/posts' component={PostList} />
+                    <Route path='/admin/posts' 
+                        render={ () => <PostList posts={ this.props.posts } /> } />
                 </Switch>
             </div>
         );
