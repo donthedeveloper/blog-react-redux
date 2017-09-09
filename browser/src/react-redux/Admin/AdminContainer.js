@@ -8,9 +8,10 @@ const AdminContainer = (props) => {
   return (
     <div>
       <nav>
-        <Link to={'/admin/posts/create'}>Create Post</Link>
-        <Link to={'/admin/posts/edit'}>Edit Post</Link>
-        <Link to={'/admin/posts'}>View Posts</Link>
+        <ul>
+          <li><Link to={'/admin/posts/create'}>Create Post</Link></li>
+          <li><Link to={'/admin/posts'}>View Posts</Link></li>
+        </ul>
       </nav>
       <div>
           <Route path='/admin/posts' component={PostContainer} />

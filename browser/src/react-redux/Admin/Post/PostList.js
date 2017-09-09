@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const PostList = (props) => {
     return (
@@ -9,13 +10,13 @@ const PostList = (props) => {
                         <li key={index}>
                             <ul>
                                 <li>
-                                    <Link to={`${post.id}`}>{post.title}</Link>
+                                    <Link to={`/admin/posts/${post.id}`}>{post.title}</Link>
                                 </li>
                                 <li>
-                                    <button>Edit Post</button>
+                                    <Link to={`/admin/posts/${post.id}/edit`}>Edit Post</Link>
                                 </li>
                                 <li>
-                                    <button>Remove Post</button>
+                                <Link to={`/admin/posts/${post.id}/remove`}>Remove Post</Link>
                                 </li>
                             </ul>
                         </li>

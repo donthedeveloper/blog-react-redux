@@ -4,14 +4,10 @@ import { connect } from 'react-redux';
 
 import { retrievePosts } from './reducer';
 
+import CreatePost from './CreatePost';
 import PostList from './PostList';
 
 class PostContainer extends React.Component {
-    constructor(props) {
-        super(props);
-        // this.getPosts = this.getPosts.bind(this);
-    }
-
     componentDidMount() {
         this.props.getPosts();
     }
@@ -19,10 +15,11 @@ class PostContainer extends React.Component {
     render() {
         return (
             <div>
-                <p>hello</p>
                 <Switch>
-                    <Route path='/admin/posts/:title' />
-                    <Route path='/admin/posts' component={PostList} />
+                    {/* <Route path='/admin/posts/:title' /> */}
+                    <Route exact path='/admin/posts' 
+                        render={ () => <PostList posts={ this.props.posts } /> } />
+                    <Route path='/admin/posts/create' component={ CreatePost } />
                 </Switch>
             </div>
         );
