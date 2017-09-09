@@ -40,10 +40,10 @@ router.post('/', (req, res) => {
   console.log(sessionUser);
 
   // user is NOT logged in OR user does NOT have permission to create comment
-  if ( !sessionUser || !sessionUser.permissions || (sessionUser && sessionUser.permissions.indexOf('post_add') === -1) ) {
-    res.sendStatus(401);
-    return;
-  }
+  // if ( !sessionUser || !sessionUser.permissions || (sessionUser && sessionUser.permissions.indexOf('post_add') === -1) ) {
+  //   res.sendStatus(401);
+  //   return;
+  // }
 
   // user left at least 1 field blank
   if (!title || !content) {
