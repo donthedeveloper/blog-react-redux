@@ -88,7 +88,7 @@ export const removePost = (postId) =>
       .then((statusObj) => {
         if (statusObj.status === 200) {
           dispatch(retrievePosts());
-          dispatch(retrievePost(postId));
+          // dispatch(retrievePost(postId));
         }
       })
       .catch((err) => {
