@@ -17,9 +17,9 @@ class PostContainer extends React.Component {
             <div>
                 <Switch>
                     {/* <Route path='/admin/posts/:title' /> */}
-                    <Route exact path='/admin/posts' 
+                    <Route exact path={ this.props.match.url } 
                         render={ () => <PostList posts={ this.props.posts } /> } />
-                    <Route path='/admin/posts/create' component={ CreatePost } />
+                    <Route path={ `${this.props.match.url}/create` } component={ CreatePost } />
                 </Switch>
             </div>
         );
