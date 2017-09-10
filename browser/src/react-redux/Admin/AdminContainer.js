@@ -9,12 +9,12 @@ const AdminContainer = (props) => {
     <div>
       <nav>
         <ul>
-          <li><Link to={'/admin/posts/create'}>Create Post</Link></li>
+          <li><Link to={`/admin/posts/create`}>Create Post</Link></li>
           <li><Link to={'/admin/posts'}>View Posts</Link></li>
         </ul>
       </nav>
       <div>
-          <Route path='/admin/posts' component={PostContainer} />
+          <Route path={`${props.match.url}/posts`} component={PostContainer} />
       </div>
     </div>
   );
