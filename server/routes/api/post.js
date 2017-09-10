@@ -113,10 +113,10 @@ router.put('/:postId', (req, res) => {
 router.delete('/:postId', (req, res) => {
   const sessionUser = req.session.user;
 
-  if ( !sessionUser || !sessionUser.permissions || (sessionUser && sessionUser.permissions.indexOf('post_delete') === -1) ) {
-    res.sendStatus(401);
-    return;
-  }
+  // if ( !sessionUser || !sessionUser.permissions || (sessionUser && sessionUser.permissions.indexOf('post_delete') === -1) ) {
+  //   res.sendStatus(401);
+  //   return;
+  // }
 
   Post.destroy({
     where: {

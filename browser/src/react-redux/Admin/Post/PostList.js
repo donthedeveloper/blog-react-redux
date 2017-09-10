@@ -16,7 +16,7 @@ const PostList = (props) => {
                                     <Link to={`/admin/posts/${post.id}/edit`}>Edit Post</Link>
                                 </li>
                                 <li>
-                                <Link to={`/admin/posts/${post.id}/remove`}>Remove Post</Link>
+                                    <a href="" onClick={ (e) => { props.removePost(e, post.id) } }>Remove Post</a>
                                 </li>
                             </ul>
                         </li>
