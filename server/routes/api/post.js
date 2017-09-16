@@ -85,10 +85,10 @@ router.put('/:postId', (req, res) => {
   //   return;
   // }
 
-  if ( !sessionUser || !sessionUser.permissions || (sessionUser && sessionUser.permissions.indexOf('post_edit') === -1) ) {
-    res.sendStatus(401);
-    return;
-  }
+  // if ( !sessionUser || !sessionUser.permissions || (sessionUser && sessionUser.permissions.indexOf('post_edit') === -1) ) {
+  //   res.sendStatus(401);
+  //   return;
+  // }
 
   Post.update({
     title: req.body.title,
