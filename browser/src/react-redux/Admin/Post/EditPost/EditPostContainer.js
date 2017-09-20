@@ -20,31 +20,38 @@ class EditPostContainer extends React.Component {
             intervalId: null
         };
         this.saveToState = this.saveToState.bind(this);
+        this.saveToDB = this.saveToDB.bind(this);
     }
 
     componentDidMount() {
-        console.log('component mounted');
         this.setState({
-            intervalId: setInterval(() => {
-                this.props.savePost({
-                    post: {
-                        id: this.state.post.id,  
-                        title: this.state.post.editTitle, 
-
-                        content: this.state.post.editContent
-                    }
-                })
-            }, 10000)
+            intervalId: setInterval(this.saveToDB, 10000)
         })
     }
+
+
 
     componentWillUnmount() {
         clearInterval(this.state.intervalId);
     }
 
-    saveToState(e, name) {
+    saveToState(e) {
+        // console.log('name:', e.target.name);
+        // console.log('value:', e.target.value);
         this.setState({
-            [e.target.name]: e.target.value
+            // TODO: currently replacing entire post object with 1 key / 1 value, replace single key instead of entire object
+            post: {
+                [e.target.name]: e.target.value
+            }
+        });
+    }
+
+    saveToDB() {
+        console.log('state:', this.state);
+        this.props.savePost({
+            id: this.state.post.id, 
+            title: this.state.post.editTitle, 
+            content: this.state.post.editContent
         });
     }
 

@@ -1,7 +1,6 @@
 import React from 'react';
 
 const EditPost = (props) => {
-    console.log('post:', props.post);
     return (
         <div>
             <form onChange={props.saveToState}>

@@ -43,7 +43,6 @@ class PostContainer extends React.Component {
 
                                 if (postIndex > -1) {
                                     const post = this.props.posts[postIndex];
-                                    console.log('post:', post);
                                     return <EditPostContainer post={ post } />;
                                 } else {
                                     return <Redirect to={`${this.props.match.url}`} />
