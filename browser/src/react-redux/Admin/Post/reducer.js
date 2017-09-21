@@ -70,17 +70,18 @@ export const createPost = (post) =>
       .catch((err) => console.error(err.message));
 
 export const updatePost = (post) =>
-dispatch =>
+dispatch => {
   axios.put(`/api/posts/${post.id}`, post)
     .then((statusObj) => {
       if (statusObj.status === 200) {
         dispatch(retrievePosts());
-        dispatch(retrievePost(post.id));
+        // dispatch(retrievePost(post.id));
       }
     })
     .catch((err) => {
       console.error(err.message)
     });
+  }
 
 export const removePost = (postId) =>
   dispatch =>

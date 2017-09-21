@@ -10,7 +10,8 @@ const PostList = (props) => {
                         <li key={index}>
                             <ul>
                                 <li>
-                                    <Link to={`/admin/posts/${post.id}`}>{post.title}</Link>
+                                    {/* <Link to={`/admin/posts/${post.id}`}>{post.title}</Link> */}
+                                    {post.title}
                                 </li>
                                 <li>
                                     <Link to={`/admin/posts/${post.id}/edit`}>Edit Post</Link>
