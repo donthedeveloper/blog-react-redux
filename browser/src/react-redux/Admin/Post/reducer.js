@@ -71,7 +71,6 @@ export const createPost = (post) =>
 
 export const updatePost = (post) =>
 dispatch => {
-  console.log('post:', post);
   axios.put(`/api/posts/${post.id}`, post)
     .then((statusObj) => {
       if (statusObj.status === 200) {

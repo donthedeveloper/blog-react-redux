@@ -13,9 +13,9 @@ class EditPostContainer extends React.Component {
         this.state = {
             post: {
                 id: props.post.id, 
-                editTitle: this.props.post.title, 
-                editIntroParagraph: this.props.post.intro_paragraph, 
-                editContent: this.props.post.content
+                title: this.props.post.title, 
+                introParagraph: this.props.post.intro_paragraph, 
+                content: this.props.post.content
             }, 
             intervalId: null
         };
@@ -29,30 +29,31 @@ class EditPostContainer extends React.Component {
         })
     }
 
-
-
     componentWillUnmount() {
         clearInterval(this.state.intervalId);
     }
 
     saveToState(e) {
-        // console.log('name:', e.target.name);
-        // console.log('value:', e.target.value);
+        // TODO: check if there's a better way to do this with prevState
+        const updatedPost = {...this.state.post};
+        updatedPost[e.target.name] = e.target.value;
         this.setState({
-            // TODO: currently replacing entire post object with 1 key / 1 value, replace single key instead of entire object
-            post: {
-                [e.target.name]: e.target.value
-            }
+            post: updatedPost
         });
     }
 
     saveToDB() {
-        console.log('state:', this.state);
         this.props.savePost({
             id: this.state.post.id, 
-            title: this.state.post.editTitle, 
-            content: this.state.post.editContent
+            title: this.state.post.title, 
+            introParagraph: this.state.post.introParagraph, 
+            content: this.state.post.content
         });
+    }
+
+    // create status message managed by server response to save
+    flashSaveMessage() {
+
     }
 
     // savePost() {
@@ -76,7 +77,7 @@ class EditPostContainer extends React.Component {
             );*/}
             
                 <EditPost saveToState={this.saveToState} post={this.state.post} />
-                <ViewPost />
+                <ViewPost post={this.state.post} />
             </div>
         );
     }

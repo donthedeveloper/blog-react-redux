@@ -7,24 +7,24 @@ const EditPost = (props) => {
                 <label htmlFor="post-title">Title:</label><br />
                 <input 
                     id="input-post-title" 
-                    name="editTitle" 
+                    name="title" 
                     type="text" 
-                    defaultValue={props.post.editTitle}
+                    defaultValue={props.post.title}
                 /><br />
 
                 <label htmlFor="input-introParagraph">Intro Paragraph:</label><br />
                 <input 
                     id="input-introParagraph" 
-                    name="editIntroParagraph" 
+                    name="introParagraph" 
                     type="text" 
-                    defaultValue={props.post.editIntroParagraph}
+                    defaultValue={props.post.introParagraph}
                 /><br />
 
                 <label htmlFor="input-content">Content:</label><br />
                 <textarea 
                     id="input-content" 
-                    name="editContent" 
-                    defaultValue={props.post.editContent}
+                    name="content" 
+                    defaultValue={props.post.content}
                 /><br />
             </form>
         </div>
