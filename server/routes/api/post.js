@@ -40,10 +40,10 @@ router.post('/', (req, res) => {
   console.log(sessionUser);
 
   // user is NOT logged in OR user does NOT have permission to create comment
-  if ( !sessionUser || !sessionUser.permissions || (sessionUser && sessionUser.permissions.indexOf('post_add') === -1) ) {
-    res.sendStatus(401);
-    return;
-  }
+  // if ( !sessionUser || !sessionUser.permissions || (sessionUser && sessionUser.permissions.indexOf('post_add') === -1) ) {
+  //   res.sendStatus(401);
+  //   return;
+  // }
 
   // user left at least 1 field blank
   if (!title || !content) {
@@ -66,9 +66,9 @@ router.post('/', (req, res) => {
 
 // update one post in database (admin)
 router.put('/:postId', (req, res) => {
-  const sessionUser = req.session.user;
+  // const sessionUser = req.session.user;
 
-  console.log(sessionUser);
+  // console.log(sessionUser);
 
   // if (!sessionUser) {
   //   res.sendStatus(401);
@@ -85,10 +85,12 @@ router.put('/:postId', (req, res) => {
   //   return;
   // }
 
-  if ( !sessionUser || !sessionUser.permissions || (sessionUser && sessionUser.permissions.indexOf('post_edit') === -1) ) {
-    res.sendStatus(401);
-    return;
-  }
+  // if ( !sessionUser || !sessionUser.permissions || (sessionUser && sessionUser.permissions.indexOf('post_edit') === -1) ) {
+  //   res.sendStatus(401);
+  //   return;
+  // }
+
+  console.dir(req.body);
 
   Post.update({
     title: req.body.title,
@@ -113,10 +115,10 @@ router.put('/:postId', (req, res) => {
 router.delete('/:postId', (req, res) => {
   const sessionUser = req.session.user;
 
-  if ( !sessionUser || !sessionUser.permissions || (sessionUser && sessionUser.permissions.indexOf('post_delete') === -1) ) {
-    res.sendStatus(401);
-    return;
-  }
+  // if ( !sessionUser || !sessionUser.permissions || (sessionUser && sessionUser.permissions.indexOf('post_delete') === -1) ) {
+  //   res.sendStatus(401);
+  //   return;
+  // }
 
   Post.destroy({
     where: {
