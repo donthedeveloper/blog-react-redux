@@ -25,11 +25,8 @@ app.use(session({
 
 app.engine('html', nunjucks.render);
 app.set('view engine', 'html');
-<<<<<<< HEAD
-nunjucks.configure('server/views', {
-=======
+
 nunjucks.configure('server/templates', {
->>>>>>> develop
   noCache: true, 
   autoescape: true, 
   express: app
