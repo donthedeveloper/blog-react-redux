@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const chalk = require('chalk');
 
-const { Post } = require('../../models');
+const {Post} = require('../../models');
 
 // get all of posts from database
 router.get('/', (req, res) => {
