@@ -36,8 +36,8 @@
           <div class="post-content">
             <h2 class="post-title">{{ post.title }}</h2>
             <hr class="divider--mini">
-            <p class="post-text">{{ post.content }}</p>
-            <a class="button--read-more" href="what-i-learned-building-my-first-email-marketing-template">Read More</a>
+            <p class="post-text">{{ post.intro_paragraph }}</p>
+            <a class="button--read-more" href="http://localhost:3001/{{ post.slug }}">Read More</a>
           </div>
         </div>
         {% if loop.first == false and loop.last == false %}
