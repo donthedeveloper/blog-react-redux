@@ -14,7 +14,7 @@
     "start": "node app.js",
     "dev": "DATABASE_URL=postgres://localhost:5432/blog_react_redux nodemon --watch server --watch app.js app.js",
     "webpack": "webpack -w",
-    "seed": "node server/models/seed.js"
+    "seed": "DATABASE_URL=postgres://localhost:5432/blog_react_redux node server/models/seed.js"
   },
   "repository": {
     "type": "git",
@@ -53,7 +53,7 @@
     "redux-devtools-extension": "^2.13.0",
     "redux-logger": "^2.8.1",
     "redux-thunk": "^2.2.0",
-    "sequelize": "^3.30.2",
+    "sequelize": "^4.10.2",
     "webpack": "^2.7.0"
   },
   "devDependencies": {}

@@ -11,33 +11,38 @@ const Post = db.define('post', {
     }
   },
   intro_paragraph: {
-    type: Sequelize.STRING,
-    get: function() {
+    type: Sequelize.TEXT,
+    get() {
       let intro = this.getDataValue('intro_paragraph');
 
       if (intro) {
         return intro;
       } else {
         intro = this.getDataValue('content');
-        intro = intro.substr(0,75);
+        if (intro.length > 255) {
+          intro = intro.substr(0,75);
+        }
         return `${intro}...`;
       }
     }
   },
-  // img route
-  // img alt text
   content: {
     type: Sequelize.TEXT,
     allowNull: false
   },
-  urlTitle: {
-    type: Sequelize.VIRTUAL,
-    get: function() {
-      const title = this.getDataValue('title');
-      return title.replace(/\s+/g, '-');
+  slug: {
+    type: Sequelize.STRING,
+  }
+}, {
+  hooks: {
+    beforeCreate: (post, options) => {
+      const title = post.getDataValue('title');
+      const slug = title.split(' ').map((word) => {
+        return word.toLowerCase();
+      }).join('-');
+      post.slug = slug;
     }
   }
-
 });
 
 module.exports = { Sequelize, db, Post };
