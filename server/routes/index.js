@@ -15,7 +15,7 @@ router.get('/', (req,res) => {
     })
     .then((posts) => {
         console.dir(posts);
-        res.render('index', { posts: posts });
+        res.render('pages/posts', { posts: posts });
     })
     .catch((err) => {
         console.error(err);
@@ -33,7 +33,11 @@ router.get('/:postSlug', (req, res) => {
         }
     })
     .then((post) => {
-        res.send(post);
+        if (post) {
+            res.render('pages/post', { post: post});
+        } else {
+            res.send('where da post at!?');
+        }
     })
     .catch((err) => {
         console.error(err);
