@@ -1,4 +1,5 @@
 const { Sequelize, db } = require('./db');
+const marked = require('marked');
 const chalk = require('chalk');
 
 const Post = db.define('post', {
@@ -30,6 +31,15 @@ const Post = db.define('post', {
     type: Sequelize.TEXT,
     allowNull: false
   },
+  markedContent: {
+    type: Sequelize.VIRTUAL, 
+    get() {
+      // console.log(chalk.blue(this.getDataValue('content')));
+      // console.log(chalk.yellow(this.content));
+      // console.log(chalk.green(post.content));
+      return marked(this.getDataValue('content'));
+    }
+  }, 
   slug: {
     type: Sequelize.STRING,
   }

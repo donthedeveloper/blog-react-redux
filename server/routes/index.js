@@ -14,7 +14,6 @@ router.get('/', (req,res) => {
         // attributes: ['title', 'intro_paragraph', 'content', 'slug']
     })
     .then((posts) => {
-        console.dir(posts);
         res.render('pages/posts', { posts: posts });
     })
     .catch((err) => {
@@ -30,10 +29,13 @@ router.get('/:postSlug', (req, res) => {
     Post.findOne({
         where: {
             slug: req.params.postSlug
-        }
+        }, 
+        // attributes: ['title', 'markedContent']
     })
     .then((post) => {
         if (post) {
+            console.log(post.get('markedContent'));
+            // post.markedContent = post.get('markedContent');
             res.render('pages/post', { post: post});
         } else {
             res.send('where da post at!?');
