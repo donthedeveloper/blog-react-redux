@@ -1,0 +1,10 @@
+{% extends "index.html" %}
+
+{% block content %}
+    <div class="post">
+        <div class="post-content">
+            <h2 class="post-title">{{ post.title }}</h2>
+            {% autoescape false %}{{ post.markedContent }}{% endautoescape %}
+        </div>
+    </div>
+{% endblock %}

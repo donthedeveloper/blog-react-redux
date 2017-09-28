@@ -26,11 +26,15 @@ app.use(session({
 app.engine('html', nunjucks.render);
 app.set('view engine', 'html');
 
-nunjucks.configure('server/templates', {
+const nunjucksConfigure = nunjucks.configure('server/templates', {
   noCache: true, 
   autoescape: true, 
   express: app
 });
+
+// and then include these two lines of code to add the extension:
+const AutoEscapeExtension = require("nunjucks-autoescape")(nunjucks);
+nunjucksConfigure.addExtension('AutoEscapeExtension', new AutoEscapeExtension(nunjucksConfigure));
 
 // app.use(express.static('server/templates'));
 app.use(express.static('browser/public'));

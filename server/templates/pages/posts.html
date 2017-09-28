@@ -1,0 +1,17 @@
+{% extends "index.html" %}
+
+{% block content %}
+{% for post in posts %}
+    <div class="{% if loop.first %}posts--featured{% else %}posts{% endif %}">
+        <div class="posts-content">
+            <h2 class="posts-title">{{ post.title }}</h2>
+            <hr class="divider--mini">
+            <p class="posts-text">{{ post.intro_paragraph }}</p>
+            <a class="button--read-more" href="http://localhost:3001/{{ post.slug }}">Read More</a>
+        </div>
+    </div>
+    {% if loop.first == false and loop.last == false %}
+        <hr class="divider-full">
+    {% endif %}
+{% endfor %}
+{% endblock %}
