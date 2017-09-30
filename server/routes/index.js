@@ -5,6 +5,40 @@ const chalk = require('chalk');
 const apiRouter = require('./api');
 
 const {Post} = require('../models');
+const {User} = require('../models');
+
+
+
+
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+
+// passport.use(new LocalStrategy({
+//         usernameField: 'email'
+//     }, 
+//     function(email, password, done) {
+//         User.findOne({
+//             email: email
+//         }, function(err, user) {
+//             if (err) {
+//                 return done(err);
+//             }
+
+//             if (!user) {
+//                 return done(null, false, { message: 'Incorrect username.' });
+//             }
+
+//             if (!user.validPassword(password)) {
+//                 return (done(null, false, { message: 'Incorrect password.' }))
+//             }
+
+//             return done(null, user);
+//         })
+//     }
+// ));
+
+
+
 
 router.use('/api', apiRouter);
 
@@ -24,6 +58,17 @@ router.get('/', (req,res) => {
 router.get('/admin*', (req,res) => {
     res.render('admin');
 });
+
+router.get('/login', (req, res) => {
+    res.render('pages/login');
+});
+
+router.post('/login', 
+    passport.authenticate('local', {
+        successRedirect: '/', 
+        failureRedirect: '/login', 
+        failureFlash: true
+    }));
 
 router.get('/:postSlug', (req, res) => {
     Post.findOne({
