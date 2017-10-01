@@ -4,7 +4,7 @@ const chalk = require('chalk');
 
 const apiRouter = require('./api');
 
-const {Post} = require('../models');
+const {Post, Subscriber} = require('../models');
 
 router.use('/api', apiRouter);
 
@@ -19,6 +19,27 @@ router.get('/', (req,res) => {
     .catch((err) => {
         console.error(err);
     })
+});
+
+router.post('/', (req, res) => {
+    Subscriber.findOrCreate({
+        where: {
+            email: req.body.email
+        },
+        defaults: {
+            email: req.body.email
+        }
+    })
+    .then((subscriber) => {
+        if (subscriber[1]) {
+            res.sendStatus(200);
+        } else {
+            res.sendStatus(409); // email taken already
+        }
+    })
+    .catch((err) => {
+        res.sendStatus(400); // invalid email
+    });
 });
 
 router.get('/admin*', (req,res) => {

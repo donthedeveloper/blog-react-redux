@@ -3,8 +3,9 @@ const app = express();
 
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-const session = require('client-sessions');
+// const session = require('client-sessions');
 const nunjucks = require('nunjucks');
+const session = require('express-session');
 
 const chalk = require('chalk');
 
@@ -17,11 +18,20 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(session({
-  cookieName: 'session',
-  secret: 'random_string',
-  duration: 30 * 60 * 1000,
-  activeDuration: 5 * 60 * 100
+  secret: 'keyboard cat', 
+  cookie: {
+    maxAge: 1000*60*60*24*7*30 // 1 month
+  }, 
+  resave: false, 
+  saveUninitialized: false
 }));
+
+// app.use(session({
+//   cookieName: 'session',
+//   secret: 'random_string',
+//   duration: 30 * 60 * 1000,
+//   activeDuration: 5 * 60 * 100
+// }));
 
 app.engine('html', nunjucks.render);
 app.set('view engine', 'html');
