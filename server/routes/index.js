@@ -60,7 +60,16 @@ router.get('/admin*', (req,res) => {
 });
 
 router.get('/login', (req, res) => {
-    res.render('pages/login');
+    passport.authenticate('local', function(err, user, info) {
+        if (err) {
+            console.error(err);
+        }
+        if (user) {
+            return res.redirect('/account');
+        } else {
+            res.render('pages/login');
+        }
+    })
 });
 
 router.post('/login', 
@@ -69,6 +78,19 @@ router.post('/login',
         failureRedirect: '/login', 
         failureFlash: true
     }));
+
+router.get('/signup', (req, res) => {
+    passport.authenticate('local', function(err, user, info) {
+        if (err) {
+            console.error(err);
+        }
+        if (user) {
+            return res.redirect('/account');
+        } else {
+            res.render('pages/signup');
+        }
+    })
+});
 
 router.get('/:postSlug', (req, res) => {
     Post.findOne({

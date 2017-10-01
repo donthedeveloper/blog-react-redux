@@ -1,6 +1,6 @@
 const { Sequelize, db } = require('./db');
 
-// const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 
 const User = db.define('user', {
   email: {
@@ -27,10 +27,10 @@ const User = db.define('user', {
 }, {
   instanceMethods: {
     generateHash: function(plainPassword) {
-        // return bcrypt.hashSync(plainPassword, bcrypt.genSaltSync(10), null);
+        return bcrypt.hashSync(plainPassword, bcrypt.genSaltSync(10), null);
     },
     validPassword: function(plainPassword) {
-        // return bcrypt.compareSync(plainPassword, this.password);
+        return bcrypt.compareSync(plainPassword, this.password);
     }
   }
 });
