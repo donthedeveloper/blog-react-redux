@@ -28,7 +28,13 @@
     <div class="hero">
       <h1 class="hero-title">DonTheDeveloper</h1>
       <p class="hero-lead">Web Development through the eyes of a junior developer.</p>
-      <form class="subscribe-form">
+      <form action="" method="post" class="subscribe-form{% if successMessage %} vanish{% endif %}">
+        {% if successMessage %}
+          <p class="success-message">{{ successMessage }}</p>
+        {% endif %}
+        {% if errorMessage %}
+          <p class="error-message">{{ errorMessage }}</p>
+        {% endif %}
         <input type="email" name="email" placeholder="Email" />
         <input type="submit" value="Subscribe" />
       </form>
