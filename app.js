@@ -5,7 +5,7 @@ const passport = require('passport');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 // const session = require('client-sessions');
-const expressSection = require('express-session');
+const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const nunjucks = require('nunjucks');
 
@@ -21,7 +21,7 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use(expressSession({ section: 'mySecretKey' }));
+app.use(session({ secret: 'stuff' }));
 app.use(passport.initialize());
 app.use(passport.session());
 

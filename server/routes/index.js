@@ -80,16 +80,47 @@ router.post('/login',
     }));
 
 router.get('/signup', (req, res) => {
-    passport.authenticate('local', function(err, user, info) {
-        if (err) {
-            console.error(err);
+    // passport.authenticate('local', function(err, user, info) {
+    //     if (err) {
+    //         console.error(err);
+    //     }
+    //     if (user) {
+    //         return res.redirect('/account');
+    //     } else {
+    //         res.render('pages/signup');
+    //     }
+    // })
+    res.render('pages/signup');
+});
+
+router.post('/signup', (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+
+    // TODO: EDIT BELOW
+    User.findOrCreate({
+        where: {
+          email: email
+        },
+        defaults: {
+          email: email,
+          password: password,
+          first_name: firstName,
+          last_name: lastName,
+          roleId: 1
         }
-        if (user) {
-            return res.redirect('/account');
+      })
+      .then((user) => {
+        console.dir(user);
+        if (user[1]) {
+          res.sendStatus(200);
         } else {
-            res.render('pages/signup');
+          res.sendStatus(409);
         }
-    })
+      })
+      .catch((err) => {
+        res.sendStatus(400);
+      })
 });
 
 router.get('/:postSlug', (req, res) => {
