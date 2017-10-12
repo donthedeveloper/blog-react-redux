@@ -1,11 +1,9 @@
 const express = require('express');
 const app = express();
 
-const passport = require('passport');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-// const session = require('client-sessions');
-const session = require('express-session');
+const session = require('client-sessions');
 const cookieParser = require('cookie-parser');
 const nunjucks = require('nunjucks');
 
@@ -21,18 +19,12 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// require('./server/passport');
-require('./server/passport/strategies');
-app.use(session({ secret: 'stuff' }));
-app.use(passport.initialize());
-app.use(passport.session());
-
-// app.use(session({
-//   cookieName: 'session',
-//   secret: 'random_string',
-//   duration: 30 * 60 * 1000,
-//   activeDuration: 5 * 60 * 100
-// }));
+app.use(session({
+  cookieName: 'session',
+  secret: 'random_string',
+  duration: 30 * 60 * 1000,
+  activeDuration: 5 * 60 * 100
+}));
 
 app.engine('html', nunjucks.render);
 app.set('view engine', 'html');
@@ -47,10 +39,7 @@ const nunjucksConfigure = nunjucks.configure('server/templates', {
 const AutoEscapeExtension = require("nunjucks-autoescape")(nunjucks);
 nunjucksConfigure.addExtension('AutoEscapeExtension', new AutoEscapeExtension(nunjucksConfigure));
 
-// app.use(express.static('server/templates'));
 app.use(express.static('browser/public'));
-// process.env.PWD = process.cwd();
-// app.use('/public', express.static(path.join(process.env.PWD, 'browser/public')));
 
 app.use('/', router);
 

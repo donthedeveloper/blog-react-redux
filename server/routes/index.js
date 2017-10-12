@@ -7,44 +7,10 @@ const apiRouter = require('./api');
 const {Post} = require('../models');
 const {User} = require('../models');
 
-
-
-
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-
-// passport.use(new LocalStrategy({
-//         usernameField: 'email'
-//     }, 
-//     function(email, password, done) {
-//         User.findOne({
-//             email: email
-//         }, function(err, user) {
-//             if (err) {
-//                 return done(err);
-//             }
-
-//             if (!user) {
-//                 return done(null, false, { message: 'Incorrect username.' });
-//             }
-
-//             if (!user.validPassword(password)) {
-//                 return (done(null, false, { message: 'Incorrect password.' }))
-//             }
-
-//             return done(null, user);
-//         })
-//     }
-// ));
-
-
-
-
 router.use('/api', apiRouter);
 
 router.get('/', (req,res) => {
-    console.log('user session:', req.user);
-    console.log('user is authenticated:', req.isAuthenticated());
+    console.log('session:', req.session);
 
     Post.findAll({
         order: [['id', 'ASC']], 
@@ -59,6 +25,13 @@ router.get('/', (req,res) => {
 });
 
 router.get('/admin*', (req,res) => {
+    if (!req.session.user) {
+        return res.redirect('/login');
+    }
+
+    if (req.session.user.roleId !== 2) {
+        return res.redirect('/login');
+    }
     res.render('admin');
 });
 
@@ -67,22 +40,40 @@ router.get('/login', (req, res) => {
 });
 
 router.post('/login', function(req, res, next) {
-    passport.authenticate('local', function(err, user, info) {
-        if (err) { 
-            return res.render('pages/login', {
-                errorMessage: 'There was an error.'
-            });
+    User.findOne({
+        where: {
+          email: req.body.username
         }
-        
-        if (!user) { 
-            return res.render('pages/login', {
-                errorMessage: info.message
-            }); 
+      })
+      .then((user) => {
+    
+        // validated plain password with encrypted password
+        if (user && user.validPassword(req.body.password)) {
+    
+            // req.session.user = user.dataValues;
+            req.session.user = {
+                id: user.id, 
+                roleId: user.roleId
+            };
+            // delete req.session.user.password;
+    
+            res.redirect('/');
+        } else {
+            res.render('pages/login', { errorMessage: 'Invalid username or password.'} );
         }
+    
+      })
+      .catch((err) => {
+        return res.render('pages/login', {
+            errorMessage: err.message
+        });
+    });
+});
 
-        res.redirect('/');
-    })(req, res, next);
-  });
+router.get('/logout', (req, res) => {
+    req.session.reset();
+    res.redirect('/login');
+});
 
 router.get('/signup', (req, res) => {
     res.render('pages/signup');
@@ -112,6 +103,11 @@ router.post('/signup', (req, res) => {
       })
       .then((user) => {
         if (user) {
+            req.session.user = {
+                id: user.id, 
+                roleId: user.roleId
+            };
+
             res.redirect('/');
         } else {
             // TODO
