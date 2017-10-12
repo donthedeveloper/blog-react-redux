@@ -43,6 +43,9 @@ const LocalStrategy = require('passport-local').Strategy;
 router.use('/api', apiRouter);
 
 router.get('/', (req,res) => {
+    console.log('user session:', req.user);
+    console.log('user is authenticated:', req.isAuthenticated());
+
     Post.findAll({
         order: [['id', 'ASC']], 
         // attributes: ['title', 'intro_paragraph', 'content', 'slug']
@@ -60,66 +63,74 @@ router.get('/admin*', (req,res) => {
 });
 
 router.get('/login', (req, res) => {
-    passport.authenticate('local', function(err, user, info) {
-        if (err) {
-            console.error(err);
-        }
-        if (user) {
-            return res.redirect('/account');
-        } else {
-            res.render('pages/login');
-        }
-    })
+    res.render('pages/login');
 });
 
-router.post('/login', 
-    passport.authenticate('local', {
-        successRedirect: '/', 
-        failureRedirect: '/login', 
-        failureFlash: true
-    }));
+router.post('/login', function(req, res, next) {
+    passport.authenticate('local', function(err, user, info) {
+        if (err) { 
+            return res.render('pages/login', {
+                errorMessage: 'There was an error.'
+            });
+        }
+        
+        if (!user) { 
+            return res.render('pages/login', {
+                errorMessage: info.message
+            }); 
+        }
+
+        res.redirect('/');
+    })(req, res, next);
+  });
 
 router.get('/signup', (req, res) => {
-    // passport.authenticate('local', function(err, user, info) {
-    //     if (err) {
-    //         console.error(err);
-    //     }
-    //     if (user) {
-    //         return res.redirect('/account');
-    //     } else {
-    //         res.render('pages/signup');
-    //     }
-    // })
     res.render('pages/signup');
 });
 
 router.post('/signup', (req, res) => {
-    const username = req.body.username;
+    const email = req.body.email;
     const password = req.body.password;
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
+
+    // validation here because of lack of custom error message support in sequelize for required fields
+    if (!password) {
+        res.render('pages/signup', {
+            errorMessage: 'Please choose a password.'
+        });
+        return;
+    }
 
     // TODO: EDIT BELOW
-    User.findOrCreate({
-        where: {
-          email: email
-        },
-        defaults: {
-          email: email,
-          password: password,
-          first_name: firstName,
-          last_name: lastName,
-          roleId: 1
-        }
+    User.create({
+        email: email,
+        password: password || null,
+        first_name: firstName,
+        last_name: lastName,
+        roleId: 1
       })
       .then((user) => {
-        console.dir(user);
-        if (user[1]) {
-          res.sendStatus(200);
+        if (user) {
+            res.redirect('/');
         } else {
-          res.sendStatus(409);
+            // TODO
+            console.log('i dont know');
         }
       })
       .catch((err) => {
-        res.sendStatus(400);
+        // TODO
+        let errorMessage = 'Please contact the admin.';
+
+        try {
+            errorMessage = err.errors[0].message;
+        } catch(e) {
+            console.error(e);
+        }
+
+        res.render('pages/signup', {
+            errorMessage: errorMessage
+        });
       })
 });
 
@@ -134,7 +145,7 @@ router.get('/:postSlug', (req, res) => {
         if (post) {
             console.log(post.get('markedContent'));
             // post.markedContent = post.get('markedContent');
-            res.render('pages/post', { post: post});
+            res.render('pages/post', { post: post });
         } else {
             res.send('where da post at!?');
         }

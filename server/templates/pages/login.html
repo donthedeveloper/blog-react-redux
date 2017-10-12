@@ -16,8 +16,11 @@
   </head>
   <body>
     <form action="/login" method="post">
+        {% if errorMessage %}
+            <p>{{ errorMessage }}</p>
+        {% endif %}
         <div>
-            <label>Username:</label>
+            <label>Email:</label>
             <input type="text" name="username"/>
         </div>
         <div>

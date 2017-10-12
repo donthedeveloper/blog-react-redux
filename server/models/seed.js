@@ -51,6 +51,13 @@ const permissions = [
   { name: POSTDELETE }
 ];
 
+const users = [
+  {
+    email: 'don@cs.com', 
+    password: 'password'
+  }
+];
+
 
 
 
@@ -74,10 +81,8 @@ db.sync({ force: true })
   return Permission.bulkCreate(permissions, { individualHooks: true });
 })
 .then((permissions) => {
-
   console.log(chalk.green("Successfully seeded permissions table"));
 
-  // console.log('permissions:\n');
   permissions.forEach((permission) => {
     const roleIdArr = [];
 
@@ -126,7 +131,10 @@ db.sync({ force: true })
     })
 
   })
-
+  return User.bulkCreate(users, { individualHooks: true });
+})
+.then((users) => {
+  console.log(chalk.green("Successfully seeded users table"));
 })
 .catch((err) => {
   console.error(chalk.red('There was totally a problem:'), err.message);

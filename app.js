@@ -21,6 +21,8 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+// require('./server/passport');
+require('./server/passport/strategies');
 app.use(session({ secret: 'stuff' }));
 app.use(passport.initialize());
 app.use(passport.session());
