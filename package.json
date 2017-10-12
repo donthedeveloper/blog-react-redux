@@ -48,8 +48,6 @@
     "morgan": "^1.8.2",
     "nunjucks": "^3.0.1",
     "nunjucks-autoescape": "^1.0.1",
-    "passport": "^0.4.0",
-    "passport-local": "^1.0.0",
     "pg": "^6.4.2",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
