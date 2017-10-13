@@ -34,9 +34,6 @@ const Post = db.define('post', {
   markedContent: {
     type: Sequelize.VIRTUAL, 
     get() {
-      // console.log(chalk.blue(this.getDataValue('content')));
-      // console.log(chalk.yellow(this.content));
-      // console.log(chalk.green(post.content));
       return marked(this.getDataValue('content'));
     }
   }, 
