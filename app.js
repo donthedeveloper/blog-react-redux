@@ -4,17 +4,14 @@ const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const session = require('client-sessions');
-const cookieParser = require('cookie-parser');
+// const cookieParser = require('cookie-parser');
 const nunjucks = require('nunjucks');
-
 const chalk = require('chalk');
 
 const router = require('./server/routes');
 
 // middleware
 app.use(morgan('dev'));
-
-app.use(cookieParser());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
