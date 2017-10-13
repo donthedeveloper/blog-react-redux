@@ -32,12 +32,20 @@ router.get('/:postId', (req, res) => {
 
 // create one post in database (admin)
 router.post('/', (req, res) => {
+  if (!req.session.user) {
+    return res.sendStatus(401);
+  }
+
+  if (req.session.user.roleId !== 2) {
+    return res.sendStatus(401);
+  }
+
   const sessionUser = req.session.user;
   const title = req.body.title;
   const introParagraph = req.body.introParagraph;
   const content = req.body.content;
 
-  console.log(sessionUser);
+  // console.log(sessionUser);
 
   // user is NOT logged in OR user does NOT have permission to create comment
   // if ( !sessionUser || !sessionUser.permissions || (sessionUser && sessionUser.permissions.indexOf('post_add') === -1) ) {
@@ -66,31 +74,13 @@ router.post('/', (req, res) => {
 
 // update one post in database (admin)
 router.put('/:postId', (req, res) => {
-  // const sessionUser = req.session.user;
+  if (!req.session.user) {
+    return res.sendStatus(401);
+  }
 
-  // console.log(sessionUser);
-
-  // if (!sessionUser) {
-  //   res.sendStatus(401);
-  //   return;
-  // }
-
-  // if (!sessionUser.permissions) {
-  //   res.sendStatus(401);
-  //   return;
-  // }
-
-  // if (sessionUser.permissions.indexOf('post_edit') === -1) {
-  //   res.sendStatus(401);
-  //   return;
-  // }
-
-  // if ( !sessionUser || !sessionUser.permissions || (sessionUser && sessionUser.permissions.indexOf('post_edit') === -1) ) {
-  //   res.sendStatus(401);
-  //   return;
-  // }
-
-  console.dir(req.body);
+  if (req.session.user.roleId !== 2) {
+    return res.sendStatus(401);
+  }
 
   Post.update({
     title: req.body.title,
@@ -113,12 +103,13 @@ router.put('/:postId', (req, res) => {
 
 // delete one post from database (admin)
 router.delete('/:postId', (req, res) => {
-  const sessionUser = req.session.user;
+  if (!req.session.user) {
+    return res.sendStatus(401);
+  }
 
-  // if ( !sessionUser || !sessionUser.permissions || (sessionUser && sessionUser.permissions.indexOf('post_delete') === -1) ) {
-  //   res.sendStatus(401);
-  //   return;
-  // }
+  if (req.session.user.roleId !== 2) {
+    return res.sendStatus(401);
+  }
 
   Post.destroy({
     where: {

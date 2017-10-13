@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const chalk = require('chalk');
 
-const { User } = require('../../models');
+const {User} = require('../../models');
 
 // get all users from database
   // get users email (admin)
@@ -23,6 +23,14 @@ const { User } = require('../../models');
 
 // create user in database
 router.post('/', (req, res) => {
+  if (!req.session.user) {
+    return res.sendStatus(401);
+  }
+
+  if (req.session.user.roleId !== 2) {
+    return res.sendStatus(401);
+  }
+
   const email = req.body.email;
   const password = req.body.password;
   const firstName = req.body.firstName;
