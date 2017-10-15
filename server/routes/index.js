@@ -4,7 +4,7 @@ const chalk = require('chalk');
 
 const apiRouter = require('./api');
 
-const {Post, User, Subscriber} = require('../models');
+const {Post, User, Subscriber, Category} = require('../models');
 
 router.use('/api', apiRouter);
 
@@ -195,12 +195,134 @@ router.post('/signup', (req, res) => {
       })
 });
 
+router.get('/:category', (req, res) => {
+    Category.findAll()
+    .then((categories) => {
+        const matchedCategory = categories.find(category => category.name === req.params.category);
+
+        Post.findAll({
+            where: {
+                categoryId: matchedCategory.id
+            }, 
+            order: [['id', 'ASC']], 
+            // attributes: ['title', 'intro_paragraph', 'content', 'slug']
+        })
+        .then((posts) => {
+            res.render('pages/posts', { 
+                posts, 
+                categories, 
+                matchedCategory: {
+                    id: matchedCategory.id, 
+                    name: matchedCategory.name
+                }, 
+                // currentCategoryId: category.id
+            });
+        })
+        .catch((err) => {
+            console.error(err);
+        })
+    })
+    .catch((err) => {
+        console.error(err);
+    })
+});
+
+router.get('/:category/:postSlug', (req, res) => {
+    // Category.findOne({
+    //     where: {
+    //         name: req.params.category
+    //     }
+    // })
+    // .then((category) => {
+    //     Post.findOne({
+    //         where: {
+    //             slug: req.params.postSlug
+    //         }, 
+    //     })
+    //     .then((post) => {
+    //         if (post) {
+    //             res.render('pages/post', { post: post});
+    //         } else {
+    //             res.send('where da post at!?');
+    //         }
+    //     })
+    //     .catch((err) => {
+    //         console.error(err);
+    //     });
+    // })
+    // .error((err) => {
+    //     console.error(err);
+    // })
+
+
+
+
+
+
+    Category.findAll()
+    .then((categories) => {
+        const matchedCategory = categories.find(category => category.name === req.params.category);
+
+        Post.findOne({
+            where: {
+                slug: req.params.postSlug
+            }, 
+        })
+        .then((post) => {
+            if (post) {
+                res.render('pages/post', { 
+                    post, 
+                    categories, 
+                    matchedCategory: {
+                        id: matchedCategory.id, 
+                        name: matchedCategory.name
+                    }
+                });
+            } else {
+                res.send('where da post at!?');
+            }
+        })
+        .catch((err) => {
+            console.error(err);
+        });
+    })
+    .catch((err) => {
+        console.error(err);
+    });
+
+
+    //     Post.findAll({
+    //         where: {
+    //             categoryId: matchedCategory.id
+    //         }, 
+    //         order: [['id', 'ASC']], 
+    //         // attributes: ['title', 'intro_paragraph', 'content', 'slug']
+    //     })
+    //     .then((posts) => {
+    //         res.render('pages/posts', { 
+    //             posts, 
+    //             categories, 
+    //             matchedCategory: {
+    //                 id: matchedCategory.id, 
+    //                 name: matchedCategory.name
+    //             }
+    //         });
+    //     })
+    //     .catch((err) => {
+    //         console.error(err);
+    //     })
+    // })
+    // .catch((err) => {
+    //     console.error(err);
+    // })
+});
+
 router.get('/:postSlug', (req, res) => {
+    // console.log('post slug');
     Post.findOne({
         where: {
             slug: req.params.postSlug
         }, 
-        // attributes: ['title', 'markedContent']
     })
     .then((post) => {
         if (post) {
@@ -214,88 +336,88 @@ router.get('/:postSlug', (req, res) => {
     });
 });
 
-router.post('/:postSlug', (req, res) => {
-    Subscriber.findOrCreate({
-        where: {
-            email: req.body.email
-        },
-        defaults: {
-            email: req.body.email
-        }
-    })
-    .then((subscriber) => {
-        if (subscriber[1]) {
-            // res.sendStatus(200);
+// router.post('/:postSlug', (req, res) => {
+//     Subscriber.findOrCreate({
+//         where: {
+//             email: req.body.email
+//         },
+//         defaults: {
+//             email: req.body.email
+//         }
+//     })
+//     .then((subscriber) => {
+//         if (subscriber[1]) {
+//             // res.sendStatus(200);
 
-            // TODO: CREATE CATCHALL ROUTE ON INDEX THAT ALWAYS GETS POSTS AND PASSES DATA
-            Post.findOne({
-                where: {
-                    slug: req.params.postSlug
-                }, 
-                // attributes: ['title', 'markedContent']
-            })
-            .then((post) => {
-                if (post) {
-                    res.render('pages/post', { 
-                        post: post, 
-                        successMessage: 'You are now subscribed for updates!', 
-                        errorMessage: null
-                    });
-                } else {
-                    res.send('where da post at!?');
-                }
-            })
-            .catch((err) => {
-                console.error(err);
-            });
-        } else {
-            // res.sendStatus(409); // email taken already
-            Post.findOne({
-                where: {
-                    slug: req.params.postSlug
-                }, 
-                // attributes: ['title', 'markedContent']
-            })
-            .then((post) => {
-                if (post) {
-                    res.render('pages/post', { 
-                        post: post, 
-                        successMessage: null, 
-                        errorMessage: 'Email is already signed up.'
-                    });
-                } else {
-                    res.send('where da post at!?');
-                }
-            })
-            .catch((err) => {
-                console.error(err);
-            });
+//             // TODO: CREATE CATCHALL ROUTE ON INDEX THAT ALWAYS GETS POSTS AND PASSES DATA
+//             Post.findOne({
+//                 where: {
+//                     slug: req.params.postSlug
+//                 }, 
+//                 // attributes: ['title', 'markedContent']
+//             })
+//             .then((post) => {
+//                 if (post) {
+//                     res.render('pages/post', { 
+//                         post: post, 
+//                         successMessage: 'You are now subscribed for updates!', 
+//                         errorMessage: null
+//                     });
+//                 } else {
+//                     res.send('where da post at!?');
+//                 }
+//             })
+//             .catch((err) => {
+//                 console.error(err);
+//             });
+//         } else {
+//             // res.sendStatus(409); // email taken already
+//             Post.findOne({
+//                 where: {
+//                     slug: req.params.postSlug
+//                 }, 
+//                 // attributes: ['title', 'markedContent']
+//             })
+//             .then((post) => {
+//                 if (post) {
+//                     res.render('pages/post', { 
+//                         post: post, 
+//                         successMessage: null, 
+//                         errorMessage: 'Email is already signed up.'
+//                     });
+//                 } else {
+//                     res.send('where da post at!?');
+//                 }
+//             })
+//             .catch((err) => {
+//                 console.error(err);
+//             });
 
-        }
-    })
-    .catch((err) => {
-        // res.sendStatus(400); // invalid email
-        Post.findOne({
-            where: {
-                slug: req.params.postSlug
-            }, 
-            // attributes: ['title', 'markedContent']
-        })
-        .then((post) => {
-            if (post) {
-                res.render('pages/post', { 
-                    post: post, 
-                    successMessage: null, 
-                    errorMessage: 'Invalid email.'
-                });
-            } else {
-                res.send('where da post at!?');
-            }
-        })
-        .catch((err) => {
-            console.error(err);
-        });
-    });
-})
+//         }
+//     })
+//     .catch((err) => {
+//         // res.sendStatus(400); // invalid email
+//         Post.findOne({
+//             where: {
+//                 slug: req.params.postSlug
+//             }, 
+//             // attributes: ['title', 'markedContent']
+//         })
+//         .then((post) => {
+//             if (post) {
+//                 res.render('pages/post', { 
+//                     post: post, 
+//                     successMessage: null, 
+//                     errorMessage: 'Invalid email.'
+//                 });
+//             } else {
+//                 res.send('where da post at!?');
+//             }
+//         })
+//         .catch((err) => {
+//             console.error(err);
+//         });
+//     });
+// });
 
 module.exports = router;
