@@ -228,37 +228,6 @@ router.get('/:category', (req, res) => {
 });
 
 router.get('/:category/:postSlug', (req, res) => {
-    // Category.findOne({
-    //     where: {
-    //         name: req.params.category
-    //     }
-    // })
-    // .then((category) => {
-    //     Post.findOne({
-    //         where: {
-    //             slug: req.params.postSlug
-    //         }, 
-    //     })
-    //     .then((post) => {
-    //         if (post) {
-    //             res.render('pages/post', { post: post});
-    //         } else {
-    //             res.send('where da post at!?');
-    //         }
-    //     })
-    //     .catch((err) => {
-    //         console.error(err);
-    //     });
-    // })
-    // .error((err) => {
-    //     console.error(err);
-    // })
-
-
-
-
-
-
     Category.findAll()
     .then((categories) => {
         const matchedCategory = categories.find(category => category.name === req.params.category);
@@ -289,32 +258,6 @@ router.get('/:category/:postSlug', (req, res) => {
     .catch((err) => {
         console.error(err);
     });
-
-
-    //     Post.findAll({
-    //         where: {
-    //             categoryId: matchedCategory.id
-    //         }, 
-    //         order: [['id', 'ASC']], 
-    //         // attributes: ['title', 'intro_paragraph', 'content', 'slug']
-    //     })
-    //     .then((posts) => {
-    //         res.render('pages/posts', { 
-    //             posts, 
-    //             categories, 
-    //             matchedCategory: {
-    //                 id: matchedCategory.id, 
-    //                 name: matchedCategory.name
-    //             }
-    //         });
-    //     })
-    //     .catch((err) => {
-    //         console.error(err);
-    //     })
-    // })
-    // .catch((err) => {
-    //     console.error(err);
-    // })
 });
 
 router.get('/:postSlug', (req, res) => {
