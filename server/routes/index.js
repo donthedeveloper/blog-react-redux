@@ -202,140 +202,34 @@ router.get('/:category', async (req, res) => {
     }
 });
 
-router.get('/:category/:postSlug', (req, res) => {
-    Category.findAll()
-    .then((categories) => {
+router.get('/:category/:postSlug', async (req, res) => {
+    try {   
+        const categories = await Category.findAll();
         const matchedCategory = categories.find(category => category.name === req.params.category);
 
-        Post.findOne({
+        const post = await Post.findOne({
             where: {
                 slug: req.params.postSlug
             }, 
-        })
-        .then((post) => {
-            if (post) {
-                res.render('pages/post', { 
-                    post, 
-                    categories, 
-                    matchedCategory: {
-                        id: matchedCategory.id, 
-                        name: matchedCategory.name
-                    }
-                });
-            } else {
-                res.send('where da post at!?');
-            }
-        })
-        .catch((err) => {
-            console.error(err);
         });
-    })
-    .catch((err) => {
+
+        if (post) {
+            res.render('pages/post', { 
+                post, 
+                categories, 
+                matchedCategory: {
+                    id: matchedCategory.id, 
+                    name: matchedCategory.name
+                }
+            });
+        } else {
+            // TODO: do I really have to explain this one?
+            res.send('where da post at!?');
+        }
+    } catch(err) {
         console.error(err);
-    });
+        res.sendStatus(500);
+    }
 });
-
-// router.get('/:postSlug', (req, res) => {
-//     // console.log('post slug');
-//     Post.findOne({
-//         where: {
-//             slug: req.params.postSlug
-//         }, 
-//     })
-//     .then((post) => {
-//         if (post) {
-//             res.render('pages/post', { post: post});
-//         } else {
-//             res.send('where da post at!?');
-//         }
-//     })
-//     .catch((err) => {
-//         console.error(err);
-//     });
-// });
-
-// router.post('/:postSlug', (req, res) => {
-//     Subscriber.findOrCreate({
-//         where: {
-//             email: req.body.email
-//         },
-//         defaults: {
-//             email: req.body.email
-//         }
-//     })
-//     .then((subscriber) => {
-//         if (subscriber[1]) {
-//             // res.sendStatus(200);
-
-//             // TODO: CREATE CATCHALL ROUTE ON INDEX THAT ALWAYS GETS POSTS AND PASSES DATA
-//             Post.findOne({
-//                 where: {
-//                     slug: req.params.postSlug
-//                 }, 
-//                 // attributes: ['title', 'markedContent']
-//             })
-//             .then((post) => {
-//                 if (post) {
-//                     res.render('pages/post', { 
-//                         post: post, 
-//                         successMessage: 'You are now subscribed for updates!', 
-//                         errorMessage: null
-//                     });
-//                 } else {
-//                     res.send('where da post at!?');
-//                 }
-//             })
-//             .catch((err) => {
-//                 console.error(err);
-//             });
-//         } else {
-//             // res.sendStatus(409); // email taken already
-//             Post.findOne({
-//                 where: {
-//                     slug: req.params.postSlug
-//                 }, 
-//                 // attributes: ['title', 'markedContent']
-//             })
-//             .then((post) => {
-//                 if (post) {
-//                     res.render('pages/post', { 
-//                         post: post, 
-//                         successMessage: null, 
-//                         errorMessage: 'Email is already signed up.'
-//                     });
-//                 } else {
-//                     res.send('where da post at!?');
-//                 }
-//             })
-//             .catch((err) => {
-//                 console.error(err);
-//             });
-
-//         }
-//     })
-//     .catch((err) => {
-//         // res.sendStatus(400); // invalid email
-//         Post.findOne({
-//             where: {
-//                 slug: req.params.postSlug
-//             }, 
-//             // attributes: ['title', 'markedContent']
-//         })
-//         .then((post) => {
-//             if (post) {
-//                 res.render('pages/post', { 
-//                     post: post, 
-//                     successMessage: null, 
-//                     errorMessage: 'Invalid email.'
-//                 });
-//             } else {
-//                 res.send('where da post at!?');
-//             }
-//         })
-//         .catch((err) => {
-//             console.error(err);
-//         });
-//     });
-// });
 
 module.exports = router;
