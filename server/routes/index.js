@@ -8,85 +8,66 @@ const {Post, User, Subscriber, Category} = require('../models');
 
 router.use('/api', apiRouter);
 
-router.get('/', (req,res) => {
+router.get('/', async (req,res) => {
     console.log('session:', req.session);
 
-    Post.findAll({
-        order: [['id', 'ASC']], 
-        // attributes: ['title', 'intro_paragraph', 'content', 'slug']
-    })
-    .then((posts) => {
-        res.render('pages/posts', { posts: posts });
-    })
-    .catch((err) => {
+    try {
+        const categories = await Category.findAll();
+        const posts = await Post.findAll({ order: [['id', 'ASC']] });
+
+        res.render('pages/posts', { 
+            posts: posts, 
+            categories, categories 
+        });
+    } catch(err) {
         console.error(err);
-    })
+        res.sendStatus(500);
+    }
 });
 
-router.post('/', (req, res) => {
-    Subscriber.findOrCreate({
-        where: {
-            email: req.body.email
-        },
-        defaults: {
-            email: req.body.email
-        }
-    })
-    .then((subscriber) => {
-        if (subscriber[1]) {
-            // res.sendStatus(200);
+router.post('/', async (req, res) => {
+    try {
+        const categories = await Category.findAll();
+        const posts = await Post.findAll({ order: [['id', 'ASC']] });
 
-            // TODO: CREATE CATCHALL ROUTE ON INDEX THAT ALWAYS GETS POSTS AND PASSES DATA
-            Post.findAll({
-                order: [['id', 'ASC']], 
-                // attributes: ['title', 'intro_paragraph', 'content', 'slug']
-            })
-            .then((posts) => {
+        try {
+            const subscriber = await Subscriber.findOrCreate({
+                where: {
+                    email: req.body.email
+                },
+                defaults: {
+                    email: req.body.email
+                }
+            });
+            
+            const newSubscriber = subscriber[1];
+            if (newSubscriber) {
                 res.render('pages/posts', { 
                     posts: posts, 
+                    categories: categories, 
                     successMessage: 'You are now subscribed for updates!', 
                     errorMessage: null
                 });
-            })
-            .catch((err) => {
-                console.error(err);
-            });
-
-        } else {
-            // res.sendStatus(409); // email taken already
-            Post.findAll({
-                order: [['id', 'ASC']], 
-                // attributes: ['title', 'intro_paragraph', 'content', 'slug']
-            })
-            .then((posts) => {
+            } else {
                 res.render('pages/posts', { 
                     posts: posts, 
+                    categories: categories, 
                     successMessage: null, 
                     errorMessage: 'Email is already signed up.'
                 });
-            })
-            .catch((err) => {
-                console.error(err);
-            });
-        }
-    })
-    .catch((err) => {
-        // res.sendStatus(400); // invalid email
-        Post.findAll({
-            order: [['id', 'ASC']], 
-            // attributes: ['title', 'intro_paragraph', 'content', 'slug']
-        })
-        .then((posts) => {
+            }
+        } catch(err) {
             res.render('pages/posts', { 
                 posts: posts, 
+                categories: categories, 
                 successMessage: null, 
                 errorMessage: 'Invalid Email.'
             });
-        })
-        .catch((err) => {
-            console.error(err);
-        });
-    });
+        }
+    } catch (err) {
+        console.error(err);
+        res.sendStatus(500);
+    }
 });
 
 router.get('/admin*', (req,res) => {
@@ -195,172 +176,60 @@ router.post('/signup', (req, res) => {
       })
 });
 
-router.get('/:category', (req, res) => {
-    Category.findAll()
-    .then((categories) => {
+router.get('/:category', async (req, res) => {
+    try {
+        const categories = await Category.findAll();
         const matchedCategory = categories.find(category => category.name === req.params.category);
 
-        Post.findAll({
+        const posts = await Post.findAll({ 
             where: {
                 categoryId: matchedCategory.id
             }, 
-            order: [['id', 'ASC']], 
-            // attributes: ['title', 'intro_paragraph', 'content', 'slug']
-        })
-        .then((posts) => {
-            res.render('pages/posts', { 
-                posts, 
+            order: [['id', 'ASC']] 
+        });
+
+        res.render('pages/posts', { 
+            posts: posts, 
+            categories, 
+            matchedCategory: {
+                id: matchedCategory.id, 
+                name: matchedCategory.name
+            }, 
+        });
+    } catch(err) {
+        console.error(err);
+        res.sendStatus(500);
+    }
+});
+
+router.get('/:category/:postSlug', async (req, res) => {
+    try {   
+        const categories = await Category.findAll();
+        const matchedCategory = categories.find(category => category.name === req.params.category);
+
+        const post = await Post.findOne({
+            where: {
+                slug: req.params.postSlug
+            }, 
+        });
+
+        if (post) {
+            res.render('pages/post', { 
+                post, 
                 categories, 
                 matchedCategory: {
                     id: matchedCategory.id, 
                     name: matchedCategory.name
-                }, 
-                // currentCategoryId: category.id
+                }
             });
-        })
-        .catch((err) => {
-            console.error(err);
-        })
-    })
-    .catch((err) => {
-        console.error(err);
-    })
-});
-
-router.get('/:category/:postSlug', (req, res) => {
-    Category.findAll()
-    .then((categories) => {
-        const matchedCategory = categories.find(category => category.name === req.params.category);
-
-        Post.findOne({
-            where: {
-                slug: req.params.postSlug
-            }, 
-        })
-        .then((post) => {
-            if (post) {
-                res.render('pages/post', { 
-                    post, 
-                    categories, 
-                    matchedCategory: {
-                        id: matchedCategory.id, 
-                        name: matchedCategory.name
-                    }
-                });
-            } else {
-                res.send('where da post at!?');
-            }
-        })
-        .catch((err) => {
-            console.error(err);
-        });
-    })
-    .catch((err) => {
-        console.error(err);
-    });
-});
-
-router.get('/:postSlug', (req, res) => {
-    // console.log('post slug');
-    Post.findOne({
-        where: {
-            slug: req.params.postSlug
-        }, 
-    })
-    .then((post) => {
-        if (post) {
-            res.render('pages/post', { post: post});
         } else {
+            // TODO: do I really have to explain this one?
             res.send('where da post at!?');
         }
-    })
-    .catch((err) => {
+    } catch(err) {
         console.error(err);
-    });
+        res.sendStatus(500);
+    }
 });
-
-// router.post('/:postSlug', (req, res) => {
-//     Subscriber.findOrCreate({
-//         where: {
-//             email: req.body.email
-//         },
-//         defaults: {
-//             email: req.body.email
-//         }
-//     })
-//     .then((subscriber) => {
-//         if (subscriber[1]) {
-//             // res.sendStatus(200);
-
-//             // TODO: CREATE CATCHALL ROUTE ON INDEX THAT ALWAYS GETS POSTS AND PASSES DATA
-//             Post.findOne({
-//                 where: {
-//                     slug: req.params.postSlug
-//                 }, 
-//                 // attributes: ['title', 'markedContent']
-//             })
-//             .then((post) => {
-//                 if (post) {
-//                     res.render('pages/post', { 
-//                         post: post, 
-//                         successMessage: 'You are now subscribed for updates!', 
-//                         errorMessage: null
-//                     });
-//                 } else {
-//                     res.send('where da post at!?');
-//                 }
-//             })
-//             .catch((err) => {
-//                 console.error(err);
-//             });
-//         } else {
-//             // res.sendStatus(409); // email taken already
-//             Post.findOne({
-//                 where: {
-//                     slug: req.params.postSlug
-//                 }, 
-//                 // attributes: ['title', 'markedContent']
-//             })
-//             .then((post) => {
-//                 if (post) {
-//                     res.render('pages/post', { 
-//                         post: post, 
-//                         successMessage: null, 
-//                         errorMessage: 'Email is already signed up.'
-//                     });
-//                 } else {
-//                     res.send('where da post at!?');
-//                 }
-//             })
-//             .catch((err) => {
-//                 console.error(err);
-//             });
-
-//         }
-//     })
-//     .catch((err) => {
-//         // res.sendStatus(400); // invalid email
-//         Post.findOne({
-//             where: {
-//                 slug: req.params.postSlug
-//             }, 
-//             // attributes: ['title', 'markedContent']
-//         })
-//         .then((post) => {
-//             if (post) {
-//                 res.render('pages/post', { 
-//                     post: post, 
-//                     successMessage: null, 
-//                     errorMessage: 'Invalid email.'
-//                 });
-//             } else {
-//                 res.send('where da post at!?');
-//             }
-//         })
-//         .catch((err) => {
-//             console.error(err);
-//         });
-//     });
-// });
 
 module.exports = router;
