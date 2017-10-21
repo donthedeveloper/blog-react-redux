@@ -27,10 +27,6 @@
             </a>
           </li>
         {% endfor %}
-
-        <!-- <li class="current"><a href="">Frontend</a></li>
-        <li><a href="">Backend</a></li>
-        <li><a href="">Scrum</a></li> -->
       </ul>
     </div>
     <div class="hero">
@@ -52,7 +48,13 @@
 
     <div class="hero">
       <p class="hero-lead">Subscribe to receive notifications for updates.</p>
-      <form class="subscribe-form">
+      <form action="" method="post" class="subscribe-form{% if successMessage %} vanish{% endif %}">
+        {% if successMessage %}
+          <p class="success-message">{{ successMessage }}</p>
+        {% endif %}
+        {% if errorMessage %}
+          <p class="error-message">{{ errorMessage }}</p>
+        {% endif %}
         <input type="email" name="email" placeholder="Email" />
         <input type="submit" value="Subscribe" />
       </form>
@@ -60,10 +62,14 @@
     <footer class="footer">
       <div class="footer-content">
         <p class="logo">DonTheDeveloper</p>
-        <ul class="nav-categories">
-          <li class="current"><a href="">Frontend</a></li>
-          <li><a href="">Backend</a></li>
-          <li><a href="">Scrum</a></li>
+        <ul class="nav-links">
+          {% for category in categories %}
+            <li class="{% if matchedCategory.id == category.id %}current{% endif %}">
+              <a href="/{{ category.name }}">
+                  {{ category.name|capitalize }}
+              </a>
+            </li>
+          {% endfor %}
         </ul>
         <ul class="nav-social">
           <li><a target="_blank" rel="noopener noreferrer" href="http://twitter.com/developerdontv"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>

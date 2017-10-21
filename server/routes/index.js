@@ -9,7 +9,7 @@ const {Post, User, Subscriber, Category} = require('../models');
 router.use('/api', apiRouter);
 
 router.get('/', async (req,res) => {
-    console.log('session:', req.session);
+    // console.log('session:', req.session);
 
     try {
         const categories = await Category.findAll();
@@ -95,13 +95,10 @@ router.post('/login', function(req, res, next) {
     
         // validated plain password with encrypted password
         if (user && user.validPassword(req.body.password)) {
-    
-            // req.session.user = user.dataValues;
             req.session.user = {
                 id: user.id, 
                 roleId: user.roleId
             };
-            // delete req.session.user.password;
     
             res.redirect('/');
         } else {
@@ -156,18 +153,18 @@ router.post('/signup', (req, res) => {
 
             res.redirect('/');
         } else {
-            // TODO
             console.log('i dont know');
+            console.error('could not create user');
+            res.sendStatus(500);
         }
       })
       .catch((err) => {
-        // TODO
         let errorMessage = 'Please contact the admin.';
 
         try {
             errorMessage = err.errors[0].message;
-        } catch(e) {
-            console.error(e);
+        } catch(err) {
+            console.error(err);
         }
 
         res.render('pages/signup', {
@@ -201,6 +198,7 @@ router.get('/:category', async (req, res) => {
         res.sendStatus(500);
     }
 });
+// TODO: CREATE router.post('/:category')
 
 router.get('/:category/:postSlug', async (req, res) => {
     try {   
@@ -231,5 +229,6 @@ router.get('/:category/:postSlug', async (req, res) => {
         res.sendStatus(500);
     }
 });
+// TODO: CREATE router.post('/:category/:postSlug')
 
 module.exports = router;
