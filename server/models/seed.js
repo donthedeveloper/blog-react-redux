@@ -1,22 +1,45 @@
-const { db, User, Post, Role, Permission } = require('./index');
+const { db, User, Post, Role, Permission, Category } = require('./index');
 const chalk = require('chalk');
 
 const posts = [
   {
     title: "Guest Post",
     intro: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    categoryId: 1 
+  },
+  {
+    title: "First week at Fsullstack Academy",
+    intro: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", 
+    categoryId: 1
+  },
+  {
+    title: "IDK Podst",
+    intro: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", 
+    categoryId: 1
   },
   {
     title: "First week at Fullstack Academy",
     intro: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", 
+    categoryId: 2
   },
   {
     title: "IDK Post",
     intro: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", 
+    categoryId: 3
   }
+];
+
+const categories = [
+  {name: 'ux'}, 
+  {name: 'coding'}, 
+  {name: 'design'}, 
+  {name: 'content'}, 
+  {name: 'process'}
 ];
 
 const roles = [
@@ -65,6 +88,12 @@ db.sync({ force: true })
 .then(() => {
   console.log(chalk.blue("Dropped old data."));
 
+  // CREATE CATEGORIES
+  return Category.bulkCreate(categories, { individualHooks: true })
+})
+.then(function(categories) {
+  console.log(chalk.green("Successfully seeded categories table"));
+
   // CREATE POSTS
   return Post.bulkCreate(posts, { individualHooks: true });
 })
@@ -89,6 +118,7 @@ db.sync({ force: true })
     switch (permission.name) {
 
       case COMMENTADD:
+        // (role, permission)
         roleIdArr.push(1, 2);
         break;
 
@@ -137,5 +167,5 @@ db.sync({ force: true })
   console.log(chalk.green("Successfully seeded users table"));
 })
 .catch((err) => {
-  console.error(chalk.red('There was totally a problem:'), err.message);
+  console.error(chalk.red('There was totally a problem:'), err);
 });

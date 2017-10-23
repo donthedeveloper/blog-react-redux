@@ -4,89 +4,70 @@ const chalk = require('chalk');
 
 const apiRouter = require('./api');
 
-const {Post, User, Subscriber} = require('../models');
+const {Post, User, Subscriber, Category} = require('../models');
 
 router.use('/api', apiRouter);
 
-router.get('/', (req,res) => {
-    console.log('session:', req.session);
+router.get('/', async (req,res) => {
+    // console.log('session:', req.session);
 
-    Post.findAll({
-        order: [['id', 'ASC']], 
-        // attributes: ['title', 'intro_paragraph', 'content', 'slug']
-    })
-    .then((posts) => {
-        res.render('pages/posts', { posts: posts });
-    })
-    .catch((err) => {
+    try {
+        const categories = await Category.findAll();
+        const posts = await Post.findAll({ order: [['id', 'ASC']] });
+
+        res.render('pages/posts', { 
+            posts: posts, 
+            categories, categories 
+        });
+    } catch(err) {
         console.error(err);
-    })
+        res.sendStatus(500);
+    }
 });
 
-router.post('/', (req, res) => {
-    Subscriber.findOrCreate({
-        where: {
-            email: req.body.email
-        },
-        defaults: {
-            email: req.body.email
-        }
-    })
-    .then((subscriber) => {
-        if (subscriber[1]) {
-            // res.sendStatus(200);
+router.post('/', async (req, res) => {
+    try {
+        const categories = await Category.findAll();
+        const posts = await Post.findAll({ order: [['id', 'ASC']] });
 
-            // TODO: CREATE CATCHALL ROUTE ON INDEX THAT ALWAYS GETS POSTS AND PASSES DATA
-            Post.findAll({
-                order: [['id', 'ASC']], 
-                // attributes: ['title', 'intro_paragraph', 'content', 'slug']
-            })
-            .then((posts) => {
+        try {
+            const subscriber = await Subscriber.findOrCreate({
+                where: {
+                    email: req.body.email
+                },
+                defaults: {
+                    email: req.body.email
+                }
+            });
+            
+            const newSubscriber = subscriber[1];
+            if (newSubscriber) {
                 res.render('pages/posts', { 
                     posts: posts, 
+                    categories: categories, 
                     successMessage: 'You are now subscribed for updates!', 
                     errorMessage: null
                 });
-            })
-            .catch((err) => {
-                console.error(err);
-            });
-
-        } else {
-            // res.sendStatus(409); // email taken already
-            Post.findAll({
-                order: [['id', 'ASC']], 
-                // attributes: ['title', 'intro_paragraph', 'content', 'slug']
-            })
-            .then((posts) => {
+            } else {
                 res.render('pages/posts', { 
                     posts: posts, 
+                    categories: categories, 
                     successMessage: null, 
                     errorMessage: 'Email is already signed up.'
                 });
-            })
-            .catch((err) => {
-                console.error(err);
-            });
-        }
-    })
-    .catch((err) => {
-        // res.sendStatus(400); // invalid email
-        Post.findAll({
-            order: [['id', 'ASC']], 
-            // attributes: ['title', 'intro_paragraph', 'content', 'slug']
-        })
-        .then((posts) => {
+            }
+        } catch(err) {
             res.render('pages/posts', { 
                 posts: posts, 
+                categories: categories, 
                 successMessage: null, 
                 errorMessage: 'Invalid Email.'
             });
-        })
-        .catch((err) => {
-            console.error(err);
-        });
-    });
+        }
+    } catch (err) {
+        console.error(err);
+        res.sendStatus(500);
+    }
 });
 
 router.get('/admin*', (req,res) => {
@@ -114,13 +95,10 @@ router.post('/login', function(req, res, next) {
     
         // validated plain password with encrypted password
         if (user && user.validPassword(req.body.password)) {
-    
-            // req.session.user = user.dataValues;
             req.session.user = {
                 id: user.id, 
                 roleId: user.roleId
             };
-            // delete req.session.user.password;
     
             res.redirect('/');
         } else {
@@ -175,18 +153,18 @@ router.post('/signup', (req, res) => {
 
             res.redirect('/');
         } else {
-            // TODO
             console.log('i dont know');
+            console.error('could not create user');
+            res.sendStatus(500);
         }
       })
       .catch((err) => {
-        // TODO
         let errorMessage = 'Please contact the admin.';
 
         try {
             errorMessage = err.errors[0].message;
-        } catch(e) {
-            console.error(e);
+        } catch(err) {
+            console.error(err);
         }
 
         res.render('pages/signup', {
@@ -195,107 +173,187 @@ router.post('/signup', (req, res) => {
       })
 });
 
-router.get('/:postSlug', (req, res) => {
-    Post.findOne({
-        where: {
-            slug: req.params.postSlug
-        }, 
-        // attributes: ['title', 'markedContent']
-    })
-    .then((post) => {
-        if (post) {
-            res.render('pages/post', { post: post});
-        } else {
-            res.send('where da post at!?');
-        }
-    })
-    .catch((err) => {
+router.get('/:category', async (req, res) => {
+    try {
+        const categories = await Category.findAll();
+        const matchedCategory = categories.find(category => category.name === req.params.category);
+
+        const posts = await Post.findAll({ 
+            where: {
+                categoryId: matchedCategory.id
+            }, 
+            order: [['id', 'ASC']] 
+        });
+
+        res.render('pages/posts', { 
+            posts: posts, 
+            categories, 
+            matchedCategory: {
+                id: matchedCategory.id, 
+                name: matchedCategory.name
+            }, 
+        });
+    } catch(err) {
         console.error(err);
-    });
+        res.sendStatus(500);
+    }
 });
 
-router.post('/:postSlug', (req, res) => {
-    Subscriber.findOrCreate({
-        where: {
-            email: req.body.email
-        },
-        defaults: {
-            email: req.body.email
-        }
-    })
-    .then((subscriber) => {
-        if (subscriber[1]) {
-            // res.sendStatus(200);
+router.post('/:category', async (req, res) => {
+    try {
+        const categories = await Category.findAll();
+        const matchedCategory = categories.find(category => category.name === req.params.category);
+        
+        const posts = await Post.findAll({ 
+            where: {
+                categoryId: matchedCategory.id
+            }, 
+            order: [['id', 'ASC']] 
+        });
 
-            // TODO: CREATE CATCHALL ROUTE ON INDEX THAT ALWAYS GETS POSTS AND PASSES DATA
-            Post.findOne({
+        try {
+            const subscriber = await Subscriber.findOrCreate({
                 where: {
-                    slug: req.params.postSlug
-                }, 
-                // attributes: ['title', 'markedContent']
-            })
-            .then((post) => {
-                if (post) {
-                    res.render('pages/post', { 
-                        post: post, 
-                        successMessage: 'You are now subscribed for updates!', 
-                        errorMessage: null
-                    });
-                } else {
-                    res.send('where da post at!?');
+                    email: req.body.email
+                },
+                defaults: {
+                    email: req.body.email
                 }
-            })
-            .catch((err) => {
-                console.error(err);
             });
-        } else {
-            // res.sendStatus(409); // email taken already
-            Post.findOne({
-                where: {
-                    slug: req.params.postSlug
-                }, 
-                // attributes: ['title', 'markedContent']
-            })
-            .then((post) => {
-                if (post) {
-                    res.render('pages/post', { 
-                        post: post, 
-                        successMessage: null, 
-                        errorMessage: 'Email is already signed up.'
-                    });
-                } else {
-                    res.send('where da post at!?');
-                }
-            })
-            .catch((err) => {
-                console.error(err);
+            
+            const newSubscriber = subscriber[1];
+            if (newSubscriber) {
+                res.render('pages/posts', { 
+                    posts: posts, 
+                    categories: categories, 
+                    matchedCategory: {
+                        id: matchedCategory.id, 
+                        name: matchedCategory.name
+                    },
+                    successMessage: 'You are now subscribed for updates!', 
+                    errorMessage: null
+                });
+            } else {
+                res.render('pages/posts', { 
+                    posts: posts, 
+                    categories: categories, 
+                    matchedCategory: {
+                        id: matchedCategory.id, 
+                        name: matchedCategory.name
+                    },
+                    successMessage: null, 
+                    errorMessage: 'Email is already signed up.'
+                });
+            }
+        } catch(err) {
+            res.render('pages/posts', { 
+                posts: posts, 
+                categories: categories, 
+                matchedCategory: {
+                    id: matchedCategory.id, 
+                    name: matchedCategory.name
+                },
+                successMessage: null, 
+                errorMessage: 'Invalid Email.'
             });
-
         }
-    })
-    .catch((err) => {
-        // res.sendStatus(400); // invalid email
-        Post.findOne({
+    } catch (err) {
+        console.error(err);
+        res.sendStatus(500);
+    }
+});
+
+router.get('/:category/:postSlug', async (req, res) => {
+    try {   
+        const categories = await Category.findAll();
+        const matchedCategory = categories.find(category => category.name === req.params.category);
+
+        const post = await Post.findOne({
             where: {
                 slug: req.params.postSlug
             }, 
-            // attributes: ['title', 'markedContent']
-        })
-        .then((post) => {
-            if (post) {
-                res.render('pages/post', { 
-                    post: post, 
-                    successMessage: null, 
-                    errorMessage: 'Invalid email.'
+        });
+
+        if (post) {
+            res.render('pages/post', { 
+                post, 
+                categories, 
+                matchedCategory: {
+                    id: matchedCategory.id, 
+                    name: matchedCategory.name
+                }
+            });
+        } else {
+            // TODO: do I really have to explain this one?
+            res.send('where da post at!?');
+        }
+    } catch(err) {
+        console.error(err);
+        res.sendStatus(500);
+    }
+});
+
+router.post('/:category/:postSlug', async (req, res) => {
+    try {
+        const categories = await Category.findAll();
+        const matchedCategory = categories.find(category => category.name === req.params.category);
+        
+        const post = await Post.findOne({
+            where: {
+                slug: req.params.postSlug
+            }, 
+        });
+
+        try {
+            const subscriber = await Subscriber.findOrCreate({
+                where: {
+                    email: req.body.email
+                },
+                defaults: {
+                    email: req.body.email
+                }
+            });
+            
+            const newSubscriber = subscriber[1];
+            if (newSubscriber) {
+                res.render('pages/posts', { 
+                    post, 
+                    categories: categories, 
+                    matchedCategory: {
+                        id: matchedCategory.id, 
+                        name: matchedCategory.name
+                    }, 
+                    successMessage: 'You are now subscribed for updates!', 
+                    errorMessage: null
                 });
             } else {
-                res.send('where da post at!?');
+                res.render('pages/posts', { 
+                    post, 
+                    categories: categories, 
+                    matchedCategory: {
+                        id: matchedCategory.id, 
+                        name: matchedCategory.name
+                    }, 
+                    successMessage: null, 
+                    errorMessage: 'Email is already signed up.'
+                });
             }
-        })
-        .catch((err) => {
-            console.error(err);
-        });
-    });
-})
+        } catch(err) {
+            res.render('pages/posts', { 
+                post, 
+                categories: categories, 
+                matchedCategory: {
+                    id: matchedCategory.id, 
+                    name: matchedCategory.name
+                }, 
+                successMessage: null, 
+                errorMessage: 'Invalid Email.'
+            });
+        }
+    } catch (err) {
+        console.error(err);
+        res.sendStatus(500);
+    }
+});
 
 module.exports = router;
