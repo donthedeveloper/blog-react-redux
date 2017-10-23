@@ -198,7 +198,70 @@ router.get('/:category', async (req, res) => {
         res.sendStatus(500);
     }
 });
-// TODO: CREATE router.post('/:category')
+
+router.post('/:category', async (req, res) => {
+    try {
+        const categories = await Category.findAll();
+        const matchedCategory = categories.find(category => category.name === req.params.category);
+        
+        const posts = await Post.findAll({ 
+            where: {
+                categoryId: matchedCategory.id
+            }, 
+            order: [['id', 'ASC']] 
+        });
+
+        try {
+            const subscriber = await Subscriber.findOrCreate({
+                where: {
+                    email: req.body.email
+                },
+                defaults: {
+                    email: req.body.email
+                }
+            });
+            
+            const newSubscriber = subscriber[1];
+            if (newSubscriber) {
+                res.render('pages/posts', { 
+                    posts: posts, 
+                    categories: categories, 
+                    matchedCategory: {
+                        id: matchedCategory.id, 
+                        name: matchedCategory.name
+                    },
+                    successMessage: 'You are now subscribed for updates!', 
+                    errorMessage: null
+                });
+            } else {
+                res.render('pages/posts', { 
+                    posts: posts, 
+                    categories: categories, 
+                    matchedCategory: {
+                        id: matchedCategory.id, 
+                        name: matchedCategory.name
+                    },
+                    successMessage: null, 
+                    errorMessage: 'Email is already signed up.'
+                });
+            }
+        } catch(err) {
+            res.render('pages/posts', { 
+                posts: posts, 
+                categories: categories, 
+                matchedCategory: {
+                    id: matchedCategory.id, 
+                    name: matchedCategory.name
+                },
+                successMessage: null, 
+                errorMessage: 'Invalid Email.'
+            });
+        }
+    } catch (err) {
+        console.error(err);
+        res.sendStatus(500);
+    }
+});
 
 router.get('/:category/:postSlug', async (req, res) => {
     try {   
@@ -229,6 +292,68 @@ router.get('/:category/:postSlug', async (req, res) => {
         res.sendStatus(500);
     }
 });
-// TODO: CREATE router.post('/:category/:postSlug')
+
+router.post('/:category/:postSlug', async (req, res) => {
+    try {
+        const categories = await Category.findAll();
+        const matchedCategory = categories.find(category => category.name === req.params.category);
+        
+        const post = await Post.findOne({
+            where: {
+                slug: req.params.postSlug
+            }, 
+        });
+
+        try {
+            const subscriber = await Subscriber.findOrCreate({
+                where: {
+                    email: req.body.email
+                },
+                defaults: {
+                    email: req.body.email
+                }
+            });
+            
+            const newSubscriber = subscriber[1];
+            if (newSubscriber) {
+                res.render('pages/posts', { 
+                    post, 
+                    categories: categories, 
+                    matchedCategory: {
+                        id: matchedCategory.id, 
+                        name: matchedCategory.name
+                    }, 
+                    successMessage: 'You are now subscribed for updates!', 
+                    errorMessage: null
+                });
+            } else {
+                res.render('pages/posts', { 
+                    post, 
+                    categories: categories, 
+                    matchedCategory: {
+                        id: matchedCategory.id, 
+                        name: matchedCategory.name
+                    }, 
+                    successMessage: null, 
+                    errorMessage: 'Email is already signed up.'
+                });
+            }
+        } catch(err) {
+            res.render('pages/posts', { 
+                post, 
+                categories: categories, 
+                matchedCategory: {
+                    id: matchedCategory.id, 
+                    name: matchedCategory.name
+                }, 
+                successMessage: null, 
+                errorMessage: 'Invalid Email.'
+            });
+        }
+    } catch (err) {
+        console.error(err);
+        res.sendStatus(500);
+    }
+});
 
 module.exports = router;
