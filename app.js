@@ -43,3 +43,5 @@ app.use('/', router);
 app.listen(process.env.PORT || 3001, function() {
   console.log( chalk.blue(`App is listening on port ${this.address().port}`) );
 });
+
+module.exports = app;

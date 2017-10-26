@@ -8,13 +8,14 @@
     "npm": "4.2.0"
   },
   "directories": {
-    "test": "tests"
+    "test": "spec"
   },
   "scripts": {
     "start": "node app.js",
     "dev": "DATABASE_URL=postgres://localhost:5432/blog_react_redux nodemon --watch server --watch app.js app.js",
     "webpack": "webpack -w",
-    "seed": "DATABASE_URL=postgres://localhost:5432/blog_react_redux node server/models/seed.js"
+    "seed": "DATABASE_URL=postgres://localhost:5432/blog_react_redux node server/models/seed.js",
+    "test": "./node_modules/.bin/jasmine"
   },
   "repository": {
     "type": "git",
@@ -43,6 +44,7 @@
     "gulp-autoprefixer": "^4.0.0",
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.1",
+    "jasmine": "^2.8.0",
     "marked": "^0.3.6",
     "morgan": "^1.8.2",
     "nunjucks": "^3.0.1",
@@ -58,6 +60,7 @@
     "redux-logger": "^2.8.1",
     "redux-thunk": "^2.2.0",
     "sequelize": "^4.10.2",
+    "supertest": "^3.0.0",
     "webpack": "^2.7.0"
   },
   "devDependencies": {}
