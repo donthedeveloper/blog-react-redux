@@ -47,7 +47,6 @@
     "gulp-autoprefixer": "^4.0.0",
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.1",
-    "jasmine": "^2.8.0",
     "marked": "^0.3.6",
     "mocha": "^4.0.1",
     "morgan": "^1.8.2",
@@ -64,7 +63,6 @@
     "redux-logger": "^2.8.1",
     "redux-thunk": "^2.2.0",
     "sequelize": "^4.10.2",
-    "supertest": "^3.0.0",
     "webpack": "^2.7.0"
   },
   "devDependencies": {}
