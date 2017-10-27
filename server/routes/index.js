@@ -42,7 +42,6 @@ router.post('/', async (req, res) => {
             
             const newSubscriber = subscriber[1];
             if (newSubscriber) {
-                res.status(201);
                 res.render('pages/posts', { 
                     posts: posts, 
                     categories: categories, 

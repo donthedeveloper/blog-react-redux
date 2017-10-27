@@ -8,8 +8,6 @@ const session = require('client-sessions');
 const nunjucks = require('nunjucks');
 const chalk = require('chalk');
 
-require('dotenv').config()
-
 const router = require('./server/routes');
 
 // middleware
