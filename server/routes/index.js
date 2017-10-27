@@ -50,6 +50,7 @@ router.post('/', async (req, res) => {
                     errorMessage: null
                 });
             } else {
+                res.status(422);
                 res.render('pages/posts', { 
                     posts: posts, 
                     categories: categories, 
@@ -58,6 +59,7 @@ router.post('/', async (req, res) => {
                 });
             }
         } catch(err) {
+            res.status(400);
             res.render('pages/posts', { 
                 posts: posts, 
                 categories: categories, 
@@ -131,13 +133,13 @@ router.post('/signup', (req, res) => {
 
     // validation here because of lack of custom error message support in sequelize for required fields
     if (!password) {
+        res.status(400)
         res.render('pages/signup', {
             errorMessage: 'Please choose a password.'
         });
         return;
     }
 
-    // TODO: EDIT BELOW
     User.create({
         email: email,
         password: password || null,
@@ -154,8 +156,6 @@ router.post('/signup', (req, res) => {
 
             res.redirect('/');
         } else {
-            console.log('i dont know');
-            console.error('could not create user');
             res.sendStatus(500);
         }
       })
@@ -168,6 +168,7 @@ router.post('/signup', (req, res) => {
             console.error(err);
         }
 
+        res.status(400);
         res.render('pages/signup', {
             errorMessage: errorMessage
         });
