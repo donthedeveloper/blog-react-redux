@@ -15,6 +15,7 @@ router.get('/', async (req,res) => {
         const categories = await Category.findAll();
         const posts = await Post.findAll({ order: [['id', 'ASC']] });
 
+        res.status(200);
         res.render('pages/posts', { 
             posts: posts, 
             categories, categories 
@@ -85,6 +86,7 @@ router.get('/admin*', (req,res) => {
 });
 
 router.get('/login', (req, res) => {
+    res.status(200);
     res.render('pages/login');
 });
 
@@ -95,16 +97,15 @@ router.post('/login', function(req, res, next) {
         }
       })
       .then((user) => {
-    
         // validated plain password with encrypted password
         if (user && user.validPassword(req.body.password)) {
             req.session.user = {
                 id: user.id, 
                 roleId: user.roleId
             };
-    
             res.redirect('/');
         } else {
+            res.status(401);
             res.render('pages/login', { errorMessage: 'Invalid username or password.'} );
         }
     
@@ -180,6 +181,8 @@ router.get('/:category', async (req, res) => {
         const categories = await Category.findAll();
         const matchedCategory = categories.find(category => category.name === req.params.category);
 
+        if (!matchedCategory) { return res.sendStatus(404) }
+
         const posts = await Post.findAll({ 
             where: {
                 categoryId: matchedCategory.id
@@ -187,6 +190,7 @@ router.get('/:category', async (req, res) => {
             order: [['id', 'ASC']] 
         });
 
+        res.status(200);
         res.render('pages/posts', { 
             posts: posts, 
             categories, 
@@ -205,6 +209,8 @@ router.post('/:category', async (req, res) => {
     try {
         const categories = await Category.findAll();
         const matchedCategory = categories.find(category => category.name === req.params.category);
+
+        if (!matchedCategory) { return res.sendStatus(404) }
         
         const posts = await Post.findAll({ 
             where: {
@@ -225,6 +231,7 @@ router.post('/:category', async (req, res) => {
             
             const newSubscriber = subscriber[1];
             if (newSubscriber) {
+                res.status(201);
                 res.render('pages/posts', { 
                     posts: posts, 
                     categories: categories, 
@@ -236,6 +243,7 @@ router.post('/:category', async (req, res) => {
                     errorMessage: null
                 });
             } else {
+                res.status(422);
                 res.render('pages/posts', { 
                     posts: posts, 
                     categories: categories, 
@@ -248,6 +256,7 @@ router.post('/:category', async (req, res) => {
                 });
             }
         } catch(err) {
+            res.status(400);
             res.render('pages/posts', { 
                 posts: posts, 
                 categories: categories, 
@@ -276,19 +285,19 @@ router.get('/:category/:postSlug', async (req, res) => {
             }, 
         });
 
-        if (post) {
-            res.render('pages/post', { 
-                post, 
-                categories, 
-                matchedCategory: {
-                    id: matchedCategory.id, 
-                    name: matchedCategory.name
-                }
-            });
-        } else {
-            // TODO: do I really have to explain this one?
-            res.send('where da post at!?');
-        }
+        if (!matchedCategory || !post) { return res.sendStatus(404) }
+        if (post.categoryId !== matchedCategory.id) { return res.sendStatus(404) }
+
+
+        res.status(200);
+        res.render('pages/post', { 
+            post, 
+            categories, 
+            matchedCategory: {
+                id: matchedCategory.id, 
+                name: matchedCategory.name
+            }
+        });
     } catch(err) {
         console.error(err);
         res.sendStatus(500);
@@ -306,6 +315,9 @@ router.post('/:category/:postSlug', async (req, res) => {
             }, 
         });
 
+        if (!matchedCategory || !post) { return res.sendStatus(404) }
+        if (post.categoryId !== matchedCategory.id) { return res.sendStatus(404) }
+
         try {
             const subscriber = await Subscriber.findOrCreate({
                 where: {
@@ -318,6 +330,7 @@ router.post('/:category/:postSlug', async (req, res) => {
             
             const newSubscriber = subscriber[1];
             if (newSubscriber) {
+                res.status(201);
                 res.render('pages/posts', { 
                     post, 
                     categories: categories, 
@@ -329,6 +342,7 @@ router.post('/:category/:postSlug', async (req, res) => {
                     errorMessage: null
                 });
             } else {
+                res.status(422);
                 res.render('pages/posts', { 
                     post, 
                     categories: categories, 
@@ -341,6 +355,7 @@ router.post('/:category/:postSlug', async (req, res) => {
                 });
             }
         } catch(err) {
+            res.status(400);
             res.render('pages/posts', { 
                 post, 
                 categories: categories, 
