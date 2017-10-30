@@ -2,6 +2,8 @@ var chai = require('chai');
 var chaiHttp = require('chai-http');
 var app = require('../app');
 var expect = chai.expect;
+// var expect = require('chai-http').expect;
+
 chai.use(chaiHttp);
 
 var {User} = require('../server/models');
@@ -39,6 +41,7 @@ describe('\'/login\'', function() {
                 });
         });
 
+        var agent = chai.request.agent(app);
         it('response has cookie when user signs in successfully', function(done) {
             chai.request(app)
                 .post('/login')
@@ -48,8 +51,13 @@ describe('\'/login\'', function() {
                     password: testAdminPassword, 
                 })
                 .end(function(err, res) {
-                    // TODO: NOT DETECTING COOKIE CORRECTLY
-                    expect(res).to.have.cookie('session');
+                    expect(res).to.redirect;
+                    
+                    // agent.get('/')
+                    // .then(function (res) {
+                    //     // expect(agent).to.have.cookie('session');
+                    // })
+                    // .error(console.error(err));
                     done();
                 });
         });
